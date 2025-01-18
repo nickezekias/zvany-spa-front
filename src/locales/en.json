@@ -1,0 +1,65 @@
+{
+  "errors": {
+    "validation": {
+      "email": "E-mail must be valid",
+      "invalidForm": "Invalid form, please fill out the form correctly",
+      "passwords": {
+        "minCount": "Your password must have at least 8 characters",
+        "notSame": "Passwords must be the same"
+      },
+      "requiredField": "This field is required"
+    }
+  },
+
+  "features": {
+    "account": {
+      "registerSuccessMessage": "Account created successfully"
+    },
+    "dashboard": {
+      "welcome": "Welcome to the dashboard"
+    },
+    "errors": {
+      "404NotFound": "Oops! We can't find the page you're looking for."
+    }
+  },
+
+  "labels": {
+    "abbreviation": "Abbreviation",
+    "address": "Address",
+    "age": "Age",
+    "birthDate": "Birth Date",
+    "class": "Class | Classes",
+    "dashboard": "Dashboard",
+    "email": "Email",
+    "female": "Female",
+    "firstName": "First Name",
+    "gender": "Gender",
+    "goHome": "Go Home",
+    "lastName": "Last Name",
+    "license": "License | Licenses",
+    "login": "Login",
+    "loginFailed": "Failed to sign in",
+    "logout": "Logout",
+    "male": "Male",
+    "name": "Name",
+    "next": "Next",
+    "operationFailure": "Operation Failure",
+    "operationSuccess": "Operation Success",
+    "paid": "Paid",
+    "password": "Password",
+    "passwordConfirm": "Confirm Password",
+    "phone": "Phone",
+    "previous": "Previous",
+    "register": "Register",
+    "school": "School | Schools",
+    "schoolFees": "School Fees",
+    "student": "Student | Students",
+    "studentId": "Student ID",
+    "timetable": "Timetable | Timetables",
+    "unpaid": "Unpaid"
+  },
+  "messages": {
+    "credentialsNotFound": "These credentials do not match our records",
+    "noDataFound": "No data found"
+  }
+}
