@@ -14,6 +14,7 @@ import primevueConfig from './lib/primevue'
 
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import Message from 'primevue/message'
 import ToastService from 'primevue/toastservice'
 
 const app = createApp(App)
@@ -26,5 +27,6 @@ app.use(ToastService)
 
 app.component('PrimeButton', Button)
 app.component('PrimeCard', Card)
+app.component('PrimeMessage', Message)
 
 app.mount('#app')
