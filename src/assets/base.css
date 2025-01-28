@@ -20,3 +20,9 @@
 .dbg-border-green {
   border: 1px solid green !important;
 }
+
+.nikk-card {
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: none;
+}
