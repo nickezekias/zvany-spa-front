@@ -18,9 +18,18 @@ const props = defineProps<{
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputText v-model="model" class="w-full p-3 border shadow-none" :disabled="props.disabled"
-        :invalid="props.isError" :id="props.id" :readonly="props.readonly" :type="type" />
-      <label :class="props.isError ? 'nikk-invalid' : ''" :for="props.id">{{ $t(`${props.label}`) }}</label>
+      <InputText
+        v-model="model"
+        class="w-full border shadow-none"
+        :disabled="props.disabled"
+        :invalid="props.isError"
+        :id="props.id"
+        :readonly="props.readonly"
+        :type="type"
+      />
+      <label :class="props.isError ? 'nikk-invalid' : ''" :for="props.id">{{
+        $t(`${props.label}`)
+      }}</label>
     </FloatLabel>
     <small v-if="props.isError" :id="`${props.id}-help`" class="nikk-invalid">
       {{ $t(`${props.errorHelpLabel}`) }}
