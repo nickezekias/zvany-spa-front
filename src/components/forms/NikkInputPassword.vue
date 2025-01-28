@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import FloatLabel from 'primevue/floatlabel'
-import Password from 'primevue/password'
+import PrimeFloatLabel from 'primevue/floatlabel'
+import PrimePassword from 'primevue/password'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const model: any = defineModel()
@@ -8,25 +8,35 @@ const model: any = defineModel()
 const props = defineProps<{
   id: string
   disabled?: boolean
-  errorHelpLabel: string
+  errorHelpLabel: string | undefined
   feedback?: boolean
   label: string
+  name?: string
   readonly?: boolean
   toggleMask: boolean
-  isError: boolean
+  isError: boolean | undefined
 }>()
 </script>
 
 <template>
   <div>
-    <FloatLabel variant="on">
-      <Password v-model="model" :disabled="props.disabled" :invalid="props.isError" :inputId="props.id"
-        :readonly="props.readonly" :toggleMask="props.toggleMask" :feedback="props.feedback" fluid />
-      <label :class="props.isError ? 'nikk-invalid' : ''" :for="props.id">{{ $t(`${props.label}`) }}</label>
-    </FloatLabel>
-    <small v-if="props.isError" :id="`${props.id}-help`" class="nikk-invalid">
+    <PrimeFloatLabel variant="on">
+      <PrimePassword
+        v-model="model"
+        :disabled="props.disabled"
+        :invalid="props.isError"
+        :inputId="props.id"
+        :name="props.name"
+        :readonly="props.readonly"
+        :toggleMask="props.toggleMask"
+        :feedback="props.feedback"
+        fluid
+      />
+      <label :for="props.id">{{ $t(`${props.label}`) }}</label>
+    </PrimeFloatLabel>
+    <PrimeMessage v-if="props.isError" severity="error" size="small" variant="simple">
       {{ $t(`${props.errorHelpLabel}`) }}
-    </small>
+    </PrimeMessage>
   </div>
 </template>
 

@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import FloatLabel from 'primevue/floatlabel'
-import InputText from 'primevue/inputtext'
+import PrimeFloatLabel from 'primevue/floatlabel'
+import PrimeInputText from 'primevue/inputtext'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const model: any = defineModel()
 const props = defineProps<{
   id: string
   disabled?: boolean
-  errorHelpLabel: string
+  errorHelpLabel: string | undefined
   label: string
+  name?: string
   readonly?: boolean
   type: string
-  isError: boolean
+  isError: boolean | undefined
 }>()
 </script>
 
 <template>
   <div>
-    <FloatLabel variant="on">
-      <InputText
+    <PrimeFloatLabel variant="on">
+      <PrimeInputText
         v-model="model"
         class="w-full border shadow-none"
         :disabled="props.disabled"
         :invalid="props.isError"
         :id="props.id"
+        :name="props.name"
         :readonly="props.readonly"
         :type="type"
       />
-      <label :class="props.isError ? 'nikk-invalid' : ''" :for="props.id">{{
-        $t(`${props.label}`)
-      }}</label>
-    </FloatLabel>
-    <small v-if="props.isError" :id="`${props.id}-help`" class="nikk-invalid">
+      <label :for="props.id">{{ $t(`${props.label}`) }}</label>
+    </PrimeFloatLabel>
+    <PrimeMessage v-if="props.isError" severity="error" size="small" variant="simple">
       {{ $t(`${props.errorHelpLabel}`) }}
-    </small>
+    </PrimeMessage>
   </div>
 </template>
