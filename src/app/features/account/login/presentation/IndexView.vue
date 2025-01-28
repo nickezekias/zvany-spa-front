@@ -1,32 +1,57 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
+import { zodResolver } from '@primevue/forms/resolvers/zod'
+import { z } from 'zod'
 import { useAccountStore } from '@/stores/account.store'
-import { useAppStore } from '@/stores/app.store'
 import { useRoute, useRouter } from 'vue-router'
+
+import { Form as PrimeForm, type FormSubmitEvent } from '@primevue/forms'
 
 import NikkInputText from '@/components/forms/NikkInputText.vue'
 import NikkInputPassword from '@/components/forms/NikkInputPassword.vue'
 
 import type { LoginRequest } from '@/app/@types/account.interface'
+import type { Ref } from 'vue'
+import NikkToast from '@/app/utils/NikkToast'
+import { useToast } from 'primevue'
+import { useI18n } from 'vue-i18n'
 
 const accountStore = useAccountStore()
-const appStore = useAppStore()
 const loading = ref(false)
 const router = useRouter()
 const route = useRoute()
+const toast = useToast()
+const { t } = useI18n()
 
-const state: LoginRequest = reactive({
+const nikkToast = new NikkToast(toast, t)
+
+const state: Ref<LoginRequest> = ref({
   email: '',
   password: '',
 })
 
-async function submit(): Promise<void> {
+const resolver = zodResolver(
+  z.object({
+    email: z.string().email({ message: 'errors.validation.email' }),
+    password: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
+    /* .refine((value: string) => /[a-z]/.test(value), {
+        message: 'errors.validation.mustContain.lowercase',
+      })
+      .refine((value: string) => /[A-Z]/.test(value), {
+        message: 'errors.validation.mustContain.uppercase',
+      })
+      .refine((value: string) => /d/.test(value), {
+        message: 'errors.validation.mustContain.number',
+      }), */
+  }),
+)
+
+async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
   loading.value = true
   try {
-    //FIXME: Implement form validation
-    const isFormCorrect = true
+    const isFormCorrect = e.valid
     if (isFormCorrect) {
-      await accountStore.login(state)
+      await accountStore.login(e.values as LoginRequest)
       if (route.query.redirect) {
         router.push(`${route.query.redirect}`)
       } else {
@@ -37,14 +62,14 @@ async function submit(): Promise<void> {
         }
       }
     } else {
-      appStore.toastError('labels.invalidFormHint', 'labels.invalidForm')
+      nikkToast.error('errors.validation.form', 'labels.invalidForm')
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     if (e?.response?.status == 422) {
-      appStore.toastError('messages.credentialsNotFound', 'labels.loginFailed')
+      nikkToast.error('messages.credentialsNotFound', 'labels.loginFailed')
     } else {
-      appStore.toastAPIError(e)
+      nikkToast.httpError(e)
     }
   } finally {
     loading.value = false
@@ -54,31 +79,43 @@ async function submit(): Promise<void> {
 
 <template>
   <div class="w-full p-3 overflow-y-auto">
-    <PrimeCard class="w-full md:w-4/12 2xl:w-3/12 mx-auto mt-10">
-      <template #title>{{ $t('labels.login') }}</template>
+    <PrimeCard class="w-full md:w-4/12 2xl:w-3/12 mx-auto mt-10 nikk-card">
+      <template #title>
+        <h1 class="text-center text-3xl md:text-4xl font-light">
+          {{ $t('labels.login') }}
+        </h1>
+      </template>
       <template #content>
-        <form @submit.prevent="submit" class="py-3 flex flex-col gap-5">
+        <PrimeForm
+          class="py-3 flex flex-col gap-5"
+          :initialValues="state"
+          @submit="onFormSubmit"
+          :resolver
+          v-slot="$form"
+          :validateOnBlur="true"
+          :validateOnSubmit="true"
+        >
           <NikkInputText
-            v-model="state.email"
-            errorHelpLabel="errors.validation.email"
+            :errorHelpLabel="$form.email?.error?.message"
             id="email"
-            :isError="false"
+            :isError="$form.email?.invalid"
             label="labels.email"
+            name="email"
             type="email"
           />
 
           <NikkInputPassword
-            v-model="state.password"
-            errorHelpLabel="errors.validation.passwords.minCount"
+            :errorHelpLabel="$form.password?.error?.message"
             id="password"
-            :isError="false"
+            :isError="$form.password?.invalid"
             label="labels.password"
+            name="password"
             :toggleMask="true"
             :feedback="false"
           />
 
           <PrimeButton type="submit" :loading="loading" :label="$t('labels.login')" />
-        </form>
+        </PrimeForm>
       </template>
     </PrimeCard>
   </div>

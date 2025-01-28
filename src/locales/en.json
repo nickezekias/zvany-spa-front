@@ -1,8 +1,15 @@
 {
   "errors": {
     "validation": {
-      "email": "E-mail must be valid",
+      "email": "Email must be valid",
+      "form": "Please fill out the form correctly",
       "invalidForm": "Invalid form, please fill out the form correctly",
+      "mustContain": {
+        "lowercase": "Must contain at least one lowercase letter",
+        "number": "Must contain at least one number",
+        "specialCharacter": "Must contain at least one special character",
+        "uppercase": "Must contain at least one uppercase letter"
+      },
       "passwords": {
         "minCount": "Your password must have at least 8 characters",
         "notSame": "Passwords must be the same"
@@ -35,6 +42,8 @@
     "firstName": "First Name",
     "gender": "Gender",
     "goHome": "Go Home",
+    "info": "Info",
+    "invalidForm": "Invalid Form",
     "lastName": "Last Name",
     "license": "License | Licenses",
     "login": "Login",
@@ -56,7 +65,8 @@
     "student": "Student | Students",
     "studentId": "Student ID",
     "timetable": "Timetable | Timetables",
-    "unpaid": "Unpaid"
+    "unpaid": "Unpaid",
+    "warning": "Warning"
   },
   "messages": {
     "credentialsNotFound": "These credentials do not match our records",

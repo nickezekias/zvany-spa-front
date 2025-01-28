@@ -25,6 +25,11 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('@/app/features/dashboard/presentation/IndexView.vue'),
+    },
   ],
 })
 

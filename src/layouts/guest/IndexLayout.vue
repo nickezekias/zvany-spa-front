@@ -5,9 +5,9 @@ import PrimeToolbar from 'primevue/toolbar'
 
 <template>
   <div class="h-screen w-screen flex-col">
-    <PrimeToolbar class="py-0 rounded-none border-none border-b">
+    <PrimeToolbar class="py-0 rounded-none border-0 border-b">
       <template #start>
-        <div class="logo">LugShare</div>
+        <div class="logo font-black">LugShare</div>
       </template>
 
       <template #end>
