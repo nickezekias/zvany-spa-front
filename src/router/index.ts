@@ -53,6 +53,16 @@ const router = createRouter({
           name: 'dashboard',
           component: () => import('@/app/features/dashboard/presentation/IndexView.vue'),
         },
+        {
+          path: '/u',
+          children: [
+            {
+              path: 'public-profile',
+              name: 'user.publicProfile',
+              component: () => import('@/app/features/profile/public/presentation/IndexView.vue'),
+            },
+          ],
+        },
       ],
     },
   ],

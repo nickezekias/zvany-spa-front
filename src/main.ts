@@ -14,6 +14,7 @@ import primevueConfig from './lib/primevue'
 
 import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
+import Badge from 'primevue/badge'
 import Card from 'primevue/card'
 import Menu from 'primevue/menu'
 import Message from 'primevue/message'
@@ -31,6 +32,7 @@ app.use(PrimeVue, primevueConfig)
 app.use(ToastService)
 
 app.component('PrimeAvatar', Avatar)
+app.component('PrimeBadge', Badge)
 app.component('PrimeButton', Button)
 app.component('PrimeCard', Card)
 app.component('PrimeMenu', Menu)

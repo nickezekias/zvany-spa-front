@@ -17,6 +17,22 @@ const MyPreset = definePreset(Aura, {
       950: '#002640',
     },
   },
+  components: {
+    card: {
+      colorScheme: {
+        light: {
+          root: {
+            shadow: 'none',
+          },
+        },
+        dark: {
+          root: {
+            shadow: 'none',
+          },
+        },
+      },
+    },
+  },
 })
 
 export default {

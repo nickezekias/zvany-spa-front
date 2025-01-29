@@ -2,6 +2,7 @@
 import TopBarComponent from './TopBarComponent.vue'
 import FooterComponent from './FooterComponent.vue'
 import { ref } from 'vue'
+import BottomBar from './mobile/BottomBar.vue'
 
 const darkMode = ref(false)
 
@@ -15,10 +16,11 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
   <div :class="{ dark: darkMode }" class="min-h-screen flex flex-col">
     <TopBarComponent />
     <div class="flex flex-grow">
-      <main class="flex-grow p-4 pb-8">
+      <main class="flex-grow max-w-screen overflow-x-hidden">
         <router-view />
       </main>
     </div>
     <FooterComponent />
+    <BottomBar class="md:hidden" />
   </div>
 </template>

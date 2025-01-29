@@ -2,9 +2,10 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAccountStore } from '@/stores/account.store'
+import { useRouter } from 'vue-router'
 
 import PrimeBadge from 'primevue/badge'
-import { useRouter } from 'vue-router'
+import UserAvatar from './UserAvatar.vue'
 
 const accountStore = useAccountStore()
 const router = useRouter()
@@ -15,12 +16,12 @@ const items = ref([
     separator: true,
   },
   {
-    label: t('labels.myProfile'),
+    label: t('labels.publicProfile'),
     icon: `
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="3" opacity="0.5"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5" opacity="0.5"/></g></svg>
     `,
     command: () => {
-      router.push('#')
+      router.push({ name: 'user.publicProfile' })
     },
   },
   {
@@ -69,12 +70,7 @@ async function onLogout() {
       class="p-1"
       @click="toggle"
     >
-      <PrimeAvatar
-        :label="accountStore.userModel?.initials"
-        shape="circle"
-        class="text-primary text-sm bg-[#0099ff10] border-2 border-primary"
-        style="width: 2rem; height: 2rem"
-      />
+      <UserAvatar class="w-[2rem] h-[2rem] text-sm" />
 
       <PrimeMenu
         id="overlay_menu"
