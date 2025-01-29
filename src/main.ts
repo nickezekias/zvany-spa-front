@@ -17,6 +17,7 @@ import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Menu from 'primevue/menu'
 import Message from 'primevue/message'
+import Ripple from 'primevue/ripple'
 import Toolbar from 'primevue/toolbar'
 
 import ToastService from 'primevue/toastservice'
@@ -35,5 +36,7 @@ app.component('PrimeCard', Card)
 app.component('PrimeMenu', Menu)
 app.component('PrimeMessage', Message)
 app.component('PrimeToolbar', Toolbar)
+
+app.directive('ripple', Ripple)
 
 app.mount('#app')
