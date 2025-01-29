@@ -57,8 +57,9 @@
     "account": "Account",
     "age": "Age",
     "birthDate": "Birth Date",
-    "class": "Class | Classes",
+    "chooseImage": "Choose Image",
     "city": "City",
+    "class": "Class | Classes",
     "communityBadges": "Community Badges",
     "confirmPassword": "Confirm Password",
     "country": "Country",
@@ -111,6 +112,7 @@
     "transaction": "Transaction | Transactions",
     "transactions": "Transactions",
     "trustAndVerification": "Trust & Verification",
+    "uploadIDDocument": "Upload ID Document",
     "userID": "User ID",
     "verification": "Verification | Verifications",
     "warning": "Warning"
@@ -120,5 +122,8 @@
     "noDataFound": "No data found",
     "passwordResetLinkSent": "Password reset link has been sent to your email",
     "passwordResetSuccess": "Password reset successful, you will be redirected to login page"
+  },
+  "placeholders": {
+    "fileUploader": "Click to choose, or drag and drop a file"
   }
 }
