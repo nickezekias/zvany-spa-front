@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import accountService from '@/app/features/account/adapters/account.service'
 import { defineStore } from 'pinia'
 import type {
@@ -14,14 +14,21 @@ export const useAccountStore = defineStore('accountStore', () => {
   const router = useRouter()
 
   const registerPayload: Ref<RegisterRequest> = ref({
-    firstName: '',
-    lastName: '',
     email: '',
-    phone: '',
+    firstName: '',
+    gender: '',
+    lastName: '',
     password: '',
     password_confirmation: '',
+    phone: '',
   })
   const user: Ref<User | null> = ref(null)
+  const userModel: Ref<User | null> = computed(() => {
+    if (user.value) {
+      return User.fromObject(user.value)
+    }
+    return null
+  })
 
   const clearAuthenticatedUser = (): void => {
     setUser(null)
@@ -76,8 +83,8 @@ export const useAccountStore = defineStore('accountStore', () => {
   }
 
   async function register(payload: RegisterRequest) {
-    const response = await accountService.register(payload)
-    setAuthenticatedUser(response.data as User)
+    await accountService.register(payload)
+    await getAuthenticatedUser()
   }
 
   async function resetPassword(payload: PasswordResetRequest) {
@@ -105,5 +112,6 @@ export const useAccountStore = defineStore('accountStore', () => {
     setUser,
     registerPayload,
     user,
+    userModel,
   }
 })
