@@ -15,7 +15,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
   <div :class="{ dark: darkMode }" class="min-h-screen flex flex-col">
     <TopBarComponent />
     <div class="flex flex-grow">
-      <main class="flex-grow p-4">
+      <main class="flex-grow p-4 pb-8">
         <router-view />
       </main>
     </div>

@@ -4,7 +4,7 @@ import PrimeToolbar from 'primevue/toolbar'
 </script>
 
 <template>
-  <div class="h-screen w-screen flex-col">
+  <div class="min-h-screen flex flex-col">
     <PrimeToolbar class="py-0 rounded-none border-0 border-b">
       <template #start>
         <div class="logo font-black">LugShare</div>
@@ -21,7 +21,7 @@ import PrimeToolbar from 'primevue/toolbar'
       </template>
     </PrimeToolbar>
 
-    <main class="mt-4 md:mt-16">
+    <main class="flex flex-grow pt-4 md:pt-16 pb-8">
       <RouterView />
     </main>
   </div>
