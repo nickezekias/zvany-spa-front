@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UserAvatar from '@/components/user/UserAvatar.vue'
 import { useAccountStore } from '@/stores/account.store'
-import IndexContent from '../IndexContent.vue'
+import IndexContent from './IndexContent.vue'
 
 const accountStore = useAccountStore()
 </script>

@@ -14,7 +14,7 @@ import PublicProfileComponent from '@/components/user/PublicProfileComponent.vue
       <PrimeTab value="1">{{ $t('labels.spaceListing', 2) }}</PrimeTab>
       <PrimeTab value="2">{{ $t('labels.spaceRequest', 2) }}</PrimeTab>
     </PrimeTabList>
-    <PrimeTabPanels>
+    <PrimeTabPanels class="pt-8 md:pt-16">
       <PrimeTabPanel value="0">
         <PublicProfileComponent />
       </PrimeTabPanel>
