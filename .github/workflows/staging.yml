@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - staging
+name: 🚀 Deploy website on push to staging
+jobs:
+  web-deploy:
+    name: 🎉 Deploy to staging env
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: ftp://147.79.103.53
+          username: ${{ secrets.ftp_username_staging }}
+          password: ${{ secrets.ftp_password_staging }}
+          local-dir: ./dist/
+          server-dir: ./domains/staging.lugshare.com/public_html/
