@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import Select from 'primevue/select'
+import PrimeSelect from 'primevue/select'
 
 const model = defineModel()
 const props = defineProps<{
-  disable?: boolean
+  disabled?: boolean
   errorHelpLabel?: string
   id: string
   isError?: boolean
   loading?: boolean
+  name?: string
   optionLabel?: string
   optionValue?: string
   options: Array<unknown>
@@ -18,11 +19,21 @@ const props = defineProps<{
 
 <template>
   <div>
-    <Select v-model="model" class="w-full" :invalid="props.isError" :loading="props.loading"
-      :optionLabel="props.optionLabel" :optionValue="props.optionValue" :options=props.options
-      :placeholder="props.placeholder" :readonly="props.readonly" />
-    <small v-if="props.isError" :id="`${props.id}-help`" class="nikk-invalid">
+    <PrimeSelect
+      v-model="model"
+      class="w-full"
+      :disabled="props.disabled"
+      :invalid="props.isError"
+      :loading="props.loading"
+      :name="props.name"
+      :optionLabel="props.optionLabel"
+      :optionValue="props.optionValue"
+      :options="props.options"
+      :placeholder="$t(`${props.placeholder}`)"
+      :readonly="props.readonly"
+    />
+    <PrimeMessage v-if="props.isError" severity="error" size="small" variant="simple">
       {{ $t(`${props.errorHelpLabel}`) }}
-    </small>
+    </PrimeMessage>
   </div>
 </template>
