@@ -20,6 +20,12 @@ const router = createRouter({
           redirect: '/login',
         },
         {
+          path: '/forgot-password',
+          name: 'account.forgotPassword',
+          component: () =>
+            import('@/app/features/account/forgot-password/presentation/IndexView.vue'),
+        },
+        {
           path: '/login',
           name: 'account.login',
           component: () => import('@/app/features/account/login/presentation/IndexView.vue'),

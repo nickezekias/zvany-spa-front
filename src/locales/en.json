@@ -42,7 +42,10 @@
 
   "hints": {
     "alreadyHaveAccount": "Already have an account?",
-    "doNotHaveAccount": "Don't have an account?"
+    "backToLogin": "Back to Login",
+    "doNotHaveAccount": "Don't have an account?",
+    "forgotPassword": "Forgot Password?",
+    "forgotPasswordDesc": "Enter your email address and we'll send you a link to reset your password"
   },
 
   "labels": {
@@ -54,8 +57,10 @@
     "confirmPassword": "Confirm Password",
     "dashboard": "Dashboard",
     "email": "Email",
+    "emailResetLink": "Email Reset Link",
     "female": "Female",
     "firstName": "First Name",
+    "forgotPassword": "Forgot Password",
     "gender": "Gender",
     "goHome": "Go Home",
     "info": "Info",
@@ -76,6 +81,7 @@
     "phone": "Phone",
     "previous": "Previous",
     "register": "Register",
+    "resetPassword": "Reset Password",
     "school": "School | Schools",
     "schoolFees": "School Fees",
     "selectGender": "Select Gender",
@@ -87,6 +93,7 @@
   },
   "messages": {
     "credentialsNotFound": "These credentials do not match our records",
-    "noDataFound": "No data found"
+    "noDataFound": "No data found",
+    "passwordResetLinkSent": "Password reset link has been sent to your email"
   }
 }

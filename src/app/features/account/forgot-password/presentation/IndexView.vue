@@ -3,15 +3,12 @@ import { ref } from 'vue'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
 import { useAccountStore } from '@/stores/account.store'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 import { Form as PrimeForm, type FormSubmitEvent } from '@primevue/forms'
 
 import NikkInputText from '@/components/forms/NikkInputText.vue'
-import NikkInputPassword from '@/components/forms/NikkInputPassword.vue'
 
-import type { LoginRequest } from '@/app/@types/account.interface'
-import type { Ref } from 'vue'
 import NikkToast from '@/app/utils/NikkToast'
 import { useToast } from 'primevue'
 import { useI18n } from 'vue-i18n'
@@ -19,21 +16,18 @@ import { useI18n } from 'vue-i18n'
 const accountStore = useAccountStore()
 const loading = ref(false)
 const router = useRouter()
-const route = useRoute()
 const toast = useToast()
 const { t } = useI18n()
 
 const nikkToast = new NikkToast(toast, t)
 
-const state: Ref<LoginRequest> = ref({
+const state = ref({
   email: '',
-  password: '',
 })
 
 const resolver = zodResolver(
   z.object({
     email: z.string().email({ message: 'errors.validation.email' }),
-    password: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
   }),
 )
 
@@ -42,26 +36,15 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
   try {
     const isFormCorrect = e.valid
     if (isFormCorrect) {
-      await accountStore.login(e.values as LoginRequest)
-      if (route.query.redirect) {
-        router.push(`${route.query.redirect}`)
-      } else {
-        if (accountStore.user && accountStore.user.isAdmin()) {
-          router.push({ name: 'admin.dashboard' })
-        } else {
-          router.push({ name: 'dashboard' })
-        }
-      }
+      await accountStore.sendPasswordResetLink(state.value.email)
+      nikkToast.success('messages.passwordResetLinkSent')
+      router.push({ name: 'account.login' })
     } else {
       nikkToast.error('errors.validation.form', 'labels.invalidForm')
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
-    if (e?.response?.status == 422) {
-      nikkToast.error('messages.credentialsNotFound', 'labels.loginFailed')
-    } else {
-      nikkToast.httpError(e)
-    }
+    nikkToast.httpError(e)
   } finally {
     loading.value = false
   }
@@ -72,16 +55,10 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
   <div class="w-full p-3 overflow-y-auto">
     <PrimeCard class="w-full md:w-4/12 2xl:w-3/12 mx-auto mt-10 nikk-card">
       <template #title>
-        <div>
+        <div class="text-center">
           <h1 class="text-center text-3xl md:text-4xl font-light mb-0">
-            {{ $t('labels.login') }}
+            {{ $t('labels.forgotPassword') }}
           </h1>
-          <div class="flex items-center justify-center">
-            <span class="font-light text-sm me-1">{{ $t('hints.doNotHaveAccount') }}</span>
-            <router-link to="/register" activeClass="border-b border-primary">
-              <PrimeButton text :label="$t('labels.register')" />
-            </router-link>
-          </div>
         </div>
       </template>
       <template #content>
@@ -94,7 +71,12 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
           :validateOnBlur="true"
           :validateOnSubmit="true"
         >
+          <PrimeMessage class="text text-muted font-light text-sm bock">{{
+            $t('hints.forgotPasswordDesc')
+          }}</PrimeMessage>
+
           <NikkInputText
+            v-model="state.email"
             :errorHelpLabel="$form.email?.error?.message"
             id="email"
             :isError="$form.email?.invalid"
@@ -103,24 +85,14 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
             type="email"
           />
 
-          <NikkInputPassword
-            :errorHelpLabel="$form.password?.error?.message"
-            id="password"
-            :isError="$form.password?.invalid"
-            label="labels.password"
-            name="password"
-            :toggleMask="true"
-            :feedback="false"
-          />
+          <PrimeButton type="submit" :loading="loading" :label="$t('labels.emailResetLink')" />
 
           <div class="flex items-center justify-center">
-            <span class="font-light text-sm me-1">{{ $t('hints.forgotPassword') }}</span>
-            <router-link to="/forgot-password" activeClass="border-b border-primary">
-              <PrimeButton text severity="danger" :label="$t('labels.resetPassword')" />
+            <span class="font-light text-sm me-1">{{ $t('hints.backToLogin') }}</span>
+            <router-link to="/login" activeClass="border-b border-primary">
+              <PrimeButton text :label="$t('labels.login')" />
             </router-link>
           </div>
-
-          <PrimeButton type="submit" :loading="loading" :label="$t('labels.login')" />
         </PrimeForm>
       </template>
     </PrimeCard>
