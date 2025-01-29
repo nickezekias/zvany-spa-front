@@ -54,6 +54,7 @@
     "abbreviation": "Abbreviation",
     "about": "About",
     "address": "Address",
+    "account": "Account",
     "age": "Age",
     "birthDate": "Birth Date",
     "class": "Class | Classes",
@@ -92,6 +93,7 @@
     "phone": "Phone",
     "previous": "Previous",
     "profile": "Profile",
+    "profileDetails": "Profile Details",
     "publicProfile": "Public Profile",
     "recentSpaceListings": "Recent Space Listings",
     "recentSpaceRequests": "Recent Space Requests",
@@ -108,6 +110,7 @@
     "state": "State",
     "transaction": "Transaction | Transactions",
     "transactions": "Transactions",
+    "trustAndVerification": "Trust & Verification",
     "userID": "User ID",
     "verification": "Verification | Verifications",
     "warning": "Warning"
