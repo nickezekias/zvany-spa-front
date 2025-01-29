@@ -37,9 +37,9 @@ const resolver = zodResolver(
         .refine((value: string) => /[a-z]/.test(value), {
           message: 'errors.validation.mustContain.lowercase',
         })
-        /* .refine((value: string) => /[A-Z]/.test(value), {
+        .refine((value: string) => /[A-Z]/.test(value), {
           message: 'errors.validation.mustContain.uppercase',
-        }) */
+        })
         .refine((value: string) => /d/.test(value), {
           message: 'errors.validation.mustContain.number',
         }),
