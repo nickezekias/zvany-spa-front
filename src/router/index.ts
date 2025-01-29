@@ -23,6 +23,11 @@ const router = createRouter({
           name: 'account.login',
           component: () => import('@/app/features/account/login/presentation/IndexView.vue'),
         },
+        {
+          path: '/register',
+          name: 'account.register',
+          component: () => import('@/app/features/account/register/presentation/IndexView.vue'),
+        },
       ],
     },
     {

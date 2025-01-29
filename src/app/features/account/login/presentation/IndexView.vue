@@ -34,15 +34,6 @@ const resolver = zodResolver(
   z.object({
     email: z.string().email({ message: 'errors.validation.email' }),
     password: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
-    /* .refine((value: string) => /[a-z]/.test(value), {
-        message: 'errors.validation.mustContain.lowercase',
-      })
-      .refine((value: string) => /[A-Z]/.test(value), {
-        message: 'errors.validation.mustContain.uppercase',
-      })
-      .refine((value: string) => /d/.test(value), {
-        message: 'errors.validation.mustContain.number',
-      }), */
   }),
 )
 
@@ -81,9 +72,17 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
   <div class="w-full p-3 overflow-y-auto">
     <PrimeCard class="w-full md:w-4/12 2xl:w-3/12 mx-auto mt-10 nikk-card">
       <template #title>
-        <h1 class="text-center text-3xl md:text-4xl font-light">
-          {{ $t('labels.login') }}
-        </h1>
+        <div>
+          <h1 class="text-center text-3xl md:text-4xl font-light mb-0">
+            {{ $t('labels.login') }}
+          </h1>
+          <div class="flex items-center justify-center">
+            <span class="font-light text-sm me-1">{{ $t('hints.doNotHaveAccount') }}</span>
+            <router-link to="/register" activeClass="border-b border-primary">
+              <PrimeButton text :label="$t('labels.register')" />
+            </router-link>
+          </div>
+        </div>
       </template>
       <template #content>
         <PrimeForm

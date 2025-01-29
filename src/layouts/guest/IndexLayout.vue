@@ -11,12 +11,12 @@ import PrimeToolbar from 'primevue/toolbar'
       </template>
 
       <template #end>
-        <!-- <router-link to="/register" activeClass="border-b border-primary" class="py-2">
-          <PrimeButton text plain class="" :label="$t('labels.register')" />
-        </router-link> -->
-
         <router-link to="/login" activeClass="border-b border-primary" class="ml-3 py-2">
           <PrimeButton text plain class="" :label="$t('labels.login')" />
+        </router-link>
+
+        <router-link to="/register" activeClass="border-b border-primary" class="py-2">
+          <PrimeButton text plain class="" :label="$t('labels.register')" />
         </router-link>
       </template>
     </PrimeToolbar>
