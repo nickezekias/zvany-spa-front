@@ -72,6 +72,7 @@
     "logout": "Logout",
     "male": "Male",
     "name": "Name",
+    "newPassword": "New Password",
     "next": "Next",
     "operationFailure": "Operation Failure",
     "operationSuccess": "Operation Success",
@@ -94,6 +95,7 @@
   "messages": {
     "credentialsNotFound": "These credentials do not match our records",
     "noDataFound": "No data found",
-    "passwordResetLinkSent": "Password reset link has been sent to your email"
+    "passwordResetLinkSent": "Password reset link has been sent to your email",
+    "passwordResetSuccess": "Password reset successful, you will be redirected to login page"
   }
 }

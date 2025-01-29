@@ -11,8 +11,10 @@ interface LoginRequest {
 }
 
 interface PasswordResetRequest {
+  email: string
   password: string
-  passwordConfirmation: SVGStringList
+  password_confirmation: string
+  token: string
 }
 
 interface RegisterRequest {

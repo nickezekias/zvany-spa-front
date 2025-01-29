@@ -35,6 +35,12 @@ const router = createRouter({
           name: 'account.register',
           component: () => import('@/app/features/account/register/presentation/IndexView.vue'),
         },
+        {
+          path: '/reset-password',
+          name: 'account.resetPassword',
+          component: () =>
+            import('@/app/features/account/reset-password/presentation/IndexView.vue'),
+        },
       ],
     },
     {
