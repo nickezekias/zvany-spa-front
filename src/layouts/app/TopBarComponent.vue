@@ -10,7 +10,7 @@ const isNotificationDrawer = ref(false)
 </script>
 <template>
   <div>
-    <PrimeToolbar class="py-0 rounded-none border-0 border-b">
+    <PrimeToolbar class="py-0 rounded-none border-0 border-b px-2 md:px-12">
       <template #start>
         <div class="logo">
           <span class="font-black">LugShare</span>
