@@ -15,7 +15,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ftp://147.79.103.53
-          username: ${{ secrets.FTP_USERNAME_STAGING }}
+          username: nickezekiel
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           local-dir: ./dist/
           server-dir: ./domains/staging.lugshare.com/public_html/
