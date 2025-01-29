@@ -86,10 +86,9 @@
     "school": "School | Schools",
     "schoolFees": "School Fees",
     "selectGender": "Select Gender",
-    "student": "Student | Students",
-    "studentId": "Student ID",
-    "timetable": "Timetable | Timetables",
-    "unpaid": "Unpaid",
+    "spaceListing": "Space Listing | Space Listings",
+    "spaceRequest": "Space Request | Space Requests",
+    "transaction": "Transaction | Transactions",
     "warning": "Warning"
   },
   "messages": {
