@@ -1,72 +1,93 @@
 export default class User {
-  id: string
+  public static readonly GENDERS = {
+    MALE: 'male',
+    FEMALE: 'female',
+    OTHER: 'other',
+  }
+
+  createdAt: string
   email: string
   emailVerifiedAt: string
   firstName: string
+  fullName: string
+  gender: string
+  id: string
+  initials: string
   isActive: boolean
   lastName: string
   password: string
   phone: string
   roles: Array<string>
-  createdAt: string
   updatedAt: string
 
   public constructor(
-    id: string,
+    createdAt: string,
     email: string,
     emailVerifiedAt: string,
     firstName: string,
+    fullName: string,
+    gender: string,
+    id: string,
+    initials: string,
     isActive: boolean,
     lastName: string,
     password: string,
     phone: string,
     roles: Array<string>,
-    createdAt: string,
     updatedAt: string,
   ) {
-    this.id = id
+    this.createdAt = createdAt
     this.email = email
     this.emailVerifiedAt = emailVerifiedAt
     this.firstName = firstName
+    this.fullName = fullName
+    this.gender = gender
+    this.id = id
+    this.initials = initials
     this.isActive = isActive
     this.lastName = lastName
     this.password = password
     this.phone = phone
     this.roles = roles
-    this.createdAt = createdAt
     this.updatedAt = updatedAt
   }
 
   static fromObject(data: {
-    id: string
+    createdAt: string
     email: string
     emailVerifiedAt: string
     firstName: string
+    fullName: string
+    gender: string
+    id: string
+    initials: string
     isActive: boolean
     lastName: string
     password: string
     phone: string
     roles: Array<string>
-    createdAt: string
     updatedAt: string
   }): User {
     return new User(
-      data.id,
+      data.createdAt,
       data.email,
       data.emailVerifiedAt,
       data.firstName,
+      data.fullName,
+      data.gender,
+      data.id,
+      data.initials,
       data.isActive,
       data.lastName,
       data.password,
       data.phone,
       data.roles,
-      data.createdAt,
       data.updatedAt,
     )
   }
 
   static initEmpty(): User {
-    return new User('', '', '', '', false, '', '', '', [], '', '')
+    return new User('', '', '', '', '', '', '', '', false, '', '', '', [], '')
   }
 
   public isAdmin(): boolean {
