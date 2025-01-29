@@ -5,6 +5,7 @@ import guest from './middleware/guest.middleware'
 import { useAppStore } from '@/stores/app.store'
 
 import GuestLayout from '@/layouts/guest/IndexLayout.vue'
+import auth from './middleware/auth.middleware'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,9 +32,16 @@ const router = createRouter({
       ],
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('@/app/features/dashboard/presentation/IndexView.vue'),
+      path: '/',
+      component: () => import('@/layouts/app/IndexLayout.vue'),
+      meta: { middleware: [auth] },
+      children: [
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          component: () => import('@/app/features/dashboard/presentation/IndexView.vue'),
+        },
+      ],
     },
   ],
 })
