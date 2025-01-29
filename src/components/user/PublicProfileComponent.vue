@@ -36,7 +36,7 @@ const items = [
 </script>
 
 <template>
-  <div class="flex gap-4 md:gap-6">
+  <div class="flex flex-col md:flex-row gap-4 md:gap-6">
     <div class="flex flex-col w-full md:w-1/3 gap-4">
       <PrimeCard class="border w-full">
         <template #title>
