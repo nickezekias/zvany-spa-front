@@ -10,11 +10,12 @@ const props = defineProps<{
   disabled?: boolean
   errorHelpLabel: string | undefined
   feedback?: boolean
+  isError: boolean | undefined
   label: string
   name?: string
   readonly?: boolean
+  showMeterHint?: boolean
   toggleMask: boolean
-  isError: boolean | undefined
 }>()
 </script>
 
@@ -24,14 +25,24 @@ const props = defineProps<{
       <PrimePassword
         v-model="model"
         :disabled="props.disabled"
+        :feedback="props.feedback"
+        fluid
         :invalid="props.isError"
         :inputId="props.id"
         :name="props.name"
         :readonly="props.readonly"
         :toggleMask="props.toggleMask"
-        :feedback="props.feedback"
-        fluid
-      />
+      >
+        <template v-if="props.feedback && props.showMeterHint" #footer>
+          <PrimeDivider />
+          <ul class="pl-2 ml-2 my-0 leading-normal">
+            <li>{{ $t('errors.validation.mustContain.lowercase') }}</li>
+            <li>{{ $t('errors.validation.mustContain.uppercase') }}</li>
+            <li>{{ $t('errors.validation.mustContain.number') }}</li>
+            <li>{{ $t('errors.validation.passwords.minCount') }}</li>
+          </ul>
+        </template>
+      </PrimePassword>
       <label :for="props.id">{{ $t(`${props.label}`) }}</label>
     </PrimeFloatLabel>
     <PrimeMessage v-if="props.isError" severity="error" size="small" variant="simple">
