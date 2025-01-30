@@ -26,5 +26,6 @@ const appStore = useAppStore()
   height: 3px;
   width: 100%;
   border-radius: 0;
+  /* stub comment - to remove */
 }
 </style>

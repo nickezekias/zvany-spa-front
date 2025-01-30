@@ -12,10 +12,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp://147.79.103.53
-          username: ${{ secrets.ftp_username_staging }}
-          password: ${{ secrets.ftp_password_staging }}
+          server: 147.79.103.53
+          username: ${{ secrets.FTP_USERNAME_STAGING }}
+          password: ${{ secrets.FTP_PASSWORD_STAGING }}
           local-dir: ./dist/
-          server-dir: ./domains/staging.lugshare.com/public_html/
+          server-dir: ./
