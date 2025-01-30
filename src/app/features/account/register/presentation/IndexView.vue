@@ -40,7 +40,7 @@ const resolver = zodResolver(
         .refine((value: string) => /[A-Z]/.test(value), {
           message: 'errors.validation.mustContain.uppercase',
         })
-        .refine((value: string) => /d/.test(value), {
+        .refine((value: string) => /[0-9]/.test(value), {
           message: 'errors.validation.mustContain.number',
         }),
       password_confirmation: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
@@ -160,11 +160,11 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
           <NikkInputPassword
             :errorHelpLabel="$form.password?.error?.message"
             id="password"
+            :feedback="false"
             :isError="$form.password?.invalid"
             label="labels.password"
             name="password"
             :toggleMask="true"
-            :feedback="false"
           />
 
           <NikkInputPassword
