@@ -78,6 +78,10 @@ onMounted(() => {
           </PrimeForm>
         </div>
       </template>
+
+      <template #footer>
+        <PrimeButton class="mt-6" fluid type="submit" :label="$t('labels.edit')" />
+      </template>
     </PrimeCard>
   </div>
 </template>
