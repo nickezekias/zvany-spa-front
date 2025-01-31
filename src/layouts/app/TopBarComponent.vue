@@ -4,6 +4,9 @@ import { ref } from 'vue'
 import NotificationDrawer from '@/components/notifications/NotificationDrawer.vue'
 import UserAvatarMenu from '@/components/user/UserAvatarMenu.vue'
 import ChatDrawer from '@/components/chat/ChatDrawer.vue'
+import { useAppStore } from '@/stores/app.store'
+
+const appStore = useAppStore()
 
 const isChatDrawer = ref(false)
 const isNotificationDrawer = ref(false)
@@ -12,9 +15,9 @@ const isNotificationDrawer = ref(false)
   <div>
     <PrimeToolbar class="py-1 md:py-0 rounded-none border-0 border-b px-4 md:px-12">
       <template #start>
-        <div class="logo">
-          <span class="font-black">LugShare</span>
-        </div>
+        <router-link :to="appStore.homeRoute">
+          <div class="logo font-black cursor-pointer">LugShare</div>
+        </router-link>
       </template>
 
       <template #center>

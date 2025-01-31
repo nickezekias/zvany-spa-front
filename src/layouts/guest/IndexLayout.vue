@@ -7,7 +7,9 @@ import PrimeToolbar from 'primevue/toolbar'
   <div class="min-h-screen flex flex-col">
     <PrimeToolbar class="py-0 rounded-none border-0 border-b">
       <template #start>
-        <div class="logo font-black">LugShare</div>
+        <router-link to="/login">
+          <div class="logo font-black cursor-pointer">LugShare</div>
+        </router-link>
       </template>
 
       <template #end>
