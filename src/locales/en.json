@@ -18,6 +18,7 @@
         "lowercase": "Must contain at least one lowercase letter",
         "number": "Must contain at least one number",
         "specialCharacter": "Must contain at least one special character",
+        "validSymbol": "Must contain at least one of these symbols: !{'@'}{'#'}$%^&*()_+{'{}'}[]:;\"'<>,.?/{'|'}{'`'}{'~'}{'-'}\\",
         "uppercase": "Must contain at least one uppercase letter"
       },
       "passwords": {

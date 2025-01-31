@@ -42,6 +42,9 @@ const resolver = zodResolver(
         })
         .refine((value: string) => /[0-9]/.test(value), {
           message: 'errors.validation.mustContain.number',
+        })
+        .refine((value: string) => /[!@#$%^&*()_+{}\[\]:;"'<>,.?/\\|`~-]/.test(value), {
+          message: 'errors.validation.mustContain.validSymbol',
         }),
       password_confirmation: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
       phone: z.string().min(1, { message: 'errors.validation.requiredField' }),
