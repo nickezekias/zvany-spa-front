@@ -11,9 +11,13 @@ export default class User {
   firstName: string
   fullName: string
   gender: string
+  hasVerifiedEmail = false
+  hasVerifiedID = false
+  hasVerifiedPhone = false
   id: string
   initials: string
   isActive: boolean
+  isOnboarded = false
   lastName: string
   password: string
   phone: string

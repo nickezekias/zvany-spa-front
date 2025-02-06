@@ -71,11 +71,7 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
     const isFormCorrect = e.valid
     if (isFormCorrect) {
       await accountStore.register(e.values as RegisterRequest)
-      if (accountStore.userModel && accountStore.userModel.isAdmin()) {
-        router.push({ name: 'admin.dashboard' })
-      } else {
-        router.push({ name: 'dashboard' })
-      }
+      router.push({ name: 'onboarding.index' })
     } else {
       nikkToast.error('errors.validation.form', 'labels.invalidForm')
     }

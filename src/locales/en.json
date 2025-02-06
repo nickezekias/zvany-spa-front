@@ -39,6 +39,10 @@
     "errors": {
       "404NotFound": "Oops! We can't find the page you're looking for."
     },
+    "onboarding": {
+      "title": "Welcome to LugShare",
+      "subtitle": "We will quickly help you setup your account, so you can start earning and/or saving money."
+    },
     "profile": {
       "userProfile": "User Profile",
       "userProfileDesc": "A centralized place for personal customization"
