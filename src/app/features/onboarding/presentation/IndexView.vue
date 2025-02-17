@@ -84,6 +84,15 @@ async function onFormSubmit() {
       </div>
 
       <div class="flex mt-10 justify-end">
+        <router-link to="/dashboard">
+          <PrimeButton
+            severity="secondary"
+            class="me-4"
+            :loading="loading"
+            :label="$t('labels.skip')"
+          />
+        </router-link>
+
         <PrimeButton @click="onFormSubmit" :loading="loading" :label="$t('labels.save')" />
       </div>
       <!-- <div class="text-center mt-10">
