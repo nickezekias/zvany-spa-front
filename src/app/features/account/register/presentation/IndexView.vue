@@ -40,8 +40,11 @@ const resolver = zodResolver(
         .refine((value: string) => /[A-Z]/.test(value), {
           message: 'errors.validation.mustContain.uppercase',
         })
-        .refine((value: string) => /d/.test(value), {
+        .refine((value: string) => /[0-9]/.test(value), {
           message: 'errors.validation.mustContain.number',
+        })
+        .refine((value: string) => /[!@#$%^&*()_+{}\[\]:;"'<>,.?/\\|`~-]/.test(value), {
+          message: 'errors.validation.mustContain.validSymbol',
         }),
       password_confirmation: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
       phone: z.string().min(1, { message: 'errors.validation.requiredField' }),
@@ -68,11 +71,7 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
     const isFormCorrect = e.valid
     if (isFormCorrect) {
       await accountStore.register(e.values as RegisterRequest)
-      if (accountStore.userModel && accountStore.userModel.isAdmin()) {
-        router.push({ name: 'admin.dashboard' })
-      } else {
-        router.push({ name: 'dashboard' })
-      }
+      router.push({ name: 'onboarding.index' })
     } else {
       nikkToast.error('errors.validation.form', 'labels.invalidForm')
     }
@@ -160,11 +159,11 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
           <NikkInputPassword
             :errorHelpLabel="$form.password?.error?.message"
             id="password"
+            :feedback="false"
             :isError="$form.password?.invalid"
             label="labels.password"
             name="password"
             :toggleMask="true"
-            :feedback="false"
           />
 
           <NikkInputPassword

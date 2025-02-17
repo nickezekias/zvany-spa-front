@@ -44,6 +44,11 @@ const router = createRouter({
       ],
     },
     {
+      path: '/onboarding',
+      name: 'onboarding.index',
+      component: () => import('@/app/features/onboarding/presentation/IndexView.vue'),
+    },
+    {
       path: '/',
       component: () => import('@/layouts/app/IndexLayout.vue'),
       meta: { middleware: [auth] },

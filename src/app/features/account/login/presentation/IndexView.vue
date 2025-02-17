@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
+import { useAppStore } from '@/stores/app.store'
 import { useAccountStore } from '@/stores/account.store'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -16,6 +17,7 @@ import NikkToast from '@/app/utils/NikkToast'
 import { useToast } from 'primevue'
 import { useI18n } from 'vue-i18n'
 
+const appStore = useAppStore()
 const accountStore = useAccountStore()
 const loading = ref(false)
 const router = useRouter()
@@ -46,10 +48,14 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
       if (route.query.redirect) {
         router.push(`${route.query.redirect}`)
       } else {
-        if (accountStore.user && accountStore.user.isAdmin()) {
-          router.push({ name: 'admin.dashboard' })
+        if (accountStore.userModel && !accountStore.userModel.isOnboarded) {
+          router.push({ name: 'onboarding.index' })
         } else {
-          router.push({ name: 'dashboard' })
+          if (accountStore.user && accountStore.user.isAdmin()) {
+            router.push(appStore.adminHomeRoute)
+          } else {
+            router.push(appStore.homeRoute)
+          }
         }
       }
     } else {

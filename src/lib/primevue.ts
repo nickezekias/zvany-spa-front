@@ -18,6 +18,18 @@ const MyPreset = definePreset(Aura, {
     },
   },
   components: {
+    tabs: {
+      colorScheme: {
+        dark: {
+          tablist: {
+            background: 'inherit',
+          },
+          tabpanel: {
+            background: 'inherit',
+          },
+        },
+      },
+    },
     card: {
       colorScheme: {
         light: {

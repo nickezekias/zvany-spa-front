@@ -16,6 +16,7 @@ import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
 import Badge from 'primevue/badge'
 import Card from 'primevue/card'
+import Divider from 'primevue/divider'
 import { Form } from '@primevue/forms'
 import Menu from 'primevue/menu'
 import Message from 'primevue/message'
@@ -36,6 +37,7 @@ app.component('PrimeAvatar', Avatar)
 app.component('PrimeBadge', Badge)
 app.component('PrimeButton', Button)
 app.component('PrimeCard', Card)
+app.component('PrimeDivider', Divider)
 app.component('PrimeForm', Form)
 app.component('PrimeMenu', Menu)
 app.component('PrimeMessage', Message)
