@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PrimeDatePicker from 'primevue/datepicker'
+import PrimeFloatLabel from 'primevue/floatlabel'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const model: any = defineModel()
@@ -7,12 +8,13 @@ const props = defineProps<{
   id: string
   dateFormat?: string
   disabled?: boolean
-  errorHelpLabel: string
-  isError: boolean
+  errorHelpLabel: string | undefined
+  isError: boolean | undefined
   label: string
   manualInput?: boolean
   maxDate?: Date
   minDate?: Date
+  name?: string
   readonly?: boolean
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   selectionMode: any
@@ -21,14 +23,27 @@ const props = defineProps<{
 </script>
 
 <template>
-  <PrimeFloatLabel>
-    <PrimeDatePicker v-model="model" class="w-full shadow-none" :dateFormat="props.dateFormat"
-      :disabled="props.disabled" :invalid="props.isError" :id="props.id" :manualInput="props.manualInput"
-      :maxDate="props.maxDate" :minDate="props.minDate" :readonly="props.readonly" :selectionMode="props.selectionMode"
-      :showButtonBar="props.showButtonBar" />
-    <label :class="props.isError ? 'nikk-invalid' : ''" :for="props.id">{{ $t(`${props.label}`) }}</label>
-    <small v-if="props.isError" :id="`${props.id}-help`" class="nikk-invalid">
+  <PrimeFloatLabel variant="on">
+    <PrimeDatePicker
+      v-model="model"
+      class="w-full shadow-none"
+      :dateFormat="props.dateFormat"
+      :disabled="props.disabled"
+      :invalid="props.isError"
+      :id="props.id"
+      :manualInput="props.manualInput"
+      :maxDate="props.maxDate"
+      :minDate="props.minDate"
+      :name="props.name"
+      :readonly="props.readonly"
+      :selectionMode="props.selectionMode"
+      :showButtonBar="props.showButtonBar"
+    />
+    <label :class="props.isError ? 'nikk-invalid' : ''" :for="props.id">{{
+      $t(`${props.label}`)
+    }}</label>
+    <PrimeMessage v-if="props.isError" severity="error" size="small" variant="simple">
       {{ $t(`${props.errorHelpLabel}`) }}
-    </small>
+    </PrimeMessage>
   </PrimeFloatLabel>
 </template>
