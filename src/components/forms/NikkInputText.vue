@@ -8,7 +8,9 @@ const props = defineProps<{
   id: string
   disabled?: boolean
   errorHelpLabel: string | undefined
-  label: string
+  hint?: string
+  label?: string
+  literalLabel?: string
   name?: string
   readonly?: boolean
   type: string
@@ -29,10 +31,19 @@ const props = defineProps<{
         :readonly="props.readonly"
         :type="type"
       />
-      <label :for="props.id">{{ $t(`${props.label}`) }}</label>
+      <label v-if="!props.literalLabel" :for="props.id">{{ $t(`${props.label}`) }}</label>
+      <label v-else :for="props.id">{{ props.literalLabel }}</label>
     </PrimeFloatLabel>
     <PrimeMessage v-if="props.isError" severity="error" size="small" variant="simple">
       {{ $t(`${props.errorHelpLabel}`) }}
+    </PrimeMessage>
+    <PrimeMessage
+      v-else-if="!props.isError && props.hint"
+      size="small"
+      severity="secondary"
+      variant="simple"
+    >
+      {{ $t(`${props.hint}`) }}
     </PrimeMessage>
   </div>
 </template>
