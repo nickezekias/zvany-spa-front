@@ -30,11 +30,7 @@ const isNotificationDrawer = ref(false)
         </router-link>
 
         <router-link :to="'#'" class="hidden md:flex py-2">
-          <PrimeButton text plain class="" :label="$t('labels.spaceListing', 2)" />
-        </router-link>
-
-        <router-link :to="'#'" class="hidden md:flex py-2">
-          <PrimeButton text plain class="" :label="$t('labels.spaceRequest', 2)" />
+          <PrimeButton text plain class="" :label="$t('labels.listing', 2)" />
         </router-link>
 
         <!--  <router-link :to="`/cheques/#?cc={ name: 'cheque.index' }`" activeClass="border-b border-primary" class="hidden md:flex py-2">
@@ -48,6 +44,14 @@ const isNotificationDrawer = ref(false)
 
       <template #end>
         <div class="flex align-items-center items-center gap-1">
+          <router-link :to="{ name: 'listings.create' }" class="hidden md:flex">
+            <PrimeButton
+              icon="pi pi-plus"
+              class="me-16 hidden md:flex"
+              :label="$t('labels.newListing')"
+            />
+          </router-link>
+
           <!-- Notifications Button -->
           <PrimeButton
             size="small"

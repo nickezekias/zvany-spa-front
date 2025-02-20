@@ -73,6 +73,16 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: '/listings',
+          children: [
+            {
+              path: 'create',
+              name: 'listings.create',
+              component: () => import('@/app/features/listing/presentation/CreateView.vue'),
+            },
+          ],
+        },
       ],
     },
   ],
