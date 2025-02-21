@@ -7,7 +7,7 @@ import SpaceRequestItemCard from '@/components/listings/SpaceRequestItemCard.vue
 <template>
   <div>
     <div
-      class="hero min-h-96 bg-primary flex flex-col p-6 md:px-32 lg:px-64 gap-4 items-center justify-center"
+      class="hero min-h-96 bg-primary dark:bg-surface-950 flex flex-col p-6 md:px-32 lg:px-64 gap-4 items-center justify-center"
     >
       <div class="text-center">
         <h1 class="text-xl md:text-4xl font-bold text-white">
