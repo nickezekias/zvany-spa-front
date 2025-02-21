@@ -77,6 +77,11 @@ const router = createRouter({
           path: '/listings',
           children: [
             {
+              path: '',
+              name: 'listings.index',
+              component: () => import('@/app/features/listing/presentation/IndexView.vue'),
+            },
+            {
               path: 'create',
               name: 'listings.create',
               component: () => import('@/app/features/listing/presentation/CreateView.vue'),
