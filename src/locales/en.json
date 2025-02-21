@@ -81,7 +81,8 @@
           "title": "Find or Share Luggage Space"
         },
         "offers": "Available Space",
-        "requests": "Looking for Space"
+        "requests": "Looking for Space",
+        "title": "LugShare - Luggage Space Listings"
       }
     },
     "onboarding": {

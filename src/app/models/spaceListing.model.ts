@@ -30,6 +30,7 @@ export default class SpaceListing {
   flightDeparture: string
   flightDepartureDate: Date | string
   flightNumber: string
+  id: string
   isActive: boolean
   itemRestrictions: Array<string>
   pricePerUnit: string
@@ -47,6 +48,7 @@ export default class SpaceListing {
     flightDeparture: string,
     flightDepartureDate: Date | string,
     flightNumber: string,
+    id: string,
     availableWeight: number,
     weightUnit: string,
     pricePerUnit: string,
@@ -66,6 +68,7 @@ export default class SpaceListing {
     this.flightDeparture = flightDeparture
     this.flightDepartureDate = flightDepartureDate
     this.flightNumber = flightNumber
+    this.id = id
     this.availableWeight = availableWeight
     this.weightUnit = weightUnit
     this.pricePerUnit = pricePerUnit
@@ -87,6 +90,7 @@ export default class SpaceListing {
     flightDeparture: string
     flightDepartureDate: Date | string
     flightNumber: string
+    id: string
     availableWeight: number
     weightUnit: string
     pricePerUnit: string
@@ -107,6 +111,7 @@ export default class SpaceListing {
       data.flightDeparture,
       data.flightDepartureDate,
       data.flightNumber,
+      data.id,
       data.availableWeight,
       data.weightUnit,
       data.pricePerUnit,
@@ -122,6 +127,7 @@ export default class SpaceListing {
 
   static initEmpty(): SpaceListing {
     return new SpaceListing(
+      '',
       '',
       '',
       '',

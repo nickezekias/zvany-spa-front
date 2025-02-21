@@ -22,6 +22,7 @@ import Menu from 'primevue/menu'
 import Message from 'primevue/message'
 import Rating from 'primevue/rating'
 import Ripple from 'primevue/ripple'
+import Skeleton from 'primevue/skeleton'
 import Tag from 'primevue/tag'
 import Toolbar from 'primevue/toolbar'
 
@@ -44,6 +45,7 @@ app.component('PrimeForm', Form)
 app.component('PrimeMenu', Menu)
 app.component('PrimeMessage', Message)
 app.component('PrimeRating', Rating)
+app.component('PrimeSkeleton', Skeleton)
 app.component('PrimeTag', Tag)
 app.component('PrimeToolbar', Toolbar)
 
