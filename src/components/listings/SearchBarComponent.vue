@@ -14,7 +14,7 @@ const state = ref({
 </script>
 
 <template>
-  <PrimeCard class="shadow-none">
+  <PrimeCard class="w-full">
     <template #content>
       <div class="flex flex-col md:flex-row items-center gap-4 rounded-lg w-full">
         <div class="flex flex-col md:flex-row items-center gap-4 w-full flex-grow">
