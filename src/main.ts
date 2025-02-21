@@ -20,7 +20,9 @@ import Divider from 'primevue/divider'
 import { Form } from '@primevue/forms'
 import Menu from 'primevue/menu'
 import Message from 'primevue/message'
+import Rating from 'primevue/rating'
 import Ripple from 'primevue/ripple'
+import Tag from 'primevue/tag'
 import Toolbar from 'primevue/toolbar'
 
 import ToastService from 'primevue/toastservice'
@@ -41,6 +43,8 @@ app.component('PrimeDivider', Divider)
 app.component('PrimeForm', Form)
 app.component('PrimeMenu', Menu)
 app.component('PrimeMessage', Message)
+app.component('PrimeRating', Rating)
+app.component('PrimeTag', Tag)
 app.component('PrimeToolbar', Toolbar)
 
 app.directive('ripple', Ripple)

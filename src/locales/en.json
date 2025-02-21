@@ -79,7 +79,9 @@
         "hero": {
           "subtitle": "Connect with verified travelers and make the most of unused baggage allowance",
           "title": "Find or Share Luggage Space"
-        }
+        },
+        "offers": "Available Space",
+        "requests": "Looking for Space"
       }
     },
     "onboarding": {
@@ -157,6 +159,7 @@
     "newPassword": "New Password",
     "next": "Next",
     "notification": "Notification | Notifications",
+    "offer": "Offer | Offers",
     "offerSpace": "Offer Space",
     "operationFailure": "Operation Failure",
     "operationSuccess": "Operation Success",
@@ -175,6 +178,7 @@
     "recentSpaceListings": "Recent Space Listings",
     "recentSpaceRequests": "Recent Space Requests",
     "register": "Register",
+    "request": "Request | Requests",
     "requestSpace": "Request Space",
     "resetPassword": "Reset Password",
     "save": "Save",

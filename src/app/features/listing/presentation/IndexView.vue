@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import SearchBarComponent from '@/components/listings/SearchBarComponent.vue'
+import SpaceOfferItemCard from '@/components/listings/SpaceOfferItemCard.vue'
+import SpaceRequestItemCard from '@/components/listings/SpaceRequestItemCard.vue'
 </script>
 
 <template>
@@ -16,6 +18,30 @@ import SearchBarComponent from '@/components/listings/SearchBarComponent.vue'
         </p>
       </div>
       <SearchBarComponent />
+    </div>
+
+    <div class="nikk-container md:px-60 flex">
+      <div class="flex w-full gap-8">
+        <div class="w-full grid grid-cols-1 gap-6">
+          <div class="flex gap-4">
+            <PrimeTag severity="success" :value="$t('labels.offer', 2)" />
+            <h3 class="text-xl md:text-3xl font-bold">
+              {{ $t('features.listings.index.offers') }}
+            </h3>
+          </div>
+          <SpaceOfferItemCard class="" v-for="i in 4" :key="i" />
+        </div>
+
+        <div class="w-full grid grid-cols-1 gap-6">
+          <div class="flex gap-4">
+            <PrimeTag severity="info" :value="$t('labels.request', 2)" />
+            <h3 class="text-xl md:text-3xl font-bold">
+              {{ $t('features.listings.index.requests') }}
+            </h3>
+          </div>
+          <SpaceRequestItemCard class="" v-for="i in 4" :key="i" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
