@@ -9,6 +9,10 @@
   @tailwind utilities;
 }
 
+.bg-primary {
+  background-color: #0099ff;
+}
+
 .dbg-border {
   border: 1px solid red !important;
 }

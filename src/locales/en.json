@@ -74,6 +74,12 @@
         "successDesc": "Space offer created successfully",
         "title": "Offer Luggage Space",
         "titleDesc": "Share your unused luggage space and earn money while traveling"
+      },
+      "index": {
+        "hero": {
+          "subtitle": "Connect with verified travelers and make the most of unused baggage allowance",
+          "title": "Find or Share Luggage Space"
+        }
       }
     },
     "onboarding": {
@@ -129,6 +135,7 @@
     "firstName": "First Name",
     "flightNumber": "Flight Number",
     "forgotPassword": "Forgot Password",
+    "fromTo": "From - To",
     "gender": "Gender",
     "goHome": "Go Home",
     "info": "Info",
@@ -178,6 +185,7 @@
     "selectDeliveryPreferences": "Select Delivery Preferences",
     "selectItemRestrictions": "Select Item Restrictions",
     "selectWeightUnit": "Select a Weight Unit",
+    "selectWeight": "Select Weight",
     "setting": "Setting | Settings",
     "shippingDetails": "Shipping Details",
     "skip": "Skip",
