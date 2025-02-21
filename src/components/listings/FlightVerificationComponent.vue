@@ -136,6 +136,7 @@ function onFormSubmit(e: FormSubmitEvent) {
       />
 
       <NikkInputText
+        v-model="spaceListing.flightBookingReference"
         :errorHelpLabel="$form.flightBookingReference?.error?.message"
         id="flightBookingReference"
         :isError="$form.flightBookingReference?.invalid"

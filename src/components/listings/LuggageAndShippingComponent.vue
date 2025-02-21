@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Form as PrimeForm, type FormSubmitEvent } from '@primevue/forms'
+import { useAccountStore } from '@/stores/account.store'
 import { useI18n } from 'vue-i18n'
 import { useListingStore } from '@/stores/listing.store'
+import { useRouter } from 'vue-router'
 import { useToast } from 'primevue'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
@@ -17,7 +19,9 @@ import type { AxiosError } from 'axios'
 
 const emit = defineEmits(['previous', 'submit'])
 
+const accountStore = useAccountStore()
 const listingStore = useListingStore()
+const router = useRouter()
 const toast = useToast()
 const { t } = useI18n()
 
@@ -48,19 +52,25 @@ const resolver = zodResolver(
 async function onFormSubmit(e: FormSubmitEvent) {
   const isFormCorrect = e.valid
   if (isFormCorrect) {
-    listingStore.setSpaceListing(spaceListing.value)
     loading.value = true
+
+    if (accountStore.user) {
+      spaceListing.value.userId = accountStore.user.id
+    }
+
+    listingStore.setSpaceListing(spaceListing.value)
+
     try {
       const response = await listingStore.createSpaceOfferListing(listingStore.spaceListing)
       console.log('RESPONSE', response)
       nikkToast.success('features.listings.create.successDesc')
+      router.push({ name: 'listings.index' })
     } catch (e) {
       nikkToast.httpError(e as AxiosError)
     } finally {
       loading.value = false
     }
 
-    console.log('LUG-SHIP FORM DATA', listingStore.spaceListing)
     emit('submit')
   } else {
     nikkToast.error('errors.validation.form', 'labels.invalidForm')

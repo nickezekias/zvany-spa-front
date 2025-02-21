@@ -19,30 +19,33 @@ export default class SpaceListing {
     GRAMS: 'g',
   }
 
+  availableSpaceDimensions: string
+  availableWeight: number
   createdAt: string
+  deliveryPreferences: Array<string>
   flightAirline: string
   flightArrival: string
-  flightArrivalDate: string
+  flightArrivalDate: Date | string
+  flightBookingReference: string
   flightDeparture: string
-  flightDepartureDate: string
+  flightDepartureDate: Date | string
   flightNumber: string
-  availableWeight: number
-  weightUnit: string
-  pricePerUnit: string
-  itemRestrictions: Array<string>
-  availableSpaceDimensions: string
-  deliveryPreferences: Array<string>
-  specialInstructions: string
   isActive: boolean
+  itemRestrictions: Array<string>
+  pricePerUnit: string
+  specialInstructions: string
   updatedAt: string
+  userId: string
+  weightUnit: string
 
   public constructor(
     createdAt: string,
     flightAirline: string,
     flightArrival: string,
-    flightArrivalDate: string,
+    flightArrivalDate: Date | string,
+    flightBookingReference: string,
     flightDeparture: string,
-    flightDepartureDate: string,
+    flightDepartureDate: Date | string,
     flightNumber: string,
     availableWeight: number,
     weightUnit: string,
@@ -52,12 +55,14 @@ export default class SpaceListing {
     deliveryPreferences: Array<string>,
     specialInstructions: string,
     isActive: boolean,
+    userId: string,
     updatedAt: string,
   ) {
     this.createdAt = createdAt
     this.flightAirline = flightAirline
     this.flightArrival = flightArrival
     this.flightArrivalDate = flightArrivalDate
+    this.flightBookingReference = flightBookingReference
     this.flightDeparture = flightDeparture
     this.flightDepartureDate = flightDepartureDate
     this.flightNumber = flightNumber
@@ -69,6 +74,7 @@ export default class SpaceListing {
     this.deliveryPreferences = deliveryPreferences
     this.specialInstructions = specialInstructions
     this.isActive = isActive
+    this.userId = userId
     this.updatedAt = updatedAt
   }
 
@@ -76,9 +82,10 @@ export default class SpaceListing {
     createdAt: string
     flightAirline: string
     flightArrival: string
-    flightArrivalDate: string
+    flightArrivalDate: Date | string
+    flightBookingReference: string
     flightDeparture: string
-    flightDepartureDate: string
+    flightDepartureDate: Date | string
     flightNumber: string
     availableWeight: number
     weightUnit: string
@@ -88,6 +95,7 @@ export default class SpaceListing {
     deliveryPreferences: Array<string>
     specialInstructions: string
     isActive: boolean
+    userId: string
     updatedAt: string
   }): SpaceListing {
     return new SpaceListing(
@@ -95,6 +103,7 @@ export default class SpaceListing {
       data.flightAirline,
       data.flightArrival,
       data.flightArrivalDate,
+      data.flightBookingReference,
       data.flightDeparture,
       data.flightDepartureDate,
       data.flightNumber,
@@ -106,12 +115,14 @@ export default class SpaceListing {
       data.deliveryPreferences,
       data.specialInstructions,
       data.isActive,
+      data.userId,
       data.updatedAt,
     )
   }
 
   static initEmpty(): SpaceListing {
     return new SpaceListing(
+      '',
       '',
       '',
       '',
@@ -127,6 +138,7 @@ export default class SpaceListing {
       [],
       '',
       true,
+      '',
       '',
     )
   }
