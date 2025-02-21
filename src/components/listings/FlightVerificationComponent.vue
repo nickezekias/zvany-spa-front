@@ -76,7 +76,7 @@ function onFormSubmit(e: FormSubmitEvent) {
     </PrimeMessage>
 
     <PrimeForm
-      class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+      class="mt-8 grid grid-cols-2 gap-4"
       :initialValues="spaceListing"
       @submit="onFormSubmit"
       :resolver
@@ -86,6 +86,7 @@ function onFormSubmit(e: FormSubmitEvent) {
     >
       <NikkInputText
         v-model="spaceListing.flightDeparture"
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.flightDeparture?.error?.message"
         id="flightDeparture"
         :isError="$form.flightDeparture?.invalid"
@@ -96,6 +97,7 @@ function onFormSubmit(e: FormSubmitEvent) {
 
       <NikkInputText
         v-model="spaceListing.flightArrival"
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.flightArrival?.error?.message"
         id="flightArrival"
         :isError="$form.flightArrival?.invalid"
@@ -106,6 +108,7 @@ function onFormSubmit(e: FormSubmitEvent) {
 
       <NikkDatePicker
         v-model="spaceListing.flightDepartureDate"
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.flightDepartureDate?.error?.message"
         id="flightDepartureDate"
         :isError="$form.flightDepartureDate?.invalid"
@@ -116,6 +119,7 @@ function onFormSubmit(e: FormSubmitEvent) {
 
       <NikkDatePicker
         v-model="spaceListing.flightArrivalDate"
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.flightArrivalDate?.error?.message"
         id="flightArrivalDate"
         :isError="$form.flightArrivalDate?.invalid"
@@ -126,6 +130,7 @@ function onFormSubmit(e: FormSubmitEvent) {
 
       <NikkSelect
         v-model="spaceListing.flightAirline"
+        class="col-span-2 md:col-span-1"
         id="flightAirline"
         error-help-label="errors.validation.requiredField"
         hint="labels.selectAirline"
@@ -137,6 +142,7 @@ function onFormSubmit(e: FormSubmitEvent) {
 
       <NikkInputText
         v-model="spaceListing.flightBookingReference"
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.flightBookingReference?.error?.message"
         id="flightBookingReference"
         :isError="$form.flightBookingReference?.invalid"
@@ -147,6 +153,7 @@ function onFormSubmit(e: FormSubmitEvent) {
 
       <NikkInputText
         v-model="spaceListing.flightNumber"
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.flightNumber?.error?.message"
         id="flightNumber"
         :isError="$form.flightNumber?.invalid"
@@ -156,6 +163,7 @@ function onFormSubmit(e: FormSubmitEvent) {
       />
 
       <NikkInputText
+        class="col-span-2 md:col-span-1"
         :errorHelpLabel="$form.passengerLastName?.error?.message"
         id="passengerLastName"
         :isError="$form.passengerLastName?.invalid"

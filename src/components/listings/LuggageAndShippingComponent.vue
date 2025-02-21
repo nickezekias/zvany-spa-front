@@ -86,7 +86,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     v-slot="$form"
     :validateOnBlur="true"
     :validateOnSubmit="true"
-    class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"
+    class="grid grid-cols-2 gap-4 mt-6"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +117,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
 
     <NikkInputNumber
       v-model="spaceListing.availableWeight"
+      class="col-span-2 md:col-span-1"
       id="availableWeight"
       error-help-label="errors.validation.requiredField"
       :is-error="$form.availableWeight?.invalid"
@@ -127,8 +128,9 @@ async function onFormSubmit(e: FormSubmitEvent) {
     />
 
     <NikkSelect
-      id="weightUnit"
       v-model="spaceListing.weightUnit"
+      class="col-span-2 md:col-span-1"
+      id="weightUnit"
       error-help-label="errors.validation.requiredField"
       :is-error="$form.weightUnit?.invalid"
       name="weightUnit"
@@ -138,7 +140,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
 
     <NikkInputText
       v-model="spaceListing.pricePerUnit"
-      class="capitalize"
+      class="col-span-2 md:col-span-1 capitalize"
       :errorHelpLabel="$form.pricePerUnit?.error?.message"
       id="pricePerUnit"
       :isError="$form.pricePerUnit?.invalid"
@@ -148,6 +150,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     />
 
     <NikkInputText
+      class="col-span-2 md:col-span-1"
       :errorHelpLabel="$form.availableSpaceDimensions?.error?.message"
       id="available-space-dimensions"
       :isError="$form.availableSpaceDimensions?.invalid"
@@ -161,6 +164,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
 
     <NikkSelect
       v-model="spaceListing.itemRestrictions"
+      class="col-span-2 md:col-span-1"
       id="itemRestrictions"
       error-help-label="errors.validation.requiredField"
       hint="labels.selectItemRestrictions"
@@ -182,6 +186,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
 
     <NikkSelect
       v-model="spaceListing.deliveryPreferences"
+      class="col-span-2 md:col-span-1"
       id="deliveryPreferences"
       error-help-label="errors.validation.requiredField"
       hint="labels.selectDeliveryPreferences"
