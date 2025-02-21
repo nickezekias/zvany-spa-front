@@ -23,7 +23,7 @@ const isNotificationDrawer = ref(false)
       <template #center>
         <router-link
           :to="{ name: 'dashboard' }"
-          activeClass="border-b border-primary"
+          exactActiveClass="border-b border-primary"
           class="hidden md:flex py-2"
         >
           <PrimeButton text plain :label="$t('labels.dashboard')" />
@@ -31,13 +31,13 @@ const isNotificationDrawer = ref(false)
 
         <router-link
           :to="{ name: 'listings.index' }"
-          activeClass="border-b border-primary"
+          exactActiveClass="border-b border-primary"
           class="hidden md:flex py-2"
         >
           <PrimeButton text plain :label="$t('labels.listing', 2)" />
         </router-link>
 
-        <!--  <router-link :to="`/cheques/#?cc={ name: 'cheque.index' }`" activeClass="border-b border-primary" class="hidden md:flex py-2">
+        <!--  <router-link :to="`/cheques/#?cc={ name: 'cheque.index' }`" exactActiveClass="border-b border-primary" class="hidden md:flex py-2">
           <PrimeButton text plain class="" :label="$t('labels.cheque', 2)" />
         </router-link> -->
 
