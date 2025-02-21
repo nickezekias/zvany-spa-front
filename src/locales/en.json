@@ -137,6 +137,7 @@
     "lastName": "Last Name",
     "license": "License | Licenses",
     "listing": "Listing | Listings",
+    "listings": "Listings",
     "login": "Login",
     "loginFailed": "Failed to sign in",
     "logout": "Logout",
