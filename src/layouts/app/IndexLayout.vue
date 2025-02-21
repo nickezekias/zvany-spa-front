@@ -16,11 +16,11 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
   <div :class="{ dark: darkMode }" class="min-h-screen flex flex-col">
     <TopBarComponent />
     <div class="flex flex-grow">
-      <main class="flex-grow max-w-screen overflow-x-hidden">
+      <main class="flex-grow max-w-screen pb-[100vh] md:pb-32 overflow-x-hidden">
         <router-view />
       </main>
     </div>
-    <FooterComponent />
+    <FooterComponent class="mb-32 md:mb-0" />
     <BottomBar class="md:hidden" />
   </div>
 </template>
