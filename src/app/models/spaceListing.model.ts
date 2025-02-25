@@ -1,3 +1,9 @@
+interface ListingOwner {
+  firstName: string
+  id: string
+  initials: string
+  lastName: string
+}
 export default class SpaceListing {
   public static readonly DELIVERY_PREFERENCES = {
     AIRPORT_DROP_OFF: 'airportDropOff',
@@ -23,6 +29,7 @@ export default class SpaceListing {
   availableWeight: number
   createdAt: string
   deliveryPreferences: Array<string>
+  description: string
   flightAirline: string
   flightArrival: string
   flightArrivalDate: Date | string
@@ -36,7 +43,7 @@ export default class SpaceListing {
   pricePerUnit: string
   specialInstructions: string
   updatedAt: string
-  userId: string
+  user: string | ListingOwner
   weightUnit: string
 
   public constructor(
@@ -55,9 +62,10 @@ export default class SpaceListing {
     itemRestrictions: Array<string>,
     availableSpaceDimensions: string,
     deliveryPreferences: Array<string>,
+    description: string,
     specialInstructions: string,
     isActive: boolean,
-    userId: string,
+    user: string | ListingOwner,
     updatedAt: string,
   ) {
     this.createdAt = createdAt
@@ -75,9 +83,10 @@ export default class SpaceListing {
     this.itemRestrictions = itemRestrictions
     this.availableSpaceDimensions = availableSpaceDimensions
     this.deliveryPreferences = deliveryPreferences
+    this.description = description
     this.specialInstructions = specialInstructions
     this.isActive = isActive
-    this.userId = userId
+    this.user = user
     this.updatedAt = updatedAt
   }
 
@@ -97,9 +106,10 @@ export default class SpaceListing {
     itemRestrictions: Array<string>
     availableSpaceDimensions: string
     deliveryPreferences: Array<string>
+    description: string
     specialInstructions: string
     isActive: boolean
-    userId: string
+    user: string | ListingOwner
     updatedAt: string
   }): SpaceListing {
     return new SpaceListing(
@@ -118,9 +128,10 @@ export default class SpaceListing {
       data.itemRestrictions,
       data.availableSpaceDimensions,
       data.deliveryPreferences,
+      data.description,
       data.specialInstructions,
       data.isActive,
-      data.userId,
+      data.user,
       data.updatedAt,
     )
   }
@@ -143,9 +154,19 @@ export default class SpaceListing {
       '',
       [],
       '',
+      '',
       true,
       '',
       '',
     )
+  }
+
+  /*
+   * Returns the owner's first name and the first letter of his last name
+   */
+  public ownerShortName() {
+    if (!(typeof this.user === 'string')) {
+      return `${this.user.firstName} ${this.user.lastName.charAt(0)}.`
+    }
   }
 }

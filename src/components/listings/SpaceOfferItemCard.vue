@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const rating = 4
+import type SpaceListing from '@/app/models/spaceListing.model'
+
+const props = defineProps<{
+  data: SpaceListing
+}>()
 </script>
 
 <template>
@@ -23,11 +27,14 @@ const rating = 4
               />
             </g>
           </svg>
-          <span>Berlin <i class="pi pi-arrow-right text-gray-300 text-sm mx-1"></i> Madrid</span>
+          <span>
+            {{ props.data.flightDeparture }}
+            <i class="pi pi-arrow-right text-gray-300 text-sm mx-1"></i>
+            {{ props.data.flightArrival }}
+          </span>
         </div>
 
         <div class="flex gap-1">
-          <span class="text-xl font-medium text-primary me-2">120 000 F</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 text-green-600"
@@ -53,8 +60,12 @@ const rating = 4
         <div class="flex justify-between">
           <div>
             <span class="pi pi-calendar me-2"></span>
-            <span>12.12.2022</span>
+            <span>{{ props.data.flightDepartureDate }}</span>
           </div>
+
+          <span class="text-xl font-medium text-primary me-2"
+            >{{ props.data.pricePerUnit }} / {{ props.data.weightUnit }}</span
+          >
 
           <!-- <div>
             <span class="pi pi-user me-2"></span>
@@ -65,26 +76,26 @@ const rating = 4
         <div class="flex justify-between items-center">
           <div>
             <span class="pi pi-shopping-bag me-2"></span>
-            10kg
+            {{ props.data.availableWeight }}{{ props.data.weightUnit }}
           </div>
 
           <div>
-            <PrimeRating v-model="rating" />
+            <PrimeRating :value="0" />
           </div>
         </div>
 
         <div class="flex justify-between items-center text-sm">
-          <span>Air France</span>
+          <span>{{ props.data.flightAirline }}</span>
 
-          <span>45000 reviews</span>
+          <span>0 reviews</span>
         </div>
 
         <div class="flex items-center gap-2">
           <span class="text-sm">
-            Extra luggage space available for your items. Can accommodate fragile items.
+            {{ props.data.description }}
           </span>
 
-          <div class="flex justify-end items-center gap-2">
+          <div class="flex justify-end items-center ms-auto gap-2">
             <div>
               <PrimeAvatar
                 image="https://images.pexels.com/photos/3761264/pexels-photo-3761264.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -93,7 +104,7 @@ const rating = 4
               />
             </div>
 
-            <div class="text-sm text-nowrap">John D.</div>
+            <div class="text-sm text-nowrap">{{ props.data.ownerShortName() }}</div>
           </div>
         </div>
       </div>

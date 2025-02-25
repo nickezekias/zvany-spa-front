@@ -56,6 +56,7 @@
             "perishable": "Perishable"
           }
         },
+        "descriptionHint": "Provide a detailed description or additional info for the luggage space",
         "falseInformationWarning": "Providing false information may result in account suspension and legal consequences.",
         "flightVerification": "Flight Verification",
         "flightVerificationProcess": {
@@ -130,6 +131,7 @@
     "deliveryPreference": "Delivery Preference",
     "departure": "Departure",
     "departureDate": "Departure Date",
+    "description": "Description",
     "edit": "Edit",
     "email": "Email",
     "emailResetLink": "Email Reset Link",

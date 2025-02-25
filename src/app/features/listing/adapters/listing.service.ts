@@ -6,18 +6,21 @@ import { getQueryFromFilter } from '@/app/utils/helpers'
 
 const createSpaceOfferListing = async function (payload: SpaceListing) {
   // format payload to match api format
-  payload.deliveryPreferences = `${payload.deliveryPreferences}`.split(' ')
-  const flightArrivalDate = payload.flightArrivalDate as Date
-  payload.flightArrivalDate = flightArrivalDate
+  const apiPayload = payload
+  apiPayload.deliveryPreferences = `${apiPayload.deliveryPreferences}`.split(' ')
+  const flightArrivalDate = new Date(apiPayload.flightArrivalDate)
+  apiPayload.flightArrivalDate = flightArrivalDate
     .toISOString()
     .slice(0, flightArrivalDate.toISOString().indexOf('T'))
-  payload.itemRestrictions = `${payload.itemRestrictions}`.split(' ')
-  const flightDepartureDate = payload.flightDepartureDate as Date
-  payload.flightDepartureDate = flightDepartureDate
+  apiPayload.itemRestrictions = `${apiPayload.itemRestrictions}`.split(' ')
+  const flightDepartureDate = new Date(apiPayload.flightDepartureDate)
+  apiPayload.flightDepartureDate = flightDepartureDate
     .toISOString()
     .slice(0, flightDepartureDate.toISOString().indexOf('T'))
 
-  return axios.post('/api/v1/listings/space-offers', payload)
+  // @ts-expect-error userId is not defined in SpaceListing is just needed for api, too lazy to fix this 👀👀
+  apiPayload['userId'] = apiPayload.user
+  return axios.post('/api/v1/listings/space-offers', apiPayload)
 }
 
 async function getAllSpaceOfferListings(filter?: DBGetQueryFilter) {

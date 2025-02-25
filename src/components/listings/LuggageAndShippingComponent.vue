@@ -15,6 +15,8 @@ import SpaceListing from '@/app/models/spaceListing.model'
 import NikkInputNumber from '@/components/forms/NikkInputNumber.vue'
 import NikkInputText from '@/components/forms/NikkInputText.vue'
 import NikkSelect from '@/components/forms/NikkSelect.vue'
+import NikkTextArea from '@/components/forms/NikkTextArea.vue'
+
 import type { AxiosError } from 'axios'
 
 const emit = defineEmits(['previous', 'submit'])
@@ -42,6 +44,7 @@ const resolver = zodResolver(
   z.object({
     availableWeight: z.number().min(1, { message: 'errors.validation.requiredField' }),
     deliveryPreferences: z.string().min(1, { message: 'errors.validation.requiredField' }),
+    description: z.string().min(1, { message: 'errors.validation.requiredField' }),
     itemRestrictions: z.string().min(1, { message: 'errors.validation.requiredField' }),
     pricePerUnit: z.string().min(1, { message: 'errors.validation.requiredField' }),
     // specialInstructions: z.string().min(1, { message: 'errors.validation.requiredField' }),
@@ -55,10 +58,11 @@ async function onFormSubmit(e: FormSubmitEvent) {
     loading.value = true
 
     if (accountStore.user) {
-      spaceListing.value.userId = accountStore.user.id
+      spaceListing.value.user = accountStore.user.id
     }
 
-    listingStore.setSpaceListing(spaceListing.value)
+    const payload = spaceListing.value
+    listingStore.setSpaceListing(payload)
 
     try {
       const response = await listingStore.createSpaceOfferListing(listingStore.spaceListing)
@@ -208,7 +212,18 @@ async function onFormSubmit(e: FormSubmitEvent) {
       </template>
     </NikkSelect>
 
-    <NikkInputText
+    <NikkTextArea
+      v-model="spaceListing.description"
+      class="col-span-2"
+      :errorHelpLabel="$form.description?.error?.message"
+      hint="features.listings.create.descriptionHint"
+      id="description"
+      :isError="$form.description?.invalid"
+      label="labels.description"
+      name="description"
+    />
+
+    <NikkTextArea
       v-model="spaceListing.specialInstructions"
       class="col-span-2"
       :errorHelpLabel="$form.specialInstructions?.error?.message"
