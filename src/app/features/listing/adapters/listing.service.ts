@@ -4,8 +4,9 @@ import axios from '@/lib/axios'
 import type { DBGetQueryFilter } from '@/app/@types/common.interface'
 import { getQueryFromFilter } from '@/app/utils/helpers'
 
-const createSpaceOfferListing = async function (payload: SpaceListing) {
-  // format payload to match api format
+const spaceOfferURL = '/api/v1/listings/space-offers'
+
+function formatSpaceOfferStorePayload(payload: SpaceListing) {
   const apiPayload = payload
   apiPayload.deliveryPreferences = `${apiPayload.deliveryPreferences}`.split(' ')
   const flightArrivalDate = new Date(apiPayload.flightArrivalDate)
@@ -20,7 +21,18 @@ const createSpaceOfferListing = async function (payload: SpaceListing) {
 
   // @ts-expect-error userId is not defined in SpaceListing is just needed for api, too lazy to fix this 👀👀
   apiPayload['userId'] = apiPayload.user
-  return axios.post('/api/v1/listings/space-offers', apiPayload)
+  return apiPayload
+}
+
+const createSpaceOfferListing = async function (payload: SpaceListing) {
+  // format payload to match api format
+  const apiPayload = formatSpaceOfferStorePayload(payload)
+
+  return axios.post(spaceOfferURL, apiPayload)
+}
+
+const getSpaceOfferListing = async function (id: string) {
+  return axios.get(`${spaceOfferURL}/${id}`)
 }
 
 async function getAllSpaceOfferListings(filter?: DBGetQueryFilter) {
@@ -35,7 +47,20 @@ async function getAllSpaceOfferListings(filter?: DBGetQueryFilter) {
   return axios.get(`/api/v1/listings/space-offers${query}`)
 }
 
+const updateSpaceOfferListing = async function (payload: SpaceListing) {
+  // format payload to match api format
+  const apiPayload = formatSpaceOfferStorePayload(payload)
+  return axios.post(`${spaceOfferURL}/${apiPayload.id}?_method=PUT`, apiPayload)
+}
+
+const deleteSpaceOfferListing = function (id: string) {
+  return axios.delete(`${spaceOfferURL}/${id}`)
+}
+
 export default {
   createSpaceOfferListing,
+  getSpaceOfferListing,
   getAllSpaceOfferListings,
+  updateSpaceOfferListing,
+  deleteSpaceOfferListing,
 }

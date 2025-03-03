@@ -65,8 +65,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     listingStore.setSpaceListing(payload)
 
     try {
-      const response = await listingStore.createSpaceOfferListing(listingStore.spaceListing)
-      console.log('RESPONSE', response)
+      await listingStore.createSpaceOfferListing(listingStore.spaceListing)
       nikkToast.success('features.listings.create.successDesc')
       router.push({ name: 'listings.index' })
     } catch (e) {
