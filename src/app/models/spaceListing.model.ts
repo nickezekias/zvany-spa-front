@@ -4,6 +4,8 @@ interface ListingOwner {
   initials: string
   lastName: string
 }
+
+export type { ListingOwner }
 export default class SpaceListing {
   public static readonly DELIVERY_PREFERENCES = {
     AIRPORT_DROP_OFF: 'airportDropOff',
