@@ -84,7 +84,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     try {
       const response = await listingStore.updateSpaceOfferListing(listingStore.spaceListing)
       console.log('RESPONSE', response)
-      nikkToast.success('features.listings.update.successDesc')
+      nikkToast.success('features.listings.edit.successDesc')
       router.push({ name: 'listings.index' })
     } catch (e) {
       nikkToast.httpError(e as AxiosError)
@@ -261,7 +261,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
           fluid
           :loading="loading"
           type="submit"
-          :label="$t('labels.postSpaceListing')"
+          :label="$t('labels.save')"
         />
       </div>
     </PrimeForm>
