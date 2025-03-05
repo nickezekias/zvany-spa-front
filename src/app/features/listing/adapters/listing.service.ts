@@ -26,6 +26,15 @@ function formatSpaceOfferStorePayload(payload: SpaceListing) {
   return apiPayload
 }
 
+function formatSpaceRequestStorePayload(payload: SpaceRequestListing) {
+  const apiPayload = payload
+  const shipmentDate = new Date(apiPayload.shipmentDate)
+  apiPayload.shipmentDate = shipmentDate
+    .toISOString()
+    .slice(0, shipmentDate.toISOString().indexOf('T'))
+  return apiPayload
+}
+
 const createSpaceOfferListing = async function (payload: SpaceListing) {
   // format payload to match api format
   const apiPayload = formatSpaceOfferStorePayload(payload)
@@ -34,11 +43,8 @@ const createSpaceOfferListing = async function (payload: SpaceListing) {
 }
 
 const createSpaceRequestListing = async function (payload: SpaceRequestListing) {
-  const shipmentDate = new Date(payload.shipmentDate)
-  payload.shipmentDate = shipmentDate
-    .toISOString()
-    .slice(0, shipmentDate.toISOString().indexOf('T'))
-  return axios.post(spaceRequestURL, payload)
+  const apiPayload = formatSpaceRequestStorePayload(payload)
+  return axios.post(spaceRequestURL, apiPayload)
 }
 
 const getSpaceOfferListing = async function (id: string) {
@@ -53,7 +59,7 @@ async function getAllSpaceOfferListings(filter?: DBGetQueryFilter) {
   if (!filter) {
     filter = {
       itemsPerPage: -1,
-      sortBy: ['space_offer_listings.flight_arrival_date'],
+      sortBy: ['space_offer_listings.created_at'],
       sortDesc: ['true'],
     }
   }
@@ -65,7 +71,7 @@ async function getAllSpaceRequestListings(filter?: DBGetQueryFilter) {
   if (!filter) {
     filter = {
       itemsPerPage: -1,
-      sortBy: ['space_request_listings.shipment_date'],
+      sortBy: ['space_request_listings.created_at'],
       sortDesc: ['true'],
     }
   }
@@ -81,7 +87,8 @@ const updateSpaceOfferListing = async function (payload: SpaceListing) {
 
 const updateSpaceRequestListing = async function (payload: SpaceRequestListing) {
   // format payload to match api format
-  return axios.post(`${spaceRequestURL}/${payload.id}?_method=PUT`, payload)
+  const apiPayload = formatSpaceRequestStorePayload(payload)
+  return axios.post(`${spaceRequestURL}/${apiPayload.id}?_method=PUT`, apiPayload)
 }
 
 const deleteSpaceOfferListing = function (id: string) {
