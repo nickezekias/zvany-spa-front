@@ -1,3 +1,5 @@
+import { WEIGHT_UNITS_LIST } from '@/app/constants'
+
 interface ListingOwner {
   firstName: string
   id: string
@@ -22,10 +24,7 @@ export default class SpaceListing {
     PERISHABLE: 'perishable',
   }
 
-  public static readonly WEIGHT_UNITS = {
-    KILOGRAMS: 'kg',
-    GRAMS: 'g',
-  }
+  public static readonly WEIGHT_UNITS = WEIGHT_UNITS_LIST
 
   availableSpaceDimensions: string
   availableWeight: number
