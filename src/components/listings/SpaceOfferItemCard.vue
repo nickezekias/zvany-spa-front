@@ -96,7 +96,7 @@ async function onDeleteItem() {
             </div>
 
             <span class="text-xl font-medium text-primary me-2"
-              >{{ props.data.pricePerUnit }} / {{ props.data.weightUnit }}</span
+              >${{ props.data.pricePerUnit }} / {{ props.data.weightUnit }}</span
             >
 
             <!-- <div>
@@ -119,7 +119,7 @@ async function onDeleteItem() {
           <div class="flex justify-between items-center text-sm">
             <span>{{ props.data.flightAirline }}</span>
 
-            <span>0 reviews</span>
+            <span>0 {{ $t('labels.review', 2) }}</span>
           </div>
 
           <div class="flex items-center gap-2">
