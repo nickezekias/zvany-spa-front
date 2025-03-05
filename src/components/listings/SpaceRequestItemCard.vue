@@ -129,7 +129,7 @@ async function onDeleteItem() {
               {{ props.data.description }}
             </span>
 
-            <div class="flex justify-end items-center gap-2">
+            <div class="flex justify-end items-center ms-auto gap-2">
               <div>
                 <PrimeAvatar
                   image="https://images.pexels.com/photos/3761264/pexels-photo-3761264.jpeg?auto=compress&cs=tinysrgb&w=600"

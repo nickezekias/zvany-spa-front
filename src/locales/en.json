@@ -125,6 +125,11 @@
           "title": "Delete Space Request",
           "confirmMessage": "Are you sure you want to delete this space request? Note this action is irreversible!",
           "successDesc": "Space request deleted successfully"
+        },
+        "edit": {
+          "successDesc": "Space request updated successfully",
+          "title": "Edit Luggage Space Request",
+          "titleDesc": "Edit your luggage space request details"
         }
       }
     },

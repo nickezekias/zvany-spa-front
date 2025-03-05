@@ -88,6 +88,11 @@ const routes: Array<RouteRecordRaw> = [
             name: 'listings.edit',
             component: () => import('@/app/features/listing/presentation/EditView.vue'),
           },
+          {
+            path: 'requests/edit/:id',
+            name: 'listings.requests.edit',
+            component: () => import('@/app/features/listing/presentation/request/EditView.vue'),
+          },
         ],
       },
     ],
