@@ -32,6 +32,7 @@ export default class SpaceRequestListing {
 
   public static readonly WEIGHT_UNITS = WEIGHT_UNITS_LIST
 
+  budget: string
   createdAt: string
   description: string
   flightArrival: string
@@ -50,6 +51,7 @@ export default class SpaceRequestListing {
   weightUnit: string
 
   public constructor(
+    budget: string,
     createdAt: string,
     description: string,
     flightArrival: string,
@@ -67,6 +69,7 @@ export default class SpaceRequestListing {
     weight: string,
     weightUnit: string,
   ) {
+    this.budget = budget
     this.createdAt = createdAt
     this.description = description
     this.flightArrival = flightArrival
@@ -86,6 +89,7 @@ export default class SpaceRequestListing {
   }
 
   static fromObject(data: {
+    budget: string
     createdAt: string
     description: string
     flightArrival: string
@@ -104,6 +108,7 @@ export default class SpaceRequestListing {
     weightUnit: string
   }): SpaceRequestListing {
     return new SpaceRequestListing(
+      data['budget'],
       data['createdAt'],
       data['description'],
       data['flightArrival'],
@@ -124,7 +129,9 @@ export default class SpaceRequestListing {
   }
 
   static initEmpty(): SpaceRequestListing {
+    // @ts-expect-error ownerShortName method not defined in data object but in class
     const data: SpaceRequestListing = {
+      budget: '',
       createdAt: '',
       description: '',
       flightArrival: '',
@@ -144,5 +151,14 @@ export default class SpaceRequestListing {
     }
 
     return this.fromObject(data)
+  }
+
+  /*
+   * Returns the owner's first name and the first letter of his last name
+   */
+  public ownerShortName() {
+    if (this.user) {
+      return `${this.user.firstName} ${this.user.lastName.charAt(0)}.`
+    }
   }
 }

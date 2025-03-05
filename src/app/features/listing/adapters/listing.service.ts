@@ -34,6 +34,10 @@ const createSpaceOfferListing = async function (payload: SpaceListing) {
 }
 
 const createSpaceRequestListing = async function (payload: SpaceRequestListing) {
+  const shipmentDate = new Date(payload.shipmentDate)
+  payload.shipmentDate = shipmentDate
+    .toISOString()
+    .slice(0, shipmentDate.toISOString().indexOf('T'))
   return axios.post(spaceRequestURL, payload)
 }
 
@@ -61,7 +65,7 @@ async function getAllSpaceRequestListings(filter?: DBGetQueryFilter) {
   if (!filter) {
     filter = {
       itemsPerPage: -1,
-      sortBy: ['space_offer_listings.flight_arrival_date'],
+      sortBy: ['space_request_listings.shipment_date'],
       sortDesc: ['true'],
     }
   }

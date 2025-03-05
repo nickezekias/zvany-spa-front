@@ -120,6 +120,11 @@
           "successDesc": "Space request created successfully",
           "title": "Request Luggage Space",
           "titleDesc": "Request luggage space and find a traveler to ship your items"
+        },
+        "delete": {
+          "title": "Delete Space Request",
+          "confirmMessage": "Are you sure you want to delete this space request? Note this action is irreversible!",
+          "successDesc": "Space request deleted successfully"
         }
       }
     },
@@ -158,12 +163,15 @@
     "birthDate": "Birth Date",
     "bookingReference": "Booking Reference",
     "bookSpace": "Book Space",
+    "budget": "Budget",
+    "budgetHint": "Total amount you're willing to pay for desired space",
     "cancel": "Cancel",
     "chooseImage": "Choose Image",
     "city": "City",
     "class": "Class | Classes",
     "communityBadges": "Community Badges",
     "confirmPassword": "Confirm Password",
+    "contactShipper": "Contact Shipper",
     "country": "Country",
     "dashboard": "Dashboard",
     "date": "Date",
@@ -227,6 +235,7 @@
     "request": "Request | Requests",
     "requestSpace": "Request Space",
     "resetPassword": "Reset Password",
+    "review": "Review | Reviews",
     "save": "Save",
     "school": "School | Schools",
     "schoolFees": "School Fees",

@@ -49,6 +49,7 @@ const obj = ref<Obj>(Obj.initEmpty())
 
 const resolver = zodResolver(
   z.object({
+    budget: z.string().min(1, { message: 'errors.validation.requiredField' }),
     description: z.string().min(1, { message: 'errors.validation.requiredField' }),
     flightArrival: z.string().min(1, { message: 'errors.validation.requiredField' }),
     flightDeparture: z.string().min(1, { message: 'errors.validation.requiredField' }),
@@ -191,6 +192,18 @@ async function onFormSubmit(e: FormSubmitEvent) {
             :min="1"
             name="weight"
             :show-buttons="true"
+          />
+
+          <NikkInputText
+            v-model="obj.budget"
+            class="col-span-2"
+            :errorHelpLabel="$form.budget?.error?.message"
+            id="requestBudget"
+            :isError="$form.budget?.invalid"
+            hint="labels.budgetHint"
+            :literalLabel="$t('labels.budget')"
+            name="budget"
+            type="text"
           />
 
           <NikkSelect

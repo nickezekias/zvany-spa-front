@@ -6,7 +6,8 @@ import { useI18n } from 'vue-i18n'
 import { useToast } from 'primevue'
 
 import NikkToast from '@/app/utils/NikkToast'
-import Obj from '@/app/models/spaceListing.model'
+import ObjOffer from '@/app/models/spaceListing.model'
+import ObjRequest from '@/app/models/spaceRequestListing.model'
 
 import type { AxiosError } from 'axios'
 
@@ -26,6 +27,8 @@ onMounted(async () => {
   loading.value = true
   try {
     await objStore.getAllSpaceOfferListings()
+    await objStore.getAllSpaceRequestListings()
+    console.log('STORE_SPACE_REQ', objStore.spaceRequests)
     loading.value = false
   } catch (error) {
     nikkToast.httpError(error as AxiosError)
@@ -66,10 +69,9 @@ onMounted(async () => {
           </div>
           <SpaceOfferItemCard
             v-else
-            class=""
             v-for="obj in objStore.spaceListings"
             :key="obj.id"
-            :data="Obj.fromObject(obj)"
+            :data="ObjOffer.fromObject(obj)"
           />
         </div>
 
@@ -80,7 +82,15 @@ onMounted(async () => {
               {{ $t('features.listings.index.requests') }}
             </h3>
           </div>
-          <SpaceRequestItemCard class="" v-for="i in 4" :key="i" />
+          <div v-if="loading" class="flex flex-col gap-4">
+            <PrimeSkeleton v-for="i in 3" :key="i" width="100%" height="18rem" />
+          </div>
+          <SpaceRequestItemCard
+            v-else
+            v-for="obj in objStore.spaceRequests"
+            :key="obj.id"
+            :data="ObjRequest.fromObject(obj)"
+          />
         </div>
       </div>
     </div>
