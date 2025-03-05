@@ -60,7 +60,6 @@ onMounted(async () => {
     const data = await listingStore.getSpaceOfferListing(
       router.currentRoute.value.params.id as string,
     )
-    console.log('GET_SO_LISTINGS', data)
     spaceListing.value = data
   } catch (e) {
     nikkToast.httpError(e as AxiosError)
@@ -82,8 +81,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     listingStore.setSpaceListing(payload)
 
     try {
-      const response = await listingStore.updateSpaceOfferListing(listingStore.spaceListing)
-      console.log('RESPONSE', response)
+      await listingStore.updateSpaceOfferListing(listingStore.spaceListing)
       nikkToast.success('features.listings.edit.successDesc')
       router.push({ name: 'listings.index' })
     } catch (e) {
