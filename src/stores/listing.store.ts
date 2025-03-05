@@ -6,10 +6,13 @@ import objService from '@/app/features/listing/adapters/listing.service'
 import { useDataTableUtil } from '@/app/composables/useDataTableUtil'
 
 import type { DBGetQueryFilter } from '@/app/@types/common.interface'
+import type SpaceRequestListing from '@/app/models/spaceRequestListing.model'
 
 export const useListingStore = defineStore('listingStore', () => {
   const spaceListing = ref<SpaceListing>(SpaceListing.initEmpty())
   const spaceListings = ref<SpaceListing[]>([])
+
+  const spaceRequests = ref<SpaceRequestListing[]>([])
 
   const { updateObjectsList } = useDataTableUtil()
 
@@ -21,8 +24,17 @@ export const useListingStore = defineStore('listingStore', () => {
     return await objService.createSpaceOfferListing(data)
   }
 
+  async function createSpaceRequestListing(data: SpaceRequestListing) {
+    return await objService.createSpaceRequestListing(data)
+  }
+
   async function getSpaceOfferListing(id: string) {
     const response = await objService.getSpaceOfferListing(id)
+    return response.data.data
+  }
+
+  async function getSpaceRequestListing(id: string) {
+    const response = await objService.getSpaceRequestListing(id)
     return response.data.data
   }
 
@@ -31,14 +43,30 @@ export const useListingStore = defineStore('listingStore', () => {
     spaceListings.value = response.data.data
   }
 
+  async function getAllSpaceRequestListings(filter?: DBGetQueryFilter) {
+    const response = await objService.getAllSpaceRequestListings(filter)
+    spaceRequests.value = response.data.data
+  }
+
   async function updateSpaceOfferListing(data: SpaceListing) {
     const response = await objService.updateSpaceOfferListing(data)
+    return response.data.data
+  }
+
+  async function updateSpaceRequestListing(data: SpaceRequestListing) {
+    const response = await objService.updateSpaceRequestListing(data)
     return response.data.data
   }
 
   async function destroySpaceOfferListing(id: string) {
     const response = await objService.deleteSpaceOfferListing(id)
     updateObjectsList({ deleteId: ref(id), objects: spaceListings })
+    return response
+  }
+
+  async function destroySpaceRequestListing(id: string) {
+    const response = await objService.deleteSpaceRequestListing(id)
+    updateObjectsList({ deleteId: ref(id), objects: spaceRequests })
     return response
   }
 
@@ -50,6 +78,13 @@ export const useListingStore = defineStore('listingStore', () => {
     getAllSpaceOfferListings,
     updateSpaceOfferListing,
     destroySpaceOfferListing,
+
+    createSpaceRequestListing,
+    getSpaceRequestListing,
+    getAllSpaceRequestListings,
+    updateSpaceRequestListing,
+    destroySpaceRequestListing,
+
     setSpaceListing,
   }
 })

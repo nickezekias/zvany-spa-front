@@ -3,8 +3,10 @@ import axios from '@/lib/axios'
 
 import type { DBGetQueryFilter } from '@/app/@types/common.interface'
 import { getQueryFromFilter } from '@/app/utils/helpers'
+import type SpaceRequestListing from '@/app/models/spaceRequestListing.model'
 
 const spaceOfferURL = '/api/v1/listings/space-offers'
+const spaceRequestURL = '/api/v1/listings/space-requests'
 
 function formatSpaceOfferStorePayload(payload: SpaceListing) {
   const apiPayload = payload
@@ -31,8 +33,16 @@ const createSpaceOfferListing = async function (payload: SpaceListing) {
   return axios.post(spaceOfferURL, apiPayload)
 }
 
+const createSpaceRequestListing = async function (payload: SpaceRequestListing) {
+  return axios.post(spaceRequestURL, payload)
+}
+
 const getSpaceOfferListing = async function (id: string) {
   return axios.get(`${spaceOfferURL}/${id}`)
+}
+
+const getSpaceRequestListing = async function (id: string) {
+  return axios.get(`${spaceRequestURL}/${id}`)
 }
 
 async function getAllSpaceOfferListings(filter?: DBGetQueryFilter) {
@@ -44,7 +54,19 @@ async function getAllSpaceOfferListings(filter?: DBGetQueryFilter) {
     }
   }
   const query = getQueryFromFilter(filter)
-  return axios.get(`/api/v1/listings/space-offers${query}`)
+  return axios.get(`${spaceOfferURL}${query}`)
+}
+
+async function getAllSpaceRequestListings(filter?: DBGetQueryFilter) {
+  if (!filter) {
+    filter = {
+      itemsPerPage: -1,
+      sortBy: ['space_offer_listings.flight_arrival_date'],
+      sortDesc: ['true'],
+    }
+  }
+  const query = getQueryFromFilter(filter)
+  return axios.get(`${spaceRequestURL}${query}`)
 }
 
 const updateSpaceOfferListing = async function (payload: SpaceListing) {
@@ -53,8 +75,17 @@ const updateSpaceOfferListing = async function (payload: SpaceListing) {
   return axios.post(`${spaceOfferURL}/${apiPayload.id}?_method=PUT`, apiPayload)
 }
 
+const updateSpaceRequestListing = async function (payload: SpaceRequestListing) {
+  // format payload to match api format
+  return axios.post(`${spaceRequestURL}/${payload.id}?_method=PUT`, payload)
+}
+
 const deleteSpaceOfferListing = function (id: string) {
   return axios.delete(`${spaceOfferURL}/${id}`)
+}
+
+const deleteSpaceRequestListing = function (id: string) {
+  return axios.delete(`${spaceRequestURL}/${id}`)
 }
 
 export default {
@@ -63,4 +94,10 @@ export default {
   getAllSpaceOfferListings,
   updateSpaceOfferListing,
   deleteSpaceOfferListing,
+
+  createSpaceRequestListing,
+  getSpaceRequestListing,
+  getAllSpaceRequestListings,
+  updateSpaceRequestListing,
+  deleteSpaceRequestListing,
 }

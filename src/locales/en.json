@@ -94,6 +94,33 @@
         "offers": "Available Space",
         "requests": "Looking for Space",
         "title": "LugShare - Luggage Space Listings"
+      },
+      "requests": {
+        "constants": {
+          "itemTypes": {
+            "electronic": "Electronic",
+            "fragile": "Fragile",
+            "hazardous": "Hazardous",
+            "liquid": "Liquid",
+            "perishable": "Perishable"
+          },
+          "shipperTypes": {
+            "individual": "Individual",
+            "smallBusiness": "Small Business",
+            "internationalShopper": "International Shopper"
+          },
+          "shipmentDateFlexibility": {
+            "strictDates": "Strict Dates",
+            "moreOrLessOneWeek": "+/- 1 Week",
+            "moreOrLessOneMonth": "+/- 1 Month"
+          }
+        },
+        "create": {
+          "descriptionHint": "Provide a detailed description or additional info for your desired luggage space",
+          "successDesc": "Space request created successfully",
+          "title": "Request Luggage Space",
+          "titleDesc": "Request luggage space and find a traveler to ship your items"
+        }
       }
     },
     "onboarding": {
@@ -143,8 +170,10 @@
     "delete": "Delete",
     "deliveryPreference": "Delivery Preference",
     "departure": "Departure",
+    "departureAndDestination": "Departure & Destination",
     "departureDate": "Departure Date",
     "description": "Description",
+    "desiredWeightForUnit": "Desired Weight ({unit})",
     "edit": "Edit",
     "email": "Email",
     "emailResetLink": "Email Reset Link",
@@ -186,6 +215,7 @@
     "payment": "Payment | Payments",
     "phone": "Phone",
     "postSpaceListing": "Post Space Listing",
+    "postSpaceRequest": "Post Space Request",
     "previous": "Previous",
     "pricePerUnit": "Price Per {unit}",
     "profile": "Profile",
@@ -204,10 +234,14 @@
     "selectGender": "Select Gender",
     "selectDeliveryPreferences": "Select Delivery Preferences",
     "selectItemRestrictions": "Select Item Restrictions",
+    "selectItemTypes": "Select Item Types",
+    "selectShipmentDateFlexibility": "Select Shipment Date Flexibility",
+    "selectShipperType": "Select Shipper Type",
     "selectWeightUnit": "Select a Weight Unit",
     "selectWeight": "Select Weight",
     "setting": "Setting | Settings",
     "shippingDetails": "Shipping Details",
+    "shipmentArrivalDate": "Shipment Arrival Date",
     "skip": "Skip",
     "spaceListing": "Space Listing | Space Listings",
     "spaceListings": "Space Listings",

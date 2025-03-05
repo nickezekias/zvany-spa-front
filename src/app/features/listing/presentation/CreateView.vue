@@ -5,6 +5,7 @@ import PrimeTab from 'primevue/tab'
 import PrimeTabPanels from 'primevue/tabpanels'
 import PrimeTabPanel from 'primevue/tabpanel'
 
+import CreateRequestView from '@/app/features/listing/presentation/request/CreateView.vue'
 import SpaceOfferIndexContent from '@/app/features/listing/presentation/IndexContent.vue'
 </script>
 
@@ -20,7 +21,7 @@ import SpaceOfferIndexContent from '@/app/features/listing/presentation/IndexCon
           <SpaceOfferIndexContent />
         </PrimeTabPanel>
         <PrimeTabPanel value="2">
-          <div>Require Space</div>
+          <CreateRequestView />
         </PrimeTabPanel>
       </PrimeTabPanels>
     </PrimeTabs>
