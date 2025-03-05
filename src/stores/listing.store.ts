@@ -45,7 +45,6 @@ export const useListingStore = defineStore('listingStore', () => {
 
   async function getAllSpaceRequestListings(filter?: DBGetQueryFilter) {
     const response = await objService.getAllSpaceRequestListings(filter)
-    console.log('SPACE_REQ_RES', response.data.data)
     spaceRequests.value = response.data.data
   }
 
