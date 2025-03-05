@@ -28,7 +28,6 @@ onMounted(async () => {
   try {
     await objStore.getAllSpaceOfferListings()
     await objStore.getAllSpaceRequestListings()
-    console.log('STORE_SPACE_REQ', objStore.spaceRequests)
     loading.value = false
   } catch (error) {
     nikkToast.httpError(error as AxiosError)
