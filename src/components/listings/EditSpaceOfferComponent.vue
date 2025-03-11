@@ -10,7 +10,7 @@ import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
 
 import NikkToast from '@/app/utils/NikkToast'
-import SpaceListing from '@/app/models/spaceListing.model'
+import Obj from '@/app/models/spaceListing.model'
 
 import NikkInputNumber from '@/components/forms/NikkInputNumber.vue'
 import NikkInputText from '@/components/forms/NikkInputText.vue'
@@ -27,17 +27,17 @@ const { t } = useI18n()
 
 const nikkToast = new NikkToast(toast, t)
 
-const deliveryPreferences = Object.values(SpaceListing.DELIVERY_PREFERENCES).map((value) => ({
+const deliveryPreferences = Object.values(Obj.DELIVERY_PREFERENCES).map((value) => ({
   label: t(`features.listings.create.constants.deliveryPreferences.${value}`),
   value,
 }))
-const itemRestrictions = Object.values(SpaceListing.ITEM_RESTRICTIONS).map((value) => ({
+const itemRestrictions = Object.values(Obj.ITEM_RESTRICTIONS).map((value) => ({
   label: t(`features.listings.create.constants.itemRestrictions.${value}`),
   value,
 }))
 const loading = ref(false)
 const pageLoading = ref(false)
-const spaceListing = ref(objStore.spaceListing)
+const obj = ref(objStore.spaceListing)
 
 const resolver = zodResolver(
   z.object({
@@ -58,7 +58,7 @@ onMounted(async () => {
   try {
     pageLoading.value = true
     const data = await objStore.getSpaceOfferListing(router.currentRoute.value.params.id as string)
-    spaceListing.value = data
+    obj.value = data
   } catch (e) {
     nikkToast.httpError(e as AxiosError)
   } finally {
@@ -72,10 +72,10 @@ async function onFormSubmit(e: FormSubmitEvent) {
     loading.value = true
 
     if (accountStore.user) {
-      spaceListing.value.userId = accountStore.user.id
+      obj.value.userId = accountStore.user.id
     }
 
-    const payload = spaceListing.value
+    const payload = obj.value
     objStore.setSpaceListing(payload)
 
     try {
@@ -99,7 +99,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
 
     <PrimeForm
       v-else
-      :initialValues="spaceListing"
+      :initialValues="obj"
       :resolver
       @submit="onFormSubmit"
       v-slot="$form"
@@ -135,35 +135,35 @@ async function onFormSubmit(e: FormSubmitEvent) {
       <h3 class="text-lg font-medium col-span-2">{{ $t('labels.luggageDetails') }}</h3>
 
       <NikkInputNumber
-        v-model="spaceListing.availableWeight"
+        v-model="obj.availableWeight"
         class="col-span-2 md:col-span-1"
         id="availableWeight"
         error-help-label="errors.validation.requiredField"
         :is-error="$form.availableWeight?.invalid"
-        :literalLabel="$t('labels.availableWeightForUnit', { unit: spaceListing.weightUnit })"
+        :literalLabel="$t('labels.availableWeightForUnit', { unit: obj.weightUnit })"
         :min="1"
         name="availableWeight"
         :show-buttons="true"
       />
 
       <NikkSelect
-        v-model="spaceListing.weightUnit"
+        v-model="obj.weightUnit"
         class="col-span-2 md:col-span-1"
         id="weightUnit"
         error-help-label="errors.validation.requiredField"
         :is-error="$form.weightUnit?.invalid"
         name="weightUnit"
-        :options="Object.values(SpaceListing.WEIGHT_UNITS)"
+        :options="Object.values(Obj.WEIGHT_UNITS)"
         hint="labels.selectWeightUnit"
       />
 
       <NikkInputText
-        v-model="spaceListing.pricePerUnit"
+        v-model="obj.pricePerUnit"
         class="col-span-2 md:col-span-1 capitalize"
         :errorHelpLabel="$form.pricePerUnit?.error?.message"
         id="pricePerUnit"
         :isError="$form.pricePerUnit?.invalid"
-        :literalLabel="$t('labels.pricePerUnit', { unit: spaceListing.weightUnit })"
+        :literalLabel="$t('labels.pricePerUnit', { unit: obj.weightUnit })"
         name="pricePerUnit"
         type="text"
       />
@@ -182,7 +182,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
       <h3 class="text-lg font-medium col-span-2">{{ $t('labels.shippingDetails') }}</h3>
 
       <NikkSelect
-        v-model="spaceListing.itemRestrictions"
+        v-model="obj.itemRestrictions"
         class="col-span-2 md:col-span-1"
         id="itemRestrictions"
         error-help-label="errors.validation.requiredField"
@@ -206,7 +206,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
       </NikkSelect>
 
       <NikkSelect
-        v-model="spaceListing.deliveryPreferences"
+        v-model="obj.deliveryPreferences"
         class="col-span-2 md:col-span-1"
         id="deliveryPreferences"
         error-help-label="errors.validation.requiredField"
@@ -230,7 +230,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
       </NikkSelect>
 
       <NikkTextArea
-        v-model="spaceListing.description"
+        v-model="obj.description"
         class="col-span-2"
         :errorHelpLabel="$form.description?.error?.message"
         hint="features.listings.create.descriptionHint"
@@ -241,7 +241,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
       />
 
       <NikkTextArea
-        v-model="spaceListing.specialInstructions"
+        v-model="obj.specialInstructions"
         class="col-span-2"
         :errorHelpLabel="$form.specialInstructions?.error?.message"
         id="specialInstructions"
