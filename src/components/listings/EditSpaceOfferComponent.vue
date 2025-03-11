@@ -20,7 +20,7 @@ import NikkTextArea from '@/components/forms/NikkTextArea.vue'
 import type { AxiosError } from 'axios'
 
 const accountStore = useAccountStore()
-const listingStore = useListingStore()
+const objStore = useListingStore()
 const router = useRouter()
 const toast = useToast()
 const { t } = useI18n()
@@ -37,7 +37,7 @@ const itemRestrictions = Object.values(SpaceListing.ITEM_RESTRICTIONS).map((valu
 }))
 const loading = ref(false)
 const pageLoading = ref(false)
-const spaceListing = ref(listingStore.spaceListing)
+const spaceListing = ref(objStore.spaceListing)
 
 const resolver = zodResolver(
   z.object({
@@ -57,9 +57,7 @@ const resolver = zodResolver(
 onMounted(async () => {
   try {
     pageLoading.value = true
-    const data = await listingStore.getSpaceOfferListing(
-      router.currentRoute.value.params.id as string,
-    )
+    const data = await objStore.getSpaceOfferListing(router.currentRoute.value.params.id as string)
     spaceListing.value = data
   } catch (e) {
     nikkToast.httpError(e as AxiosError)
@@ -78,10 +76,10 @@ async function onFormSubmit(e: FormSubmitEvent) {
     }
 
     const payload = spaceListing.value
-    listingStore.setSpaceListing(payload)
+    objStore.setSpaceListing(payload)
 
     try {
-      await listingStore.updateSpaceOfferListing(listingStore.spaceListing)
+      await objStore.updateSpaceOfferListing(objStore.spaceListing)
       nikkToast.success('features.listings.edit.successDesc')
       router.push({ name: 'listings.index' })
     } catch (e) {
