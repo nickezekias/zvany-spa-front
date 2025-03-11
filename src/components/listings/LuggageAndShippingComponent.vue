@@ -58,7 +58,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     loading.value = true
 
     if (accountStore.user) {
-      spaceListing.value.user = accountStore.user.id
+      spaceListing.value.userId = accountStore.user.id
     }
 
     const payload = spaceListing.value

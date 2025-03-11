@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import { useAccountStore } from '@/stores/account.store'
 
-import SpaceListing, { type ListingOwner } from '@/app/models/spaceListing.model'
+import SpaceListing from '@/app/models/spaceListing.model'
 import NikkDeleteDialog from '../crud/NikkDeleteDialog.vue'
 import { useListingStore } from '@/stores/listing.store'
 import { useI18n } from 'vue-i18n'
@@ -12,7 +12,7 @@ import NikkToast from '@/app/utils/NikkToast'
 import type { AxiosError } from 'axios'
 
 const props = defineProps<{
-  data: SpaceListing & { user: ListingOwner }
+  data: SpaceListing
 }>()
 const { t } = useI18n()
 const toast = useToast()
@@ -146,7 +146,7 @@ async function onDeleteItem() {
         <div class="flex gap-2">
           <PrimeButton size="small" :label="$t('labels.bookSpace')" class="w-full flex-grow" />
 
-          <div class="flex gap-2" v-if="accountStore.user?.id == props.data.user.id">
+          <div class="flex gap-2" v-if="accountStore.user?.id == props.data.user?.id">
             <router-link :to="`/listings/edit/${props.data.id}`">
               <PrimeButton size="small" outlined rounded severity="info" icon="pi pi-pencil" />
             </router-link>

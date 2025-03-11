@@ -21,8 +21,6 @@ function formatSpaceOfferStorePayload(payload: SpaceListing) {
     .toISOString()
     .slice(0, flightDepartureDate.toISOString().indexOf('T'))
 
-  // @ts-expect-error userId is not defined in SpaceListing is just needed for api, too lazy to fix this 👀👀
-  apiPayload['userId'] = apiPayload.user
   return apiPayload
 }
 
