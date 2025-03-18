@@ -1,100 +1,139 @@
-export default class User {
-  public static readonly GENDERS = {
-    MALE: 'male',
-    FEMALE: 'female',
-    OTHER: 'other',
-  }
+import Business from "./business.model"
 
-  createdAt: string
+export default class User {
+  id: string
+  address: string
+  business: Business | null
   email: string
-  emailVerifiedAt: string
   firstName: string
   fullName: string
   gender: string
-  hasVerifiedEmail = false
-  hasVerifiedID = false
-  hasVerifiedPhone = false
-  id: string
   initials: string
   isActive: boolean
-  isOnboarded = false
   lastName: string
   password: string
   phone: string
   roles: Array<string>
+  createdAt: string
   updatedAt: string
+  deletedAt: string
 
-  public constructor(
-    createdAt: string,
+  public static readonly GENDERS = {
+    MALE: 'MALE',
+    FEMALE: 'FEMALE',
+    OTHER: 'OTHER',
+  }
+
+  public static readonly ROLES_LIST = {
+    ADMIN: 'admin',
+    CUSTOMER: 'customer',
+    VENDOR: 'vendor'
+  }
+
+  constructor(
+    id: string,
+    address: string,
+    business: Business | null,
     email: string,
-    emailVerifiedAt: string,
     firstName: string,
     fullName: string,
     gender: string,
-    id: string,
     initials: string,
     isActive: boolean,
     lastName: string,
     password: string,
     phone: string,
     roles: Array<string>,
+    createdAt: string,
     updatedAt: string,
+    deletedAt: string
   ) {
-    this.createdAt = createdAt
+    this.id = id
+    this.address = address
+    this.business = business
     this.email = email
-    this.emailVerifiedAt = emailVerifiedAt
     this.firstName = firstName
     this.fullName = fullName
     this.gender = gender
-    this.id = id
-    this.initials = initials
     this.isActive = isActive
+    this.initials = initials
     this.lastName = lastName
     this.password = password
     this.phone = phone
     this.roles = roles
+    this.createdAt = createdAt
     this.updatedAt = updatedAt
+    this.deletedAt = deletedAt
   }
 
   static fromObject(data: {
-    createdAt: string
+    id: string
+    address: string
+    business: Business | null
     email: string
-    emailVerifiedAt: string
     firstName: string
     fullName: string
     gender: string
-    id: string
     initials: string
     isActive: boolean
     lastName: string
     password: string
     phone: string
     roles: Array<string>
+    createdAt: string
     updatedAt: string
-  }): User {
+    deletedAt: string
+  }) {
     return new User(
-      data.createdAt,
+      data.id,
+      data.address,
+      data.business,
       data.email,
-      data.emailVerifiedAt,
       data.firstName,
       data.fullName,
       data.gender,
-      data.id,
       data.initials,
       data.isActive,
       data.lastName,
       data.password,
       data.phone,
       data.roles,
+      data.createdAt,
       data.updatedAt,
+      data.deletedAt
     )
   }
 
   static initEmpty(): User {
-    return new User('', '', '', '', '', '', '', '', false, '', '', '', [], '')
+    return new User(
+      '',
+      '',
+      Business.initEmpty(),
+      '',
+      '',
+      '',
+      '',
+      '',
+      true,
+      '',
+      '',
+      '',
+      [],
+      '',
+      '',
+      ''
+    )
+  }
+
+  public checkIsActive(): boolean {
+    return this.isActive
   }
 
   public isAdmin(): boolean {
-    return this.roles.includes('admin')
+    return this.roles.includes(User.ROLES_LIST.ADMIN)
+  }
+
+  public isVendor(): boolean {
+    return this.roles.includes(User.ROLES_LIST.VENDOR)
   }
 }
