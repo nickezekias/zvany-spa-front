@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TopBarComponent from './TopBarComponent.vue'
+import DesktopTopBar from './TopBar.vue'
 import MobileTopBar from '@/layouts/app/mobile/TopBar.vue'
 import FooterComponent from './FooterComponent.vue'
 import { ref } from 'vue'
@@ -15,7 +15,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 
 <template>
   <div :class="{ dark: darkMode }" class="min-h-screen flex flex-col">
-    <TopBarComponent class="hidden md:block" />
+    <DesktopTopBar class="hidden md:block" />
     <MobileTopBar class="md:hidden" />
 
     <div class="flex flex-grow">
