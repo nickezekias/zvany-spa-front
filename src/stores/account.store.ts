@@ -40,19 +40,20 @@ export const useAccountStore = defineStore('accountStore', () => {
   }
 
   const isAuthenticated = computed(() => {
-    return !isGuest() && user.value != null
+    return !isGuest.value && user.value != null
   })
 
-  const isGuest = (): boolean => {
-    if (window.localStorage.getItem('guest') === '1') {
+  const isGuest = computed((): boolean => {
+    if (window.localStorage.getItem('guest') == '1') {
       return true
     } else {
       return false
     }
-  }
+  })
 
   const setAuthenticatedUser = (data: User): void => {
-    setUser(User.fromObject(data))
+    const userModel = User.fromObject(data)
+    setUser(userModel)
     setIsGuest('0')
   }
 

@@ -4,7 +4,7 @@ import { useAccountStore } from '@/stores/account.store'
 export default async function auth({ to, next }: any) {
   const accountStore = useAccountStore()
   const loginQuery = { path: '/login', query: { redirect: to.fullPath } }
-  if (accountStore.isGuest()) {
+  if (accountStore.isGuest) {
     accountStore.clearAuthenticatedUser()
     next(loginQuery)
   } else {
