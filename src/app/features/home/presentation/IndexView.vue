@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
-
+<script setup lang="ts">
+import MobileIndexContent from '@/app/features/home/presentation/MobileIndexContent.vue'
+import DesktopIndexContent from '@/app/features/home/presentation/DesktopIndexContent.vue'
+</script>
 <template>
-  <h1>Welcome Home</h1>
+  <div>
+    <MobileIndexContent class="md:hidden" />
+    <DesktopIndexContent class="hidden md:flex" />
+  </div>
 </template>

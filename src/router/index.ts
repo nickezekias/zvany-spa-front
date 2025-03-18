@@ -50,11 +50,6 @@ const routes: Array<RouteRecordRaw> = [
         path: '/u',
         children: [
           {
-            path: 'public-profile',
-            name: 'user.publicProfile',
-            component: () => import('@/app/features/profile/public/presentation/IndexView.vue'),
-          },
-          {
             path: 'profile',
             name: 'user.profile',
             component: () => import('@/app/features/profile/presentation/IndexView.vue'),
