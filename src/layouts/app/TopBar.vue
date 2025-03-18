@@ -18,7 +18,7 @@ const search = ref('')
 </script>
 <template>
   <div>
-    <PrimeToolbar class="py-2 px-12 lg:px-24 rounded-none border-b">
+    <PrimeToolbar class="py-2 px-12 lg:px-24 rounded-none border-0 border-b">
       <template #start>
         <router-link :to="appStore.homeRoute">
           <div class="logo font-black cursor-pointer">{{ appStore.appName }}</div>
