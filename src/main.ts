@@ -18,6 +18,7 @@ import Badge from 'primevue/badge'
 import Card from 'primevue/card'
 import Divider from 'primevue/divider'
 import { Form } from '@primevue/forms'
+import InputText from 'primevue/inputtext'
 import Menu from 'primevue/menu'
 import Message from 'primevue/message'
 import Rating from 'primevue/rating'
@@ -42,6 +43,7 @@ app.component('PrimeButton', Button)
 app.component('PrimeCard', Card)
 app.component('PrimeDivider', Divider)
 app.component('PrimeForm', Form)
+app.component('PrimeInputText', InputText)
 app.component('PrimeMenu', Menu)
 app.component('PrimeMessage', Message)
 app.component('PrimeRating', Rating)

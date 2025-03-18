@@ -48,15 +48,7 @@ async function onFormSubmit(e: FormSubmitEvent): Promise<void> {
       if (route.query.redirect) {
         router.push(`${route.query.redirect}`)
       } else {
-        if (accountStore.userModel && !accountStore.userModel.isOnboarded) {
-          router.push({ name: 'onboarding.index' })
-        } else {
-          if (accountStore.user && accountStore.user.isAdmin()) {
-            router.push(appStore.adminHomeRoute)
-          } else {
-            router.push(appStore.homeRoute)
-          }
-        }
+        router.push(appStore.homeRoute)
       }
     } else {
       nikkToast.error('errors.validation.form', 'labels.invalidForm')

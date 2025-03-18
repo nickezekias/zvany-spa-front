@@ -4,18 +4,19 @@ import guest from './middleware/guest.middleware'
 
 import { useAppStore } from '@/stores/app.store'
 
-import GuestLayout from '@/layouts/guest/IndexLayout.vue'
+import AppLayout from '@/layouts/app/IndexLayout.vue'
 import auth from './middleware/auth.middleware'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    component: GuestLayout,
+    component: AppLayout,
     meta: { middleware: [guest] },
     children: [
       {
         path: '',
-        redirect: '/login',
+        name: 'home',
+        component: () => import('@/app/features/home/presentation/IndexView.vue'),
       },
       {
         path: '/forgot-password',
@@ -41,20 +42,10 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
-    path: '/onboarding',
-    name: 'onboarding.index',
-    component: () => import('@/app/features/onboarding/presentation/IndexView.vue'),
-  },
-  {
     path: '/',
     component: () => import('@/layouts/app/IndexLayout.vue'),
     meta: { middleware: [auth] },
     children: [
-      {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: () => import('@/app/features/dashboard/presentation/IndexView.vue'),
-      },
       {
         path: '/u',
         children: [
@@ -67,36 +58,6 @@ const routes: Array<RouteRecordRaw> = [
             path: 'profile',
             name: 'user.profile',
             component: () => import('@/app/features/profile/presentation/IndexView.vue'),
-          },
-        ],
-      },
-      {
-        path: '/listings',
-        children: [
-          {
-            path: '',
-            name: 'listings.index',
-            component: () => import('@/app/features/listing/presentation/IndexView.vue'),
-          },
-          {
-            path: 'create',
-            name: 'listings.create',
-            component: () => import('@/app/features/listing/presentation/CreateView.vue'),
-          },
-          {
-            path: 'edit/:id',
-            name: 'listings.edit',
-            component: () => import('@/app/features/listing/presentation/EditView.vue'),
-          },
-          {
-            path: 'show/:id',
-            name: 'listings.show',
-            component: () => import('@/app/features/listing/presentation/ShowView.vue'),
-          },
-          {
-            path: 'requests/edit/:id',
-            name: 'listings.requests.edit',
-            component: () => import('@/app/features/listing/presentation/request/EditView.vue'),
           },
         ],
       },

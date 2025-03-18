@@ -5,7 +5,7 @@ export const useAppStore = defineStore('appStore', () => {
   const adminHomeRoute = { name: 'admin.dashboard' }
   const appLoading = ref(false)
   const appName = 'Zvany'
-  const homeRoute = { name: 'dashboard' }
+  const homeRoute = { name: 'home' }
 
   const setAppLoading = (value: boolean) => {
     appLoading.value = value

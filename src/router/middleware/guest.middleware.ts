@@ -10,7 +10,7 @@ export default async function guest({ next }: any) {
       console.error(e)
     }
     if (authStore.user) {
-      next({ name: 'dashboard' })
+      next({ name: 'home' })
     } else {
       authStore.clearAuthenticatedUser()
       next()

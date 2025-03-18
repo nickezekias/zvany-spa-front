@@ -39,6 +39,10 @@ export const useAccountStore = defineStore('accountStore', () => {
     return user.value != null && user.value.isAdmin()
   }
 
+  const isAuthenticated = computed(() => {
+    return !isGuest() && user.value != null
+  })
+
   const isGuest = (): boolean => {
     if (window.localStorage.getItem('guest') === '1') {
       return true
@@ -101,6 +105,7 @@ export const useAccountStore = defineStore('accountStore', () => {
     clearAuthenticatedUser,
     getAuthenticatedUser,
     isAdmin,
+    isAuthenticated,
     isGuest,
     login,
     logout,
