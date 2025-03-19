@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emit = defineEmits(['close', 'deleted'])
+const emit = defineEmits(['close', 'confirm'])
 const model = defineModel({ type: Boolean })
 const props = defineProps<{ loading: boolean }>()
 
@@ -29,7 +29,7 @@ import PrimeDialog from 'primevue/dialog'
               :label="$t('labels.cancel')"
             />
             <PrimeButton
-              @click="emit('deleted')"
+              @click="emit('confirm')"
               :label="$t('labels.delete')"
               :loading="props.loading"
               size="large"
