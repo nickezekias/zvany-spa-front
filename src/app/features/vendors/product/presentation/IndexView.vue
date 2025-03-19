@@ -109,8 +109,8 @@ const toggle = (event: Event, id: string) => {
   <div>
     <div class="nikk-container">
       <AppPageTitle
-        title="features.vendors.products.title"
-        subtitle="features.vendors.products.subtitle"
+        title="features.vendors.products.index.title"
+        subtitle="features.vendors.products.index.subtitle"
       >
       </AppPageTitle>
 
