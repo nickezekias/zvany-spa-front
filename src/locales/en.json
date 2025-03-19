@@ -56,9 +56,14 @@
     },
     "vendors": {
       "dashboardDesc": "Central Hub to Manage Your Products",
-      "productCreateDesc": "Add a new product to the system",
       "productInventoryDesc": "Manage your products inventory",
       "products": {
+        "create": {
+          "descriptionHint": "Write a brief description for your product",
+          "title": "Add Product",
+          "subtitle": "Add a new product to the system",
+          "successMessage": "Product Added Successfully | Products Added Successfully"
+        },
         "subtitle": "Manage your products inventory",
         "title": "Products"
       },
@@ -93,6 +98,7 @@
     "city": "City",
     "confirmPassword": "Confirm Password",
     "contact": "Contact",
+    "cost": "Cost",
     "country": "Country",
     "dashboard": "Dashboard",
     "delete": "Delete",
@@ -128,6 +134,7 @@
     "payWithPaypal": "Pay with PayPal",
     "phone": "Phone",
     "previous": "Previous",
+    "price": "Price",
     "product": "Product | Products",
     "productImage": "Product Image",
     "productType": "Product Type",
@@ -139,7 +146,7 @@
     "resetPassword": "Reset Password",
     "save": "Save",
     "selectGender": "Select Gender",
-    "selectProductType": "Select Type...",
+    "selectProductType": "Select Product Type",
     "setting": "Setting | Settings",
     "share": "Share",
     "shop": "Shop",
