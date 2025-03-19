@@ -89,6 +89,11 @@ const routes: Array<RouteRecordRaw> = [
             name: 'vendors.products.create',
             component: () => import('@/app/features/vendors/product/presentation/CreateView.vue'),
           },
+          {
+            path: 'update/:id',
+            name: 'vendors.products.update',
+            component: () => import('@/app/features/vendors/product/presentation/UpdateView.vue'),
+          },
         ],
       },
     ],

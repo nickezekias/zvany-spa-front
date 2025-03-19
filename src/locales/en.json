@@ -64,8 +64,15 @@
           "subtitle": "Add a new product to the system",
           "successMessage": "Product Added Successfully | Products Added Successfully"
         },
-        "subtitle": "Manage your products inventory",
-        "title": "Products"
+        "index": {
+          "subtitle": "Manage your products inventory",
+          "title": "Products"
+        },
+        "update": {
+          "title": "Edit Product",
+          "subtitle": "Edit product to update it's information",
+          "successMessage": "Product Updated Successfully | Products Updated Successfully"
+        }
       },
       "productUpdateDesc": "Change product details"
     }
