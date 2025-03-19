@@ -43,9 +43,6 @@
       "404NotFound": "Oops! We can't find the page you're looking for."
     },
     "product": {
-      "confirmDeleteMessage": "Do you really want to delete this product, note this action is irreversible!?",
-      "deleteProduct": "Delete Product",
-      "deleteSuccessMessage": "Product successfully deleted",
       "productDetail": {
         "availableForFreeShipping": "This product is available for free shipping"
       }
@@ -63,6 +60,11 @@
           "title": "Add Product",
           "subtitle": "Add a new product to the system",
           "successMessage": "Product Added Successfully | Products Added Successfully"
+        },
+        "delete": {
+          "confirmDeleteMessage": "Do you really want to delete this product, note this action is irreversible!?",
+          "successMessage": "Product successfully deleted",
+          "title": "Delete Product"
         },
         "index": {
           "subtitle": "Manage your products inventory",

@@ -91,7 +91,7 @@ async function onConfirmDelete() {
   try {
     await objStore.destroy(activeRowId.value)
     isDeleteDialog.value = false
-    nikkToast.success('features.product.deleteSuccessMessage')
+    nikkToast.success('features.vendors.products.delete.successMessage')
   } catch (e) {
     nikkToast.httpError(e as AxiosError)
   } finally {
@@ -267,7 +267,15 @@ const toggle = (event: Event, id: string) => {
       v-model="isDeleteDialog"
       :loading="isDeleteDialogLoading"
       @close="closeDeleteDialog"
-      @confirmed="onConfirmDelete"
-    />
+      @confirm="onConfirmDelete"
+    >
+      <template #title>
+        {{ $t('features.vendors.products.delete.title') }}
+      </template>
+
+      <template #message>
+        {{ $t('features.vendors.products.delete.confirmDeleteMessage') }}
+      </template>
+    </NikkDeleteDialog>
   </div>
 </template>
