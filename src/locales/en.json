@@ -58,6 +58,10 @@
       "dashboardDesc": "Central Hub to Manage Your Products",
       "productCreateDesc": "Add a new product to the system",
       "productInventoryDesc": "Manage your products inventory",
+      "products": {
+        "subtitle": "Manage your products inventory",
+        "title": "Products"
+      },
       "productUpdateDesc": "Change product details"
     }
   },

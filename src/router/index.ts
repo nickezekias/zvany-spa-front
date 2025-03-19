@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import middlewarePipeline from './middleware/middlewarePipeline'
+import auth from './middleware/auth.middleware'
 import guest from './middleware/guest.middleware'
+import vendor from './middleware/vendor.middleware'
 
 import { useAppStore } from '@/stores/app.store'
 
 import AppLayout from '@/layouts/app/IndexLayout.vue'
-import auth from './middleware/auth.middleware'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -41,6 +42,9 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  /**
+   * REGULAR AUTH USERS
+   */
   {
     path: '/',
     component: () => import('@/layouts/app/IndexLayout.vue'),
@@ -55,6 +59,27 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('@/app/features/profile/presentation/IndexView.vue'),
           },
         ],
+      },
+    ],
+  },
+
+  /**
+   * VENDORS
+   */
+  {
+    path: '/vendors/',
+    component: () => import('@/layouts/vendors/IndexLayout.vue'),
+    meta: { middleware: [auth, vendor] },
+    children: [
+      {
+        path: '',
+        name: 'vendors.index',
+        component: () => import('@/app/features/vendors/product/presentation/IndexView.vue'),
+      },
+      {
+        path: 'products',
+        name: 'vendors.products.index',
+        component: () => import('@/app/features/vendors/product/presentation/IndexView.vue'),
       },
     ],
   },
