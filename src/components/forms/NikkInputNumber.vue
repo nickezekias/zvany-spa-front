@@ -10,7 +10,7 @@ const props = defineProps<{
   id: string
   currency?: string
   disabled?: boolean
-  errorHelpLabel: string
+  errorHelpLabel: string | undefined
   label?: string
   literalLabel?: string
   locale?: string
