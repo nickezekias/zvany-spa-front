@@ -5,7 +5,7 @@ import UserAvatarMenu from '@/components/user/UserAvatarMenu.vue'
 const appStore = useAppStore()
 </script>
 <template>
-  <PrimeToolbar class="py-0 px-[3rem] rounded-none">
+  <PrimeToolbar class="py-0 px-[3rem] border-0 border-b rounded-none">
     <template #start>
       <div class="logo">
         <router-link to="/">
