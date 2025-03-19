@@ -12,6 +12,7 @@ import PrimeColumn from 'primevue/column'
 import PrimeDataTable from 'primevue/datatable'
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
 import NikkDeleteDialog from '@/components/crud/NikkDeleteDialog.vue'
+import type { MenuItem } from '@/app/@types/common.interface'
 
 const objStore = useProductStore()
 const router = useRouter()
@@ -21,7 +22,7 @@ const toast = useToast()
 const nikkToast = new NikkToast(toast, t)
 
 const activeRowId = ref('')
-const actionItems: Ref<MenuItem[]> = ref([
+const actionItems = ref<MenuItem[]>([
   {
     label: t('labels.massCreate'),
     icon: 'pi pi-list-check',
@@ -90,9 +91,9 @@ async function onConfirmDelete() {
   try {
     await objStore.destroy(activeRowId.value)
     isDeleteDialog.value = false
-    appStore.toastSuccess('features.product.deleteSuccessMessage')
+    nikkToast.success('features.product.deleteSuccessMessage')
   } catch (e) {
-    appStore.toastAPIError(e as HttpError)
+    nikkToast.httpError(e as AxiosError)
   } finally {
     isDeleteDialogLoading.value = false
   }
@@ -128,7 +129,9 @@ const toggle = (event: Event, id: string) => {
         </template>
 
         <template #content>
+          <PrimeSkeleton v-if="loading" width="100%" height="24rem" />
           <PrimeDataTable
+            v-else
             v-model:selection="selectedObjects"
             :value="objStore.objects"
             data-key="id"
@@ -231,7 +234,7 @@ const toggle = (event: Event, id: string) => {
                   />
                   <PrimeMenu id="overlay_menu" ref="menu" :model="rowActionsItems" :popup="true">
                     <template #item="{ item }">
-                      <router-link v-if="item.route" :to="`${item.route}?id=${activeRowId}`">
+                      <router-link v-if="item.route" :to="`${item.route}/${activeRowId}`">
                         <PrimeButton
                           class="w-full justify-start"
                           small
