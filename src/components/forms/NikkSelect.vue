@@ -9,7 +9,7 @@ const props = defineProps<{
   hint?: string
   id: string
   isError?: boolean
-  label: string
+  label?: string
   literalLabel?: string
   loading?: boolean
   name?: string
