@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { useAccountStore } from '@/stores/account.store'
 import { useAppStore } from '@/stores/app.store'
 import UserAvatarMenu from '@/components/user/UserAvatarMenu.vue'
 
+const accountStore = useAccountStore()
 const appStore = useAppStore()
 </script>
 <template>
@@ -25,8 +27,10 @@ const appStore = useAppStore()
     </template>
 
     <template #end>
-      <div class="flex align-items-center gap-2">
+      <div class="flex align-items-center items-center gap-2">
         <UserAvatarMenu />
+
+        <span class="font-medium text-sm md:text-lg">{{ accountStore.user?.business?.name }}</span>
       </div>
     </template>
   </PrimeToolbar>
