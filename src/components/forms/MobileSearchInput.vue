@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const model = defineModel({
   type: String,
-  default: ''
+  default: '',
 })
 </script>
 
@@ -13,6 +13,12 @@ const model = defineModel({
       placeholder="Search"
       class="border-0 py-0 bg-transparent flex-grow text-white"
     />
-    <PrimeButton icon="pi pi-search" class="w-8 h-8" severity="contrast" rounded aria-label="Star" />
+    <PrimeButton
+      icon="pi pi-search"
+      class="w-8 h-8"
+      severity="contrast"
+      rounded
+      aria-label="Star"
+    />
   </div>
 </template>

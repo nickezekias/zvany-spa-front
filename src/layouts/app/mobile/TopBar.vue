@@ -9,13 +9,21 @@ const search = ref('')
 </script>
 
 <template>
-  <div class="py-2 px-4">
-    <div class="flex justify-between">
+  <div class="py-1 px-4 bg-primary text-white">
+    <div class="flex justify-between items-center">
       <router-link :to="appStore.homeRoute">
         <div class="logo font-black cursor-pointer">{{ appStore.appName }}</div>
       </router-link>
 
-      <PrimeButton size="small" text plain aria-label="Favorites">
+      <PrimeButton
+        size="small"
+        rounded
+        severity="contrast"
+        class="p-1 text-white"
+        text
+        plain
+        aria-label="Favorites"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5">
             <path
@@ -31,7 +39,7 @@ const search = ref('')
     </div>
 
     <div class="mt-1">
-      <MobileSearchInput v-model="search" class="w-full" />
+      <MobileSearchInput v-model="search" class="w-full text-white" />
     </div>
   </div>
 </template>
