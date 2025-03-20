@@ -5,8 +5,9 @@ export default class Product {
   categories: Array<string>
   cost: number
   description: string
+  images: string | File
   name: string
-  publishedAt: string  | null
+  publishedAt: string | null
   price: number
   quantity: number
   sku: string
@@ -19,8 +20,8 @@ export default class Product {
   deletedAt: string
 
   public static readonly STATUSES = {
-    "IN_STOCK": "in stock",
-    "OUT_OF_STOCK": "out of stock"
+    IN_STOCK: 'in stock',
+    OUT_OF_STOCK: 'out of stock',
   }
 
   constructor(
@@ -30,8 +31,9 @@ export default class Product {
     categories: Array<string>,
     cost: number,
     description: string,
+    images: string | File,
     name: string,
-    publishedAt: string  | null,
+    publishedAt: string | null,
     price: number,
     quantity: number,
     sku: string,
@@ -41,7 +43,7 @@ export default class Product {
     businessId: string,
     createdAt: string,
     updatedAt: string,
-    deletedAt: string
+    deletedAt: string,
   ) {
     this.id = id
     this.barcode = barcode
@@ -49,6 +51,7 @@ export default class Product {
     this.categories = categories
     this.cost = cost
     this.description = description
+    this.images = images
     this.name = name
     this.publishedAt = publishedAt
     this.price = price
@@ -70,8 +73,9 @@ export default class Product {
     categories: Array<string>
     cost: number
     description: string
+    images: string | File
     name: string
-    publishedAt: string  | null
+    publishedAt: string | null
     price: number
     quantity: number
     sku: string
@@ -90,6 +94,7 @@ export default class Product {
       data.categories,
       data.cost,
       data.description,
+      data.images,
       data.name,
       data.publishedAt,
       data.price,
@@ -101,30 +106,37 @@ export default class Product {
       data.businessId,
       data.createdAt,
       data.updatedAt,
-      data.deletedAt
+      data.deletedAt,
     )
   }
 
   static initEmpty(): Product {
-    return new Product(
-      '',
-      '',
-      '',
-      [],
-      0,
-      '',
-      '',
-      null,
-      0,
-      0,
-      '',
-      '',
-      true,
-      '',
-      '',
-      '',
-      '',
-      ''
-    )
+    return new Product('', '', '', [], 0, '', '', '', null, 0, 0, '', '', true, '', '', '', '', '')
+  }
+
+  public toFormData(): FormData {
+    const formData = new FormData()
+
+    formData.append('id', this.id)
+    formData.append('barcode', this.barcode)
+    formData.append('brand', this.brand)
+    formData.append('categories', this.categories.toString())
+    formData.append('cost', `${this.cost}`)
+    formData.append('description', this.description)
+    formData.append('images', this.images)
+    formData.append('name', this.name)
+    formData.append('publishedAt', this.publishedAt ? this.publishedAt : '')
+    formData.append('price', `${this.price}`)
+    formData.append('quantity', `${this.quantity}`)
+    formData.append('sku', this.sku)
+    formData.append('status', this.status)
+    formData.append('stockTracked', this.stockTracked ? '1' : '0')
+    formData.append('type', this.type)
+    formData.append('businessId', this.businessId)
+    formData.append('createdAt', this.createdAt)
+    formData.append('updatedAt', this.updatedAt)
+    formData.append('deletedAt', this.deletedAt)
+
+    return formData
   }
 }

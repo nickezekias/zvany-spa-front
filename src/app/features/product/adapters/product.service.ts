@@ -21,8 +21,8 @@ const get = async function get(id: string) {
   return axios.get(`${url}/${id}`)
 }
 
-const create = async function (payload: Obj, businessId: string) {
-  return axios.post(url, { ...payload, businessId })
+const create = async function (payload: Obj) {
+  return axios.post(url, payload.toFormData())
 }
 
 const update = async function (payload: Obj) {

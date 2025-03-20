@@ -22,8 +22,8 @@ export const useProductStore = defineStore('productStore', () => {
     return response.data.data
   }
 
-  async function create(payload: Obj, businessId: string) {
-    const response = await objService.create(payload, businessId)
+  async function create(payload: Obj) {
+    const response = await objService.create(payload)
     return response.data.data
   }
 

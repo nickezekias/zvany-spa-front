@@ -16,6 +16,7 @@ import productTypes from '@/assets/data/productTypes.json'
 import type { AxiosError } from 'axios'
 
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
+import FileUploader from '@/components/forms/FileUploader.vue'
 import NikkInputNumber from '@/components/forms/NikkInputNumber.vue'
 import NikkInputText from '@/components/forms/NikkInputText.vue'
 import NikkSelect from '@/components/forms/NikkSelect.vue'
@@ -60,7 +61,8 @@ async function onFormSubmit(e: FormSubmitEvent) {
     loading.value = true
 
     try {
-      await objStore.create(obj.value, `${accountStore.user?.business?.id}`)
+      obj.value.businessId = `${accountStore.user?.business?.id}`
+      await objStore.create(obj.value)
       nikkToast.success('features.vendors.products.create.successMessage')
       router.push({ name: 'vendors.products.index' })
     } catch (e) {
@@ -93,11 +95,13 @@ async function onFormSubmit(e: FormSubmitEvent) {
           :validateOnSubmit="true"
         >
           <div class="flex gap-4">
-            <div class="w-full dbg-border lg:w-4/12">
-              <img
-                src="https://via.placeholder.com/100"
-                :alt="$t('labels.productImage')"
-                class="w-full object-cover rounded-md"
+            <div class="w-full lg:w-4/12">
+              <FileUploader
+                @file-selected="
+                  (event: File) => {
+                    obj.images = event
+                  }
+                "
               />
             </div>
             <div class="w-full flex flex-col lg:w-8/12 gap-4">
