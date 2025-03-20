@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useProductStore } from '@/stores/product.store'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue'
 
 import NikkToast from '@/app/utils/NikkToast'
+import Obj from '@/app/models/product.model'
 import type { AxiosError } from 'axios'
+import type { MenuItem } from '@/app/@types/common.interface'
 
 import PrimeColumn from 'primevue/column'
 import PrimeDataTable from 'primevue/datatable'
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
 import NikkDeleteDialog from '@/components/crud/NikkDeleteDialog.vue'
-import type { MenuItem } from '@/app/@types/common.interface'
 
 const objStore = useProductStore()
 const router = useRouter()
@@ -21,7 +22,7 @@ const toast = useToast()
 
 const nikkToast = new NikkToast(toast, t)
 
-const activeRowId = ref('')
+const activeRowObj = ref<Obj | null>(null)
 const actionItems = ref<MenuItem[]>([
   {
     label: t('labels.massCreate'),
@@ -34,6 +35,8 @@ const actionItems = ref<MenuItem[]>([
 const isDeleteDialog = ref(false)
 const isDeleteDialogLoading = ref(false)
 const isMassCreateDialog = ref(false)
+const isMassDeleteDialog = ref(false)
+const isMassSelectActions = ref(false)
 const loading = ref(false)
 const menu = ref()
 const rowActionsItems = ref([
@@ -68,6 +71,14 @@ onMounted(async () => {
   }
 })
 
+watch(selectedObjects, () => {
+  if (selectedObjects.value.length > 0) {
+    isMassSelectActions.value = true
+  } else {
+    isMassSelectActions.value = false
+  }
+})
+
 function closeDeleteDialog() {
   isDeleteDialogLoading.value = false
   isDeleteDialog.value = false
@@ -89,9 +100,13 @@ const getStatusClass = (status: string) => {
 async function onConfirmDelete() {
   isDeleteDialogLoading.value = true
   try {
-    await objStore.destroy(activeRowId.value)
+    if (activeRowObj.value) {
+      await objStore.destroy(activeRowObj.value.id)
+      nikkToast.success('features.vendors.products.delete.successMessage')
+    } else {
+      nikkToast.error('features.vendors.products.delete.selectDataTableRowError')
+    }
     isDeleteDialog.value = false
-    nikkToast.success('features.vendors.products.delete.successMessage')
   } catch (e) {
     nikkToast.httpError(e as AxiosError)
   } finally {
@@ -99,8 +114,28 @@ async function onConfirmDelete() {
   }
 }
 
-const toggle = (event: Event, id: string) => {
-  activeRowId.value = id
+async function onConfirmMassDelete() {
+  isDeleteDialogLoading.value = true
+  try {
+    if (selectedObjects.value.length > 0) {
+      const selectedObjectsIds = selectedObjects.value.map((obj: Obj) => {
+        return obj.id
+      })
+      await objStore.massDestroy(selectedObjectsIds)
+      selectedObjects.value = []
+      nikkToast.success('features.vendors.products.massDelete.successMessage')
+    }
+
+    isMassDeleteDialog.value = false
+  } catch (e) {
+    nikkToast.httpError(e as AxiosError)
+  } finally {
+    isDeleteDialogLoading.value = false
+  }
+}
+
+const toggle = (event: Event, obj: Obj) => {
+  activeRowObj.value = obj
   menu.value.toggle(event)
 }
 </script>
@@ -117,6 +152,19 @@ const toggle = (event: Event, id: string) => {
       <PrimeCard>
         <template #title>
           <div class="flex">
+            <div v-if="isMassSelectActions">
+              <PrimeButton
+                size="small"
+                severity="danger"
+                icon="pi pi-trash"
+                :label="$t('labels.deleteSelection')"
+                @click="
+                  () => {
+                    isMassDeleteDialog = true
+                  }
+                "
+              />
+            </div>
             <div class="ml-auto">
               <PrimeSplitButton
                 icon="pi pi-plus"
@@ -228,13 +276,13 @@ const toggle = (event: Event, id: string) => {
                     aria-controls="overlay_menu"
                     @click="
                       (event: Event) => {
-                        toggle(event, data.id)
+                        toggle(event, data)
                       }
                     "
                   />
                   <PrimeMenu id="overlay_menu" ref="menu" :model="rowActionsItems" :popup="true">
                     <template #item="{ item }">
-                      <router-link v-if="item.route" :to="`${item.route}/${activeRowId}`">
+                      <router-link v-if="item.route" :to="`${item.route}/${activeRowObj?.id}`">
                         <PrimeButton
                           class="w-full justify-start"
                           small
@@ -263,18 +311,41 @@ const toggle = (event: Event, id: string) => {
       </PrimeCard>
     </div>
 
+    <!-- DELETE PRODUCT DIALOG -->
     <NikkDeleteDialog
       v-model="isDeleteDialog"
       :loading="isDeleteDialogLoading"
+      class="w-full md:w-[24rem] lg:w-[28rem]"
       @close="closeDeleteDialog"
       @confirm="onConfirmDelete"
     >
       <template #title>
-        {{ $t('features.vendors.products.delete.title') }}
+        {{ $t('features.vendors.products.delete.title', { name: activeRowObj?.name }) }}
       </template>
 
       <template #message>
         {{ $t('features.vendors.products.delete.confirmDeleteMessage') }}
+      </template>
+    </NikkDeleteDialog>
+
+    <!-- MASS DELETE PRODUCT(S) DIALOG -->
+    <NikkDeleteDialog
+      v-model="isMassDeleteDialog"
+      :loading="isDeleteDialogLoading"
+      class="w-full md:w-[24rem] lg:w-[28rem]"
+      @close="
+        () => {
+          isMassDeleteDialog = false
+        }
+      "
+      @confirm="onConfirmMassDelete"
+    >
+      <template #title>
+        {{ $t('features.vendors.products.massDelete.title') }}
+      </template>
+
+      <template #message>
+        {{ $t('features.vendors.products.massDelete.confirmDeleteMessage') }}
       </template>
     </NikkDeleteDialog>
   </div>

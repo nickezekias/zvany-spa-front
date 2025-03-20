@@ -33,10 +33,15 @@ const destroy = async function (id: string) {
   return axios.delete(`${url}/${id}`)
 }
 
+const massDestroy = async function (ids: string[]) {
+  return axios.post(`${url}/mass-delete`, { ids })
+}
+
 export default {
   getAll,
   get,
   create,
   update,
   destroy,
+  massDestroy,
 }

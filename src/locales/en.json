@@ -63,12 +63,18 @@
         },
         "delete": {
           "confirmDeleteMessage": "Do you really want to delete this product, note this action is irreversible!?",
+          "selectDataTableRowError": "Couldn't find selected product. Please reload your page and try operation again. Contact admin if the problem persists.",
           "successMessage": "Product successfully deleted",
-          "title": "Delete Product"
+          "title": "Delete \"{name}\""
         },
         "index": {
           "subtitle": "Manage your products inventory",
           "title": "Products"
+        },
+        "massDelete": {
+          "confirmDeleteMessage": "Do you really want to delete these products, note this action is irreversible!?",
+          "successMessage": "Products successfully deleted",
+          "title": "Mass Delete Products"
         },
         "update": {
           "title": "Edit Product",
@@ -113,6 +119,7 @@
     "country": "Country",
     "dashboard": "Dashboard",
     "delete": "Delete",
+    "deleteSelection": "Delete Selection",
     "delivery": "Delivery",
     "description": "Description",
     "edit": "Edit",

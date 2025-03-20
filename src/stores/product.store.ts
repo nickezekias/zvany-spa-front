@@ -39,6 +39,11 @@ export const useProductStore = defineStore('productStore', () => {
     }
   }
 
+  async function massDestroy(ids: string[]) {
+    await objService.massDestroy(ids)
+    updateObjectsList({ deleteIds: ref(ids), objects })
+  }
+
   return {
     objects,
     getAll,
@@ -46,5 +51,6 @@ export const useProductStore = defineStore('productStore', () => {
     create,
     update,
     destroy,
+    massDestroy,
   }
 })

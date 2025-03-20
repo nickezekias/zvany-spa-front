@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 
 interface Payload {
   deleteId?: Ref<string>
+  deleteIds?: Ref<string[] | number[]>
   editData?: Ref<any | null>
   newData?: any | Array<any>
   objects: Ref<Array<any>>
@@ -36,6 +37,18 @@ export function useDataTableUtil() {
       for (let j = 0; j < payload.objects.value.length; j++) {
         if (payload.deleteId.value == payload.objects.value[j].id) {
           payload.objects.value.splice(j, 1)
+        }
+      }
+    }
+
+    // Remove multiple deleted items from list
+    if (payload.deleteIds?.value && payload.deleteIds?.value.length > 0) {
+      for (let k = 0; k < payload.deleteIds?.value.length; k++) {
+        const deleteIndex = payload.objects.value.findIndex((val) => {
+          if (payload.deleteIds) return val.id == payload.deleteIds.value[k]
+        })
+        if (deleteIndex > -1) {
+          payload.objects.value.splice(deleteIndex, 1)
         }
       }
     }
