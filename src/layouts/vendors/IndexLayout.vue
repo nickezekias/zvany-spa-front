@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import PrimeToast from 'primevue/toast'
+
+import BottomBar from '@/layouts/vendors/mobile/BottomBar.vue'
+import FooterComponent from '@/layouts/app/FooterComponent.vue'
 import TopBar from '@/layouts/vendors/TopBar.vue'
 </script>
 
@@ -13,6 +16,9 @@ import TopBar from '@/layouts/vendors/TopBar.vue'
         <router-view />
       </main>
     </div>
+
+    <FooterComponent class="mb-32 md:mb-0" />
+    <BottomBar class="md:hidden" />
 
     <!-- <div id="app" class="w-full">
       <div class="flex bg-surface-50 dark:bg-[#121212] w-screen overflow-y-auto">
