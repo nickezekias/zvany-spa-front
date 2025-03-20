@@ -1,5 +1,33 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useProductStore } from '@/stores/product.store'
+import { useToast } from 'primevue'
+
+import NikkToast from '@/app/utils/NikkToast'
+
+import type { AxiosError } from 'axios'
+
+import DefaultProductCard from '@/components/products/DefaultCard.vue'
 import HeroComponent from '@/app/features/home/presentation/HeroComponent.vue'
+
+const objStore = useProductStore()
+const { t } = useI18n()
+const toast = useToast()
+
+const nikkToast = new NikkToast(toast, t)
+const loading = ref(false)
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    await objStore.getAll()
+  } catch (error) {
+    nikkToast.httpError(error as AxiosError)
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
 <template>
@@ -35,15 +63,15 @@ import HeroComponent from '@/app/features/home/presentation/HeroComponent.vue'
       <div class="flex-grow">
         <PrimeDivider class="mt-0" />
         <h3 class="text-xl font-medium mb-4">Featured Phones</h3>
-        <div class="flex-grow flex gap-6">
-          <!-- <NuxtLink
+        <div class="grid grid-cols-4 gap-6">
+          <router-link
             v-for="obj in objStore.objects"
             :key="obj.id"
             class="w-full"
             :to="`/p?id=${obj.id}`"
           >
             <DefaultProductCard :obj="obj" />
-          </NuxtLink> -->
+          </router-link>
         </div>
         <PrimeDivider class="mb-0" />
       </div>
