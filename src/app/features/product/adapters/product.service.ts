@@ -26,7 +26,7 @@ const create = async function (payload: Obj) {
 }
 
 const update = async function (payload: Obj) {
-  return axios.post(`${url}/${payload.id}?_method=PUT`, payload)
+  return axios.post(`${url}/${payload.id}?_method=PUT`, payload.toFormData())
 }
 
 const destroy = async function (id: string) {
