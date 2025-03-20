@@ -42,7 +42,11 @@
     "errors": {
       "404NotFound": "Oops! We can't find the page you're looking for."
     },
-    "product": {
+    "products": {
+      "index": {
+        "signInForBestExperience": "Sign in for the best experience",
+        "welcomeVendor": "Welcome, {name}"
+      },
       "productDetail": {
         "availableForFreeShipping": "This product is available for free shipping"
       }
@@ -141,6 +145,7 @@
     "male": "Male",
     "massCreate": "Mass Create",
     "massCreateProducts": "Mass Create Products",
+    "moreToLove": "More to Love",
     "name": "Name",
     "newPassword": "New Password",
     "next": "Next",
