@@ -63,7 +63,7 @@ function previewFile(file: File): void {
       <div class="w-full flex justify-end gap-4">
         <PrimeButton
           @click="chooseCallback()"
-          icon="pi pi-plus"
+          :icon="!props.extImageSrc ? 'pi pi-plus' : 'pi pi-pencil'"
           :label="!props.extImageSrc ? $t('labels.chooseImage') : $t('labels.changeImage')"
         ></PrimeButton>
         <PrimeButton
