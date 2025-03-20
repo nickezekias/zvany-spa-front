@@ -15,7 +15,7 @@ import productTypes from '@/assets/data/productTypes.json'
 import type { AxiosError } from 'axios'
 
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
-import FileUploader from '@/components/forms/FileUploader.vue'
+import NikkAvatarUpload from '@/components/forms/NikkAvatarUpload.vue'
 import NikkInputNumber from '@/components/forms/NikkInputNumber.vue'
 import NikkInputText from '@/components/forms/NikkInputText.vue'
 import NikkSelect from '@/components/forms/NikkSelect.vue'
@@ -111,8 +111,9 @@ async function onFormSubmit(e: FormSubmitEvent) {
         >
           <div class="flex flex-col md:flex-row gap-4">
             <div class="w-full lg:w-4/12">
-              <FileUploader
-                :extImageSrc="`${obj.images}`"
+              <NikkAvatarUpload
+                class="h-96 border"
+                :url="!!obj.images ? `${obj.images}` : ``"
                 @file-selected="
                   (event: File) => {
                     obj.images = event
