@@ -144,12 +144,13 @@ const toggle = (event: Event, obj: Obj) => {
   <div>
     <div class="nikk-container">
       <AppPageTitle
+        class="px-4 md:px-0"
         title="features.vendors.products.index.title"
         subtitle="features.vendors.products.index.subtitle"
       >
       </AppPageTitle>
 
-      <PrimeCard>
+      <PrimeCard class="rounded-none md:rounded-xl">
         <template #title>
           <div class="flex">
             <div v-if="isMassSelectActions">
@@ -191,18 +192,31 @@ const toggle = (event: Event, obj: Obj) => {
             <PrimeColumn selection-mode="multiple" header-style="width: 3rem" />
 
             <!-- Image Column -->
-            <PrimeColumn field="image" header="Image" style="width: 40px">
+            <PrimeColumn field="images" :header="$t('labels.image')" style="width: 40px">
               <template #body="slotProps">
-                <img
-                  :src="slotProps.data.image"
-                  alt="Product Image"
-                  class="w-6 h-6 object-cover rounded-md"
+                <PrimeAvatar
+                  v-if="slotProps.data.images != ''"
+                  :image="slotProps.data.images"
+                  class=""
+                  shape="circle"
                 />
+
+                <svg
+                  v-else
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03ZM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 0 0 .372-.648V7.93ZM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 0 0 .372.648l8.628 5.033Z"
+                  />
+                </svg>
               </template>
             </PrimeColumn>
 
             <!-- Name Column -->
-            <PrimeColumn field="name" header="Name" class="max-w-[12rem]">
+            <PrimeColumn field="name" :header="$t('labels.name')" class="max-w-[12rem]">
               <template #body="slotProps">
                 <span class="block truncate" :title="slotProps.data.name">
                   {{ slotProps.data.name }}
@@ -211,20 +225,24 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- SKU Column -->
-            <PrimeColumn field="sku" header="SKU" class="min-w-[10rem]" />
+            <PrimeColumn field="sku" :header="$t('labels.sku')" class="min-w-[10rem]" />
 
             <!-- Category Column -->
-            <PrimeColumn field="categories" header="Category" />
+            <PrimeColumn field="categories" :header="$t('labels.categories')" />
 
             <!-- Brand Column -->
-            <PrimeColumn field="brand" header="Brand" />
+            <PrimeColumn field="brand" :header="$t('labels.brand')" />
 
             <!-- Type Column -->
-            <PrimeColumn field="type" header="Type" />
+            <PrimeColumn field="type" :header="$t('labels.type')" />
 
             <!-- Description Column -->
             <!-- Description Column -->
-            <PrimeColumn field="description" header="Description" class="max-w-[12rem]">
+            <PrimeColumn
+              field="description"
+              :header="$t('labels.description')"
+              class="max-w-[12rem]"
+            >
               <template #body="slotProps">
                 <span class="block truncate" :title="slotProps.data.description">
                   {{ slotProps.data.description }}
@@ -233,7 +251,7 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- Cost Column -->
-            <PrimeColumn field="cost" header="Cost">
+            <PrimeColumn field="cost" :header="$t('labels.cost')">
               <template #body="slotProps">
                 <span class="text-sm font-semibold text-gray-600">
                   ${{ slotProps.data.cost }}
@@ -243,7 +261,7 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- Price Column -->
-            <PrimeColumn field="price" header="Price">
+            <PrimeColumn field="price" :header="$t('labels.price')">
               <template #body="slotProps">
                 <span class="text-sm font-bold text-gray-800">
                   <!-- ${{ slotProps.data.price.toFixed(2) }} -->
@@ -253,7 +271,7 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- Status Column -->
-            <PrimeColumn field="status" header="Status" class="min-w-[8rem]">
+            <PrimeColumn field="status" :header="$t('labels.status')" class="min-w-[8rem]">
               <template #body="slotProps">
                 <span
                   :class="getStatusClass(slotProps.data.status)"
