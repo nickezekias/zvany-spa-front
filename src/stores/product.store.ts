@@ -19,17 +19,17 @@ export const useProductStore = defineStore('productStore', () => {
 
   async function get(id: string) {
     const response = await objService.get(id)
-    return response.data.data
+    return Obj.fromObject(response.data.data)
   }
 
   async function create(payload: Obj) {
     const response = await objService.create(payload)
-    return response.data.data
+    return Obj.fromObject(response.data.data)
   }
 
   async function update(payload: Obj) {
     const response = await objService.update(payload)
-    return response.data.data
+    return Obj.fromObject(response.data.data)
   }
 
   async function destroy(id: string) {
