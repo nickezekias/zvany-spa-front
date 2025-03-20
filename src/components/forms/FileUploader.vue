@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import type { Ref } from 'vue';
+import type { Ref } from 'vue'
 import type { FileUploadSelectEvent } from 'primevue/fileupload'
 import PrimeFileUpload from 'primevue/fileupload'
 
@@ -15,7 +15,7 @@ const imgSrc: Ref<string | ArrayBuffer | null> = ref('')
 const isSelectedFile = ref(false)
 const props = withDefaults(defineProps<Props>(), {
   accept: 'image/*',
-  multiple: true
+  multiple: true,
 })
 const onSelectedFiles = (event: FileUploadSelectEvent) => {
   if (event.files.length > 0) {
@@ -26,7 +26,7 @@ const onSelectedFiles = (event: FileUploadSelectEvent) => {
 }
 
 onMounted(() => {
-  if(props.extImageSrc && props.extImageSrc != "") {
+  if (props.extImageSrc && props.extImageSrc != '') {
     imgSrc.value = props.extImageSrc
     isSelectedFile.value = true
   }
@@ -34,20 +34,20 @@ onMounted(() => {
 
 function clearImage() {
   imgSrc.value = ''
-  isSelectedFile.value = false;
+  isSelectedFile.value = false
   emit('fileSelected', '')
 }
 
 function previewFile(file: File): void {
-  const reader = new FileReader();
+  const reader = new FileReader()
   reader.onloadend = () => {
-    imgSrc.value = reader.result;
+    imgSrc.value = reader.result
   }
 
   if (file) {
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   } else {
-    imgSrc.value = ""
+    imgSrc.value = ''
   }
 }
 </script>
@@ -61,14 +61,30 @@ function previewFile(file: File): void {
   >
     <template #header="{ chooseCallback, clearCallback, files }">
       <div class="w-full flex justify-end gap-4">
-        <PrimeButton @click="chooseCallback()" icon="pi pi-plus" :label="$t('labels.chooseImage')"></PrimeButton>
-        <PrimeButton @click="() => { clearImage(); clearCallback() }" icon="pi pi-times" rounded outlined severity="danger" :disabled="!files || files.length === 0"></PrimeButton>
+        <PrimeButton
+          @click="chooseCallback()"
+          icon="pi pi-plus"
+          :label="!props.extImageSrc ? $t('labels.chooseImage') : $t('labels.changeImage')"
+        ></PrimeButton>
+        <PrimeButton
+          @click="
+            () => {
+              clearImage()
+              clearCallback()
+            }
+          "
+          icon="pi pi-times"
+          rounded
+          outlined
+          severity="danger"
+          :disabled="!files || files.length === 0"
+        ></PrimeButton>
       </div>
     </template>
     <template #content>
       <div class="h-72">
         <img v-if="isSelectedFile" id="upload-img" :style="`background-image: url('${imgSrc}');`" />
-  
+
         <div v-else class="empty-img">
           <div class="flex">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-64 mx-auto" viewBox="0 0 24 24">
