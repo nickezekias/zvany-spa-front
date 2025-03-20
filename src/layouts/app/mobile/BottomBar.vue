@@ -39,7 +39,7 @@ const items = [
 
 <template>
   <PrimeToolbar
-    class="app-bottom-bar shadow-none border-0 border-t rounded-none p-0 pb-4.0 gap-0 bg-white dark:bg-surface-950"
+    class="app-bottom-bar shadow-none border-0 border-t rounded-none p-0 pb-4 gap-0 bg-white dark:bg-surface-950"
   >
     <template #center>
       <div class="flex justify-between w-screen h-full px-3">
