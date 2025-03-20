@@ -84,7 +84,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     >
     </AppPageTitle>
 
-    <PrimeCard>
+    <PrimeCard class="vendor-card">
       <template #content>
         <PrimeForm
           :initialValues="obj"
@@ -94,7 +94,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
           :validateOnBlur="true"
           :validateOnSubmit="true"
         >
-          <div class="flex gap-4">
+          <div class="flex flex-col md:flex-row gap-4">
             <div class="w-full lg:w-4/12">
               <FileUploader
                 @file-selected="

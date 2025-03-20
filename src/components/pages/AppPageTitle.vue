@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <PrimeToolbar class="bg-inherit mb-4 border-0 p-0">
+  <PrimeToolbar class="bg-inherit px-4 md:px-0 mb-4 border-0 p-0">
     <template #start>
       <div class="flex flex-col flex-grow justify-center">
         <h3 class="font-medium text-xl md:text-2xl">{{ $t(`${props.title}`) }}</h3>
