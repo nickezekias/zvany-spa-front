@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useAccountStore } from '@/stores/account.store'
 import { useProductStore } from '@/stores/product.store'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue'
@@ -15,6 +16,7 @@ import PrimeDataTable from 'primevue/datatable'
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
 import NikkDeleteDialog from '@/components/crud/NikkDeleteDialog.vue'
 
+const accountStore = useAccountStore()
 const objStore = useProductStore()
 const router = useRouter()
 const { t } = useI18n()
@@ -63,7 +65,12 @@ const selectedObjects = ref([])
 onMounted(async () => {
   loading.value = true
   try {
-    await objStore.getAll()
+    const filter = {
+      itemsPerPage: -1,
+      sortBy: ['products.name'],
+      businessId: accountStore.user?.business?.id,
+    }
+    await objStore.getAll(filter)
   } catch (error) {
     nikkToast.httpError(error as AxiosError)
   } finally {
