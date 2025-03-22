@@ -35,7 +35,7 @@ onMounted(async () => {
     <HeroComponent />
 
     <div class="flex gap-8 product-section">
-      <div class="w-[14rem]">
+      <div class="min-w-[14rem] max-w-[14rem]">
         <div class="zvany-vintage-card p-4 py-6 border">
           <div class="absolute top-0 left-0 h-100 w-100 bg-black opacity-45" />
 
