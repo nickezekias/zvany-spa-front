@@ -60,6 +60,11 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: '/p/:id',
+        name: 'products.show',
+        component: () => import('@/app/features/product/presentation/ShowView.vue'),
+      },
     ],
   },
 

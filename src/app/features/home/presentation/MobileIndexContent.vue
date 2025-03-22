@@ -89,7 +89,7 @@ onMounted(async () => {
           v-for="obj in objStore.objects"
           :key="obj.id"
           class="w-full"
-          :to="`/p?id=${obj.id}`"
+          :to="`/p/${obj.id}`"
         >
           <DefaultProductCard :obj="obj" />
         </router-link>
