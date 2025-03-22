@@ -40,7 +40,7 @@ export const useAccountStore = defineStore('accountStore', () => {
   }
 
   const isAuthenticated = computed(() => {
-    return !isGuest.value && user.value != null
+    return user.value != null
   })
 
   const isGuest = computed((): boolean => {
