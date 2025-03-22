@@ -33,7 +33,7 @@ const loading = ref(false)
 const obj = ref(Obj.initEmpty())
 const resolver = zodResolver(
   z.object({
-    barcode: z.string().min(1, { message: 'errors.validation.requiredField' }),
+    // barcode: z.string().min(1, { message: 'errors.validation.requiredField' }),
     brand: z.string().min(1, { message: 'errors.validation.requiredField' }),
     categories: z.string().min(1, { message: 'errors.validation.requiredField' }),
     cost: z.union([
@@ -61,6 +61,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
     loading.value = true
 
     try {
+      obj.value.barcode = obj.value.sku
       obj.value.businessId = `${accountStore.user?.business?.id}`
       await objStore.create(obj.value)
       nikkToast.success('features.vendors.products.create.successMessage')
@@ -127,7 +128,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
                   type="text"
                 />
 
-                <NikkInputText
+                <!-- <NikkInputText
                   v-model="obj.barcode"
                   id="barcode"
                   :error-help-label="$form.barcode?.error?.message"
@@ -135,7 +136,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
                   label="labels.barcode"
                   name="barcode"
                   type="text"
-                />
+                /> -->
 
                 <NikkSelect
                   v-model="obj.type"
