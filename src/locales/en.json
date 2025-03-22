@@ -95,7 +95,7 @@
     "backToLogin": "Back to Login",
     "doNotHaveAccount": "Don't have an account?",
     "forgotPassword": "Forgot Password?",
-    "forgotPasswordDesc": "Enter your email address and we'll send you a link to reset your password"
+    "forgotPasswordDesc": "Enter your email address and if an account with this email is found, we'll send you a link to reset your password"
   },
 
   "labels": {
@@ -194,7 +194,7 @@
   "messages": {
     "credentialsNotFound": "These credentials do not match our records",
     "noDataFound": "No data found",
-    "passwordResetLinkSent": "Password reset link has been sent to your email",
+    "passwordResetLinkSent": "If an account with this email is found, you will receive a password reset link",
     "passwordResetSuccess": "Password reset successful, you will be redirected to login page",
     "productCreated": "Product added successfully | Products added successfully",
     "productUpdated": "Product updated successfully"
