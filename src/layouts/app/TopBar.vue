@@ -31,10 +31,10 @@ const search = ref('')
 
       <template #end>
         <div class="flex me-12 gap-2 items-center">
-          <span class="pi pi-phone" />
+          <span class="pi pi-envelope" />
           <div class="flex flex-col flex-grow">
-            <span class="text-xs text-gray-500">Call us</span>
-            <span class="font-bold">+1 234 567 890</span>
+            <span class="text-xs text-gray-500">{{ $t('labels.writeUs') }}</span>
+            <span class="font-semibold">support@zvany.com</span>
           </div>
         </div>
         <div class="flex align-items-center items-center gap-1">
