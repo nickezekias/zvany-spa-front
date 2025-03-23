@@ -1,15 +1,214 @@
 {
-  "features": {
-    "vendors": {
-      "products": {
-        "index": {
-          "title": "Produits",
-          "subtitle": "Gérez votre inventaire de produits"
-        }
+  "backend": {
+    "errors": {
+      "auth": {
+        "getAuthUserFailed": "Récupérer l'utilisateur",
+        "getAuthUserFailedMessage": "Impossible de récupérer l'utilisateur après la connexion, veuillez réessayer plus tard. Contactez l'administrateur si le problème persiste"
+      },
+      "http404": "Page non trouvée. Contactez l'administrateur si le problème persiste",
+      "http500": "Une erreur est survenue de notre côté. Rechargez la page, et si le problème persiste, contactez l'administrateur"
+    }
+  },
+  "components": {
+    "locale": {
+      "languageSwitcher": {
+        "english": "Anglais",
+        "french": "Français"
       }
     }
   },
+  "constants": {
+    "statuses": {
+      "available": "Disponible",
+      "open": "Ouvert"
+    }
+  },
+  "errors": {
+    "validation": {
+      "email": "L'email doit être valide",
+      "form": "Veuillez remplir correctement le formulaire",
+      "invalidForm": "Formulaire invalide, veuillez remplir correctement le formulaire",
+      "mustContain": {
+        "lowercase": "Doit contenir au moins une lettre minuscule",
+        "number": "Doit contenir au moins un chiffre",
+        "specialCharacter": "Doit contenir au moins un caractère spécial",
+        "validSymbol": "Doit contenir au moins l'un de ces symboles : !{'@'}{'#'}$%^&*()_+{'{}'}[]:;\"'<>,.?/{'|'}{'`'}{'~'}{'-'}\\",
+        "uppercase": "Doit contenir au moins une lettre majuscule"
+      },
+      "passwords": {
+        "minCount": "Votre mot de passe doit comporter au moins 8 caractères",
+        "notSame": "Les mots de passe doivent être identiques"
+      },
+      "requiredField": "Ce champ est requis"
+    }
+  },
+
+  "features": {
+    "account": {
+      "registerSuccessMessage": "Compte créé avec succès"
+    },
+    "errors": {
+      "404NotFound": "Oups ! Nous ne pouvons pas trouver la page que vous cherchez."
+    },
+    "products": {
+      "index": {
+        "signInForBestExperience": "Connectez-vous pour la meilleure expérience",
+        "welcomeVendor": "Bienvenue, {name}"
+      },
+      "productDetail": {
+        "availableForFreeShipping": "Ce produit est disponible pour une expédition gratuite"
+      }
+    },
+    "profile": {
+      "userProfile": "Profil de l'utilisateur",
+      "userProfileDesc": "Un endroit centralisé pour la personnalisation personnelle"
+    },
+    "vendors": {
+      "dashboardDesc": "Centre principal pour gérer vos produits",
+      "productInventoryDesc": "Gérer l'inventaire de vos produits",
+      "products": {
+        "create": {
+          "descriptionHint": "Rédigez une brève description pour votre produit",
+          "title": "Ajouter un produit",
+          "subtitle": "Ajoutez un nouveau produit au système",
+          "successMessage": "Produit ajouté avec succès | Produits ajoutés avec succès"
+        },
+        "delete": {
+          "confirmDeleteMessage": "Voulez-vous vraiment supprimer ce produit, notez que cette action est irréversible !?",
+          "selectDataTableRowError": "Impossible de trouver le produit sélectionné. Veuillez recharger votre page et réessayer l'opération. Contactez l'administrateur si le problème persiste.",
+          "successMessage": "Produit supprimé avec succès",
+          "title": "Supprimer \"{name}\""
+        },
+        "index": {
+          "subtitle": "Gérez l'inventaire de vos produits",
+          "title": "Produits"
+        },
+        "massDelete": {
+          "confirmDeleteMessage": "Voulez-vous vraiment supprimer ces produits, notez que cette action est irréversible !?",
+          "successMessage": "Produits supprimés avec succès",
+          "title": "Suppression en masse des produits"
+        },
+        "update": {
+          "title": "Modifier le produit",
+          "subtitle": "Modifiez le produit pour mettre à jour ses informations",
+          "successMessage": "Produit mis à jour avec succès | Produits mis à jour avec succès"
+        }
+      },
+      "productUpdateDesc": "Modifier les détails du produit"
+    }
+  },
+
+  "hints": {
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "backToLogin": "Retour à la connexion",
+    "doNotHaveAccount": "Vous n'avez pas de compte ?",
+    "forgotPassword": "Mot de passe oublié ?",
+    "forgotPasswordDesc": "Entrez votre adresse e-mail et si un compte avec cet e-mail est trouvé, nous vous enverrons un lien pour réinitialiser votre mot de passe"
+  },
+
   "labels": {
-    "product": "Produit | Produits"
+    "account": "Compte",
+    "action": "Action | Actions",
+    "add": "Ajouter",
+    "address": "Adresse",
+    "addToCart": "Ajouter au panier",
+    "agreeTermsConditions": "J'accepte les termes et conditions",
+    "apartment": "Appartement",
+    "availability": "Disponibilité",
+    "barcode": "Code-barres",
+    "brand": "Marque",
+    "business": "Entreprise",
+    "buyNow": "Acheter maintenant",
+    "cancel": "Annuler",
+    "cart": "Panier",
+    "catalog": "Catalogue",
+    "categories": "Catégories",
+    "changeImage": "Changer l'image",
+    "chooseImage": "Choisir l'image",
+    "city": "Ville",
+    "confirmPassword": "Confirmer le mot de passe",
+    "contact": "Contact",
+    "cost": "Coût",
+    "country": "Pays",
+    "dashboard": "Tableau de bord",
+    "delete": "Supprimer",
+    "deleteSelection": "Supprimer la sélection",
+    "delivery": "Livraison",
+    "description": "Description",
+    "edit": "Modifier",
+    "email": "Email",
+    "emailNewsAndOffers": "Envoyez-moi des nouvelles et des offres par e-mail",
+    "emailResetLink": "Envoyer le lien de réinitialisation de mot de passe",
+    "female": "Femme",
+    "firstName": "Prénom",
+    "forgotPassword": "Mot de passe oublié",
+    "home": "Accueil",
+    "image": "Image | Images",
+    "invalidForm": "Formulaire invalide",
+    "inventory": "Inventaire",
+    "inventoryAdjustment": "Ajustement de l'inventaire | Ajustements de l'inventaire",
+    "language": "Langue | Langues",
+    "lastName": "Nom de famille",
+    "learnMore": "En savoir plus",
+    "license": "Licence",
+    "list": "Liste",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "male": "Homme",
+    "massCreate": "Création en masse",
+    "massCreateProducts": "Création en masse de produits",
+    "more": "Plus",
+    "moreToLove": "Plus à aimer",
+    "name": "Nom",
+    "newPassword": "Nouveau mot de passe",
+    "next": "Suivant",
+    "operationFailure": "Échec de l'opération",
+    "operationSuccess": "Opération réussie",
+    "password": "Mot de passe",
+    "passwordConfirm": "Confirmer le mot de passe",
+    "payment": "Paiement | Paiements",
+    "payWithPaypal": "Payer avec PayPal",
+    "phone": "Téléphone",
+    "previous": "Précédent",
+    "price": "Prix",
+    "product": "Produit | Produits",
+    "productImage": "Image du produit",
+    "productType": "Type de produit",
+    "productCreate": "Nouveau produit",
+    "productUpdate": "Mettre à jour le produit",
+    "profileDetails": "Détails du profil",
+    "quantity": "Quantité",
+    "register": "S'inscrire",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "sales": "Ventes",
+    "save": "Enregistrer",
+    "selectGender": "Sélectionner le genre",
+    "selectProductType": "Sélectionner le type de produit",
+    "setting": "Paramètre | Paramètres",
+    "share": "Partager",
+    "shop": "Boutique",
+    "shopNow": "Acheter maintenant",
+    "sku": "SKU",
+    "status": "Statut",
+    "tag": "Étiquette | Étiquettes",
+    "type": "Type | Types",
+    "update": "Mettre à jour",
+    "user": "Utilisateur",
+    "vendor": "Vendeur",
+    "vendorDashboard": "Tableau de bord du vendeur",
+    "website": "Site web",
+    "writeUs": "Écrivez-nous"
+  },
+
+  "messages": {
+    "credentialsNotFound": "Ces informations d'identification ne correspondent pas à nos dossiers",
+    "noDataFound": "Aucune donnée trouvée",
+    "passwordResetLinkSent": "Si un compte avec cet e-mail est trouvé, vous recevrez un lien de réinitialisation de mot de passe",
+    "passwordResetSuccess": "Réinitialisation du mot de passe réussie, vous serez redirigé vers la page de connexion",
+    "productCreated": "Produit ajouté avec succès | Produits ajoutés avec succès",
+    "productUpdated": "Produit mis à jour avec succès"
+  },
+  "placeholders": {
+    "fileUploader": "Cliquez pour choisir, ou glissez et déposez un fichier"
   }
 }
