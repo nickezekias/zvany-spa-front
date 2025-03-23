@@ -2,18 +2,8 @@
 import { ref } from 'vue'
 import { useAppStore } from '@/stores/app.store'
 import { useI18n } from 'vue-i18n'
-import PrimeVue from 'primevue/config'
-import { en } from 'primelocale/en.json' // Import locale for PrimeVue (English)
-import { fr } from 'primelocale/fr.json' // Import locale for PrimeVue (French)
 
 const appStore = useAppStore()
-const { locale } = useI18n()
-// Define the PrimeVue locales
-const primeLocales = {
-  en: en,
-  fr: fr,
-  // Add more locales as needed
-}
 const { t } = useI18n()
 
 const menu = ref()
@@ -35,17 +25,6 @@ const items = ref([
 
 const toggle = (event: Event) => {
   menu.value.toggle(event)
-}
-
-function changeLocale(language: string) {
-  // Change locale for Vue-i18n
-  locale.value = language
-
-  // Change locale for PrimeVue
-  //@ts-expect-error locale type differences
-  PrimeVue.locale = primeLocales[language]
-
-  appStore.setLocale(language)
 }
 </script>
 
@@ -74,7 +53,7 @@ function changeLocale(language: string) {
         />
         <PrimeButton
           v-else
-          @click="changeLocale(item.value)"
+          @click="appStore.changeLocale(item.value)"
           class="justify-start"
           severity="secondary"
           text

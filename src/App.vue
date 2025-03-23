@@ -1,10 +1,21 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useAppStore } from '@/stores/app.store'
 import { RouterView } from 'vue-router'
 import PrimeToast from 'primevue/toast'
 import PrimeProgressBar from 'primevue/progressbar'
 
 const appStore = useAppStore()
+
+onMounted(() => {
+  const persistedLocale = appStore.getPersistedLocale()
+  console.log('persiste locale', persistedLocale)
+  if (persistedLocale) {
+    appStore.changeLocale(persistedLocale)
+  } else {
+    appStore.setLocaleFromBrowser()
+  }
+})
 </script>
 
 <template>
