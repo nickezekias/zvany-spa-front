@@ -9,6 +9,14 @@
       "http500": "An error occurred on our end. Reload the page, and if the problem persists, contact admin"
     }
   },
+  "components": {
+    "locale": {
+      "languageSwitcher": {
+        "english": "English",
+        "french": "French"
+      }
+    }
+  },
   "constants": {
     "statuses": {
       "available": "Available",
@@ -139,6 +147,7 @@
     "invalidForm": "Invalid Form",
     "inventory": "Inventory",
     "inventoryAdjustment": "Inventory Adjustment | Inventory Adjustments",
+    "language": "Language | Languages",
     "lastName": "Last Name",
     "learnMore": "Learn More",
     "license": "License",

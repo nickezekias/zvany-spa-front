@@ -1,1 +1,15 @@
-{}
+{
+  "features": {
+    "vendors": {
+      "products": {
+        "index": {
+          "title": "Produits",
+          "subtitle": "Gérez votre inventaire de produits"
+        }
+      }
+    }
+  },
+  "labels": {
+    "product": "Produit | Produits"
+  }
+}

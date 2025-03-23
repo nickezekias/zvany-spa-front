@@ -6,9 +6,14 @@ export const useAppStore = defineStore('appStore', () => {
   const appLoading = ref(false)
   const appName = 'Zvany'
   const homeRoute = { name: 'home' }
+  const locale = ref(import.meta.env.VUE_I18N_LOCALE ?? 'en')
 
   const setAppLoading = (value: boolean) => {
     appLoading.value = value
+  }
+
+  const setLocale = (value: string) => {
+    locale.value = value
   }
 
   return {
@@ -16,7 +21,9 @@ export const useAppStore = defineStore('appStore', () => {
     appLoading,
     appName,
     homeRoute,
+    locale,
 
     setAppLoading,
+    setLocale,
   }
 })

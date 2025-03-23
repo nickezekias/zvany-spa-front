@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useAccountStore } from '@/stores/account.store'
 import { useAppStore } from '@/stores/app.store'
+
+import LanguageSwitcher from '@/components/locale/LanguageSwitcher.vue'
 import UserAvatarMenu from '@/components/user/UserAvatarMenu.vue'
 
 const accountStore = useAccountStore()
@@ -28,6 +30,8 @@ const appStore = useAppStore()
 
     <template #end>
       <div class="flex align-items-center items-center gap-2">
+        <LanguageSwitcher />
+
         <UserAvatarMenu />
 
         <span class="font-medium text-sm md:text-lg">{{ accountStore.user?.business?.name }}</span>
