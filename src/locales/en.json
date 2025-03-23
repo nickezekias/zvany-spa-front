@@ -64,6 +64,21 @@
       "userProfileDesc": "A centralized place for personal customization"
     },
     "vendors": {
+      "dashboard": {
+        "allTimeSales": "All-Time Sales:",
+        "customerDemographics": "Customer Demographics",
+        "earningsOverTime": "Earnings Over Time",
+        "newCustomersThisMonth": "New Customers This Month",
+        "recentOrders": "Recent Orders",
+        "salesByCategory": "Sales by Category",
+        "salesHighlight": "Sales Highlight",
+        "subtitle": "Central Hub to Manage Your Products",
+        "title": "Dashboard",
+        "totalEarningsThisMonth": "Total Earnings This Month",
+        "totalOrdersThisMonth": "Total Orders This Month",
+        "totalProducts": "Total Products",
+        "trafficSources": "Traffic Sources"
+      },
       "dashboardDesc": "Central Hub to Manage Your Products",
       "productInventoryDesc": "Manage your products inventory",
       "products": {
@@ -164,6 +179,7 @@
     "next": "Next",
     "operationFailure": "Operation Failure",
     "operationSuccess": "Operation Success",
+    "others": "Others",
     "password": "Password",
     "passwordConfirm": "Confirm Password",
     "payment": "Payment | Payments",

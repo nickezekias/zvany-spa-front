@@ -79,7 +79,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'vendors.index',
-        component: () => import('@/app/features/vendors/product/presentation/IndexView.vue'),
+        component: () => import('@/app/features/vendors/dashboard/presentation/IndexView.vue'),
       },
       {
         path: 'products/',
