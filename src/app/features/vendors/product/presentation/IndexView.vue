@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import { FilterMatchMode } from '@primevue/core/api'
+
 import { useI18n } from 'vue-i18n'
 import { useAccountStore } from '@/stores/account.store'
 import { useProductStore } from '@/stores/product.store'
@@ -11,6 +13,9 @@ import Obj from '@/app/models/product.model'
 import type { AxiosError } from 'axios'
 import type { MenuItem } from '@/app/@types/common.interface'
 
+import PrimeIconField from 'primevue/iconfield'
+import PrimeInputIcon from 'primevue/inputicon'
+import PrimeInputText from 'primevue/inputtext'
 import PrimeColumn from 'primevue/column'
 import PrimeDataTable from 'primevue/datatable'
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
@@ -34,6 +39,13 @@ const actionItems = ref<MenuItem[]>([
     },
   },
 ])
+const filters = ref({
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  sku: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+  categories: { value: null, matchMode: FilterMatchMode.IN },
+  description: { value: null, matchMode: FilterMatchMode.IN },
+})
 const isDeleteDialog = ref(false)
 const isDeleteDialogLoading = ref(false)
 const isMassCreateDialog = ref(false)
@@ -155,6 +167,18 @@ const toggle = (event: Event, obj: Obj) => {
         title="features.vendors.products.index.title"
         subtitle="features.vendors.products.index.subtitle"
       >
+        <template #end>
+          <PrimeIconField iconPosition="left">
+            <PrimeInputIcon>
+              <i class="pi pi-search" />
+            </PrimeInputIcon>
+            <PrimeInputText
+              v-model="filters['global'].value"
+              :placeholder="$t('labels.search')"
+              class="py-3"
+            />
+          </PrimeIconField>
+        </template>
       </AppPageTitle>
 
       <PrimeCard class="rounded-none md:rounded-xl">
@@ -188,11 +212,16 @@ const toggle = (event: Event, obj: Obj) => {
           <PrimeSkeleton v-if="loading" width="100%" height="24rem" />
           <PrimeDataTable
             v-else
+            v-model:filters="filters"
             v-model:selection="selectedObjects"
             :value="objStore.objects"
             data-key="id"
             class="shadow-none rounded-lg text-sm border-none"
+            :globalFilterFields="['name', 'sku', 'categories', 'brand']"
+            paginator
+            :rows="10"
             scrollable
+            sortMode="multiple"
             table-style="min-width: 50rem"
             scroll-height="flex"
           >
@@ -223,7 +252,7 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- Name Column -->
-            <PrimeColumn field="name" :header="$t('labels.name')" class="max-w-[12rem]">
+            <PrimeColumn sortable field="name" :header="$t('labels.name')" class="max-w-[12rem]">
               <template #body="slotProps">
                 <span class="block truncate" :title="slotProps.data.name">
                   {{ slotProps.data.name }}
@@ -232,13 +261,13 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- SKU Column -->
-            <PrimeColumn field="sku" :header="$t('labels.sku')" class="min-w-[10rem]" />
+            <PrimeColumn sortable field="sku" :header="$t('labels.sku')" class="min-w-[10rem]" />
 
             <!-- Category Column -->
-            <PrimeColumn field="categories" :header="$t('labels.categories')" />
+            <PrimeColumn sortable field="categories" :header="$t('labels.categories')" />
 
             <!-- Brand Column -->
-            <PrimeColumn field="brand" :header="$t('labels.brand')" />
+            <PrimeColumn sortable field="brand" :header="$t('labels.brand')" />
 
             <!-- Type Column -->
             <PrimeColumn field="type" :header="$t('labels.type')" />
