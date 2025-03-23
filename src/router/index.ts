@@ -101,6 +101,11 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: 'sales',
+        name: 'vendors.sales.index',
+        component: () => import('@/app/features/vendors/sales/presentation/IndexView.vue'),
+      },
     ],
   },
 ]

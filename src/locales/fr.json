@@ -3,10 +3,10 @@
     "errors": {
       "auth": {
         "getAuthUserFailed": "Récupérer l'utilisateur",
-        "getAuthUserFailedMessage": "Impossible de récupérer l'utilisateur après la connexion, veuillez réessayer plus tard. Contactez l'administrateur si le problème persiste"
+        "getAuthUserFailedMessage": "Impossible de récupérer l'utilisateur après la connexion, veuillez réessayer plus tard. Contactez l'administrateur si le problème persiste."
       },
-      "http404": "Page non trouvée. Contactez l'administrateur si le problème persiste",
-      "http500": "Une erreur est survenue de notre côté. Rechargez la page, et si le problème persiste, contactez l'administrateur"
+      "http404": "Page non trouvée. Contactez l'administrateur si le problème persiste.",
+      "http500": "Une erreur s'est produite de notre côté. Rechargez la page, et si le problème persiste, contactez l'administrateur."
     }
   },
   "components": {
@@ -26,7 +26,7 @@
   "errors": {
     "validation": {
       "email": "L'email doit être valide",
-      "form": "Veuillez remplir correctement le formulaire",
+      "form": "Veuillez remplir le formulaire correctement",
       "invalidForm": "Formulaire invalide, veuillez remplir correctement le formulaire",
       "mustContain": {
         "lowercase": "Doit contenir au moins une lettre minuscule",
@@ -36,36 +36,50 @@
         "uppercase": "Doit contenir au moins une lettre majuscule"
       },
       "passwords": {
-        "minCount": "Votre mot de passe doit comporter au moins 8 caractères",
+        "minCount": "Votre mot de passe doit contenir au moins 8 caractères",
         "notSame": "Les mots de passe doivent être identiques"
       },
       "requiredField": "Ce champ est requis"
     }
   },
-
   "features": {
     "account": {
       "registerSuccessMessage": "Compte créé avec succès"
     },
     "errors": {
-      "404NotFound": "Oups ! Nous ne pouvons pas trouver la page que vous cherchez."
+      "404NotFound": "Oups ! Nous ne trouvons pas la page que vous recherchez."
     },
     "products": {
       "index": {
-        "signInForBestExperience": "Connectez-vous pour la meilleure expérience",
+        "signInForBestExperience": "Connectez-vous pour une meilleure expérience",
         "welcomeVendor": "Bienvenue, {name}"
       },
       "productDetail": {
-        "availableForFreeShipping": "Ce produit est disponible pour une expédition gratuite"
+        "availableForFreeShipping": "Ce produit est disponible en livraison gratuite"
       }
     },
     "profile": {
-      "userProfile": "Profil de l'utilisateur",
-      "userProfileDesc": "Un endroit centralisé pour la personnalisation personnelle"
+      "userProfile": "Profil utilisateur",
+      "userProfileDesc": "Un espace centralisé pour la personnalisation personnelle"
     },
     "vendors": {
-      "dashboardDesc": "Centre principal pour gérer vos produits",
-      "productInventoryDesc": "Gérer l'inventaire de vos produits",
+      "dashboard": {
+        "allTimeSales": "Ventes totales :",
+        "customerDemographics": "Démographie des clients",
+        "earningsOverTime": "Revenus au fil du temps",
+        "newCustomersThisMonth": "Nouveaux clients ce mois-ci",
+        "recentOrders": "Commandes récentes",
+        "salesByCategory": "Ventes par catégorie",
+        "salesHighlight": "Mise en avant des ventes",
+        "subtitle": "Centre central pour gérer vos produits",
+        "title": "Tableau de bord",
+        "totalEarningsThisMonth": "Revenus totaux ce mois-ci",
+        "totalOrdersThisMonth": "Commandes totales ce mois-ci",
+        "totalProducts": "Produits totaux",
+        "trafficSources": "Sources de trafic"
+      },
+      "dashboardDesc": "Centre central pour gérer vos produits",
+      "productInventoryDesc": "Gérez l'inventaire de vos produits",
       "products": {
         "create": {
           "descriptionHint": "Rédigez une brève description pour votre produit",
@@ -74,8 +88,8 @@
           "successMessage": "Produit ajouté avec succès | Produits ajoutés avec succès"
         },
         "delete": {
-          "confirmDeleteMessage": "Voulez-vous vraiment supprimer ce produit, notez que cette action est irréversible !?",
-          "selectDataTableRowError": "Impossible de trouver le produit sélectionné. Veuillez recharger votre page et réessayer l'opération. Contactez l'administrateur si le problème persiste.",
+          "confirmDeleteMessage": "Voulez-vous vraiment supprimer ce produit ? Notez que cette action est irréversible !",
+          "selectDataTableRowError": "Produit sélectionné introuvable. Veuillez recharger la page et réessayer l'opération. Contactez l'administrateur si le problème persiste.",
           "successMessage": "Produit supprimé avec succès",
           "title": "Supprimer \"{name}\""
         },
@@ -84,9 +98,9 @@
           "title": "Produits"
         },
         "massDelete": {
-          "confirmDeleteMessage": "Voulez-vous vraiment supprimer ces produits, notez que cette action est irréversible !?",
+          "confirmDeleteMessage": "Voulez-vous vraiment supprimer ces produits ? Notez que cette action est irréversible !",
           "successMessage": "Produits supprimés avec succès",
-          "title": "Suppression en masse des produits"
+          "title": "Suppression massive des produits"
         },
         "update": {
           "title": "Modifier le produit",
@@ -97,15 +111,13 @@
       "productUpdateDesc": "Modifier les détails du produit"
     }
   },
-
   "hints": {
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
     "backToLogin": "Retour à la connexion",
     "doNotHaveAccount": "Vous n'avez pas de compte ?",
     "forgotPassword": "Mot de passe oublié ?",
-    "forgotPasswordDesc": "Entrez votre adresse e-mail et si un compte avec cet e-mail est trouvé, nous vous enverrons un lien pour réinitialiser votre mot de passe"
+    "forgotPasswordDesc": "Entrez votre adresse email et si un compte avec cet email existe, nous vous enverrons un lien pour réinitialiser votre mot de passe."
   },
-
   "labels": {
     "account": "Compte",
     "action": "Action | Actions",
@@ -124,9 +136,9 @@
     "catalog": "Catalogue",
     "categories": "Catégories",
     "changeImage": "Changer l'image",
-    "chooseImage": "Choisir l'image",
+    "chooseImage": "Choisir une image",
     "city": "Ville",
-    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
     "contact": "Contact",
     "cost": "Coût",
     "country": "Pays",
@@ -137,8 +149,8 @@
     "description": "Description",
     "edit": "Modifier",
     "email": "Email",
-    "emailNewsAndOffers": "Envoyez-moi des nouvelles et des offres par e-mail",
-    "emailResetLink": "Envoyer le lien de réinitialisation de mot de passe",
+    "emailNewsAndOffers": "Envoyez-moi des nouvelles et des offres",
+    "emailResetLink": "Envoyer un lien de réinitialisation",
     "female": "Femme",
     "firstName": "Prénom",
     "forgotPassword": "Mot de passe oublié",
@@ -146,17 +158,18 @@
     "image": "Image | Images",
     "invalidForm": "Formulaire invalide",
     "inventory": "Inventaire",
-    "inventoryAdjustment": "Ajustement de l'inventaire | Ajustements de l'inventaire",
+    "inventoryAdjustment": "Ajustement d'inventaire | Ajustements d'inventaire",
     "language": "Langue | Langues",
     "lastName": "Nom de famille",
     "learnMore": "En savoir plus",
     "license": "Licence",
     "list": "Liste",
-    "login": "Se connecter",
-    "logout": "Se déconnecter",
+    "login": "Connexion",
+    "loginFailed": "Échec de connexion",
+    "logout": "Déconnexion",
     "male": "Homme",
-    "massCreate": "Création en masse",
-    "massCreateProducts": "Création en masse de produits",
+    "massCreate": "Création massive",
+    "massCreateProducts": "Création massive de produits",
     "more": "Plus",
     "moreToLove": "Plus à aimer",
     "name": "Nom",
@@ -164,8 +177,9 @@
     "next": "Suivant",
     "operationFailure": "Échec de l'opération",
     "operationSuccess": "Opération réussie",
+    "others": "Autres",
     "password": "Mot de passe",
-    "passwordConfirm": "Confirmer le mot de passe",
+    "passwordConfirm": "Confirmez le mot de passe",
     "payment": "Paiement | Paiements",
     "payWithPaypal": "Payer avec PayPal",
     "phone": "Téléphone",
@@ -175,19 +189,20 @@
     "productImage": "Image du produit",
     "productType": "Type de produit",
     "productCreate": "Nouveau produit",
-    "productUpdate": "Mettre à jour le produit",
+    "productUpdate": "Mise à jour du produit",
     "profileDetails": "Détails du profil",
     "quantity": "Quantité",
-    "register": "S'inscrire",
+    "register": "Inscription",
     "resetPassword": "Réinitialiser le mot de passe",
     "sales": "Ventes",
     "save": "Enregistrer",
-    "selectGender": "Sélectionner le genre",
-    "selectProductType": "Sélectionner le type de produit",
+    "search": "Rechercher",
+    "selectGender": "Sélectionnez le genre",
+    "selectProductType": "Sélectionnez le type de produit",
     "setting": "Paramètre | Paramètres",
     "share": "Partager",
     "shop": "Boutique",
-    "shopNow": "Acheter maintenant",
+    "shopNow": "Achetez maintenant",
     "sku": "SKU",
     "status": "Statut",
     "tag": "Étiquette | Étiquettes",
@@ -199,16 +214,15 @@
     "website": "Site web",
     "writeUs": "Écrivez-nous"
   },
-
   "messages": {
-    "credentialsNotFound": "Ces informations d'identification ne correspondent pas à nos dossiers",
+    "credentialsNotFound": "Ces identifiants ne correspondent pas à nos enregistrements",
     "noDataFound": "Aucune donnée trouvée",
-    "passwordResetLinkSent": "Si un compte avec cet e-mail est trouvé, vous recevrez un lien de réinitialisation de mot de passe",
+    "passwordResetLinkSent": "Si un compte avec cet email est trouvé, vous recevrez un lien de réinitialisation du mot de passe",
     "passwordResetSuccess": "Réinitialisation du mot de passe réussie, vous serez redirigé vers la page de connexion",
     "productCreated": "Produit ajouté avec succès | Produits ajoutés avec succès",
     "productUpdated": "Produit mis à jour avec succès"
   },
   "placeholders": {
-    "fileUploader": "Cliquez pour choisir, ou glissez et déposez un fichier"
+    "fileUploader": "Cliquez pour choisir, ou glissez-déposez un fichier"
   }
 }

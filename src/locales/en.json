@@ -168,6 +168,7 @@
     "license": "License",
     "list": "List",
     "login": "Login",
+    "loginFailed": "Login Failed",
     "logout": "Logout",
     "male": "Male",
     "massCreate": "Mass Create",
