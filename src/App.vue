@@ -9,7 +9,6 @@ const appStore = useAppStore()
 
 onMounted(() => {
   const persistedLocale = appStore.getPersistedLocale()
-  console.log('persiste locale', persistedLocale)
   if (persistedLocale) {
     appStore.changeLocale(persistedLocale)
   } else {
@@ -27,8 +26,8 @@ onMounted(() => {
     ></PrimeProgressBar>
 
     <PrimeToast />
-
-    <RouterView />
+    <PrimeSkeleton v-if="appStore.appLoading" height="100vh" width="100%" />
+    <RouterView v-else />
   </div>
 </template>
 

@@ -22,6 +22,7 @@ export const useAppStore = defineStore('appStore', () => {
   const locale = ref(import.meta.env.VUE_I18N_LOCALE ?? 'en')
 
   const changeLocale = (language: string) => {
+    appLoading.value = true
     // Change locale for Vue-i18n
     i18nLocale.value = language
 
@@ -29,6 +30,9 @@ export const useAppStore = defineStore('appStore', () => {
     PrimeVue.locale = primeLocales[language]
 
     setLocale(language)
+    window.setTimeout(() => {
+      appLoading.value = false
+    }, 1000)
   }
 
   const getPersistedLocale = () => {
