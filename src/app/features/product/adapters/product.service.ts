@@ -6,7 +6,7 @@ import type { DBGetQueryFilter } from '@/app/@types/account.interface'
 
 const url = 'api/v1/products'
 
-const getAll = async function getAll(filter?: DBGetQueryFilter) {
+const getAll = async function getAll(filter?: DBGetQueryFilter, businessId?: string) {
   if (!filter) {
     filter = {
       itemsPerPage: -1,
@@ -14,7 +14,7 @@ const getAll = async function getAll(filter?: DBGetQueryFilter) {
     }
   }
   const query = getQueryFromFilter(filter)
-  return axios.get(`${url}${query}`)
+  return axios.get(`${url}${query}&businessId=${businessId}`)
 }
 
 const get = async function get(id: string) {

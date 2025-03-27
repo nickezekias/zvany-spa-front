@@ -76,13 +76,13 @@ const selectedObjects = ref([])
 
 onMounted(async () => {
   loading.value = true
+  const businessId = accountStore.user?.business?.id
   try {
     const filter = {
       itemsPerPage: -1,
       sortBy: ['products.name'],
-      businessId: accountStore.user?.business?.id,
     }
-    await objStore.getAll(filter)
+    await objStore.getAll(filter, businessId)
   } catch (error) {
     nikkToast.httpError(error as AxiosError)
   } finally {
@@ -290,8 +290,8 @@ const toggle = (event: Event, obj: Obj) => {
             <PrimeColumn field="cost" :header="$t('labels.cost')">
               <template #body="slotProps">
                 <span class="text-sm font-semibold text-gray-600">
-                  ${{ slotProps.data.cost }}
-                  <!-- ${{ slotProps.data.cost.toFixed(2) }} -->
+                  <!-- {{ slotProps.data.cost }} XAF -->
+                  {{ Number(slotProps.data.cost).toFixed(2) }} XAF
                 </span>
               </template>
             </PrimeColumn>
@@ -300,8 +300,8 @@ const toggle = (event: Event, obj: Obj) => {
             <PrimeColumn field="price" :header="$t('labels.price')">
               <template #body="slotProps">
                 <span class="text-sm font-bold text-gray-800">
-                  <!-- ${{ slotProps.data.price.toFixed(2) }} -->
-                  ${{ slotProps.data.price }}
+                  {{ Number(slotProps.data.price).toFixed(2) }} XAF
+                  <!-- {{ slotProps.data.price }} XAF -->
                 </span>
               </template>
             </PrimeColumn>
