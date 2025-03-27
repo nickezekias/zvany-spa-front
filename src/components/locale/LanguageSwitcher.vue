@@ -34,10 +34,9 @@ const toggle = (event: Event) => {
       type="button"
       icon="pi pi-language"
       @click="toggle"
+      outlined
       rounded
       severity="secondary"
-      size="small"
-      text
       aria-haspopup="true"
       aria-controls="overlay_menu"
     />
