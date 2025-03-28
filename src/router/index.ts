@@ -65,6 +65,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'products.show',
         component: () => import('@/app/features/product/presentation/ShowView.vue'),
       },
+      {
+        path: '/s/:id',
+        name: 'stores.show',
+        component: () => import('@/app/features/vendors/store/presentation/ShowView.vue'),
+      },
     ],
   },
 

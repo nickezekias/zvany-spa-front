@@ -101,7 +101,11 @@ const appStore = useAppStore()
 
         <UserAvatarMenu />
 
-        <span class="font-medium text-sm md:text-lg">{{ accountStore.user?.business?.name }}</span>
+        <router-link :to="`/s/${accountStore.user?.business?.id}`">
+          <span class="font-medium text-sm md:text-lg">{{
+            accountStore.user?.business?.name
+          }}</span>
+        </router-link>
       </div>
     </template>
   </PrimeToolbar>
