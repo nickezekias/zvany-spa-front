@@ -15,7 +15,6 @@ export const useProductStore = defineStore('productStore', () => {
   async function getAll(filter?: DBGetQueryFilter, businessId?: string) {
     const response = await objService.getAll(filter, businessId)
     objects.value = response.data.data
-    console.log('PRODUCTS', objects.value)
   }
 
   async function get(id: string) {
