@@ -13,8 +13,11 @@ const getAll = async function getAll(filter?: DBGetQueryFilter, businessId?: str
       sortBy: ['products.name'],
     }
   }
-  const query = getQueryFromFilter(filter)
-  return axios.get(`${url}${query}&businessId=${businessId}`)
+  let query = getQueryFromFilter(filter)
+  if (businessId) {
+    query += `&businessId=${businessId}`
+  }
+  return axios.get(`${url}${query}`)
 }
 
 const get = async function get(id: string) {
