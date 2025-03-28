@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useAccountStore } from '@/stores/account.store'
 import { useProductStore } from '@/stores/product.store'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue'
@@ -12,6 +13,7 @@ import type { AxiosError } from 'axios'
 
 import NikkInputNumber from '@/components/forms/NikkInputNumber.vue'
 
+const accountStore = useAccountStore()
 const objStore = useProductStore()
 const route = useRoute()
 const toast = useToast()
@@ -132,7 +134,11 @@ onMounted(async () => {
 
         <span>
           <span class="text-gray-200 text-sm">{{ $t('labels.vendor') }}</span>
-          <span class="ms-5 font-medium text-primary">IgnisLab</span>
+          <!-- FIXME: Send business name from Product Resource -->
+          <span v-if="accountStore.user?.business?.name" class="ms-5 font-medium text-primary">{{
+            accountStore.user?.business?.name
+          }}</span>
+          <span v-else class="ms-5 font-medium text-primary">Zen Store</span>
         </span>
       </div>
 
