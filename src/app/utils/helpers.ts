@@ -20,12 +20,18 @@ const getApiErrors = (error: AxiosError, title = '') => {
   // @ts-expect-error nested laravel model resource objects data errors
   if (error.response.data && error.response.data.errors) {
     // @ts-expect-error nested laravel model resource objects data errors
-    return error.response.data.errors
+    return error.response.data.errors.toString()
   }
 
   // show custom controller error messages for errors other than http 500
   if (error.response.status != 500) {
-    return error.response.data
+    try {
+      // @ts-expect-error nested laravel model resource objects data message
+      return error.response.data.toString()
+    } catch (e) {
+      console.error(e, error.response.data)
+      return errorMessage
+    }
   }
 
   return errorMessage
