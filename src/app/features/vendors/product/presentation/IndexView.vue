@@ -219,7 +219,7 @@ const toggle = (event: Event, obj: Obj) => {
             class="shadow-none rounded-lg text-sm border-none"
             :globalFilterFields="['name', 'sku', 'categories', 'brand']"
             paginator
-            :rows="10"
+            :rows="50"
             scrollable
             sortMode="multiple"
             table-style="min-width: 50rem"
