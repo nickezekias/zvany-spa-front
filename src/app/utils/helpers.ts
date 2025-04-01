@@ -8,9 +8,13 @@ const getApiErrors = (error: AxiosError, title = '') => {
     return errorMessage
   }
   if (!error.response) {
-    if (error && error.config) console.error(title, `API ${error.config.url} not found`)
-    else console.error(title, `API ${error} not found`)
-    return errorMessage
+    if (error && error.config) {
+      console.error(title, `API ${error.config.url} not found`)
+      return `API ${error.config.url} not found`
+    } else {
+      console.error(title, `API ${error} not found`)
+      return `API ${error} not found`
+    }
   }
   if (import.meta.env.MODE === 'development') {
     console.error(title, error.response.data)
@@ -24,17 +28,8 @@ const getApiErrors = (error: AxiosError, title = '') => {
   }
 
   // show custom controller error messages for errors other than http 500
-  if (error.response.status != 500) {
-    try {
-      // @ts-expect-error nested laravel model resource objects data message
-      return error.response.data.toString()
-    } catch (e) {
-      console.error(e, error.response.data)
-      return errorMessage
-    }
-  }
-
-  return errorMessage
+  // @ts-expect-error nested laravel model resource objects data message
+  return error.response.data?.message
 }
 
 function getImageSrc(url: string) {
