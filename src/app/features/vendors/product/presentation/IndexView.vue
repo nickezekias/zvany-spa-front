@@ -219,7 +219,9 @@ const toggle = (event: Event, obj: Obj) => {
             class="shadow-none rounded-lg text-sm border-none"
             :globalFilterFields="['name', 'sku', 'categories', 'brand']"
             paginator
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
             :rows="50"
+            :rowsPerPageOptions="[10, 25, 50]"
             scrollable
             sortMode="multiple"
             table-style="min-width: 50rem"
