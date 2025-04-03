@@ -44,11 +44,11 @@ onMounted(async () => {
       <div class="w-full lg:w-4/12">
         <img
           v-if="obj.images && typeof obj.images === 'string' && obj.images.length > 0"
-          class="product-img h-96 object-cover border"
+          class="product-img w-full object-cover border"
           :src="`${obj.images}`"
           :alt="$t('labels.productImage')"
         />
-        <div v-else class="h-96 bg-gray-50" />
+        <div v-else class="h-96 w-full bg-gray-50" />
       </div>
       <div class="w-full lg:w-6/12 flex flex-col gap-4">
         <h1 class="product-name text-2xl text-primary font-medium">
