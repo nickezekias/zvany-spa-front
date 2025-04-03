@@ -52,15 +52,27 @@
           <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-4.5l-1-1z" />
         </svg>
       </button>
+      <button
+        @click="isShowImageGrid = true"
+        class="action-btn"
+        title="Change photo with img library"
+        type="button"
+      >
+        <i class="pi pi-folder"></i>
+      </button>
     </div>
 
     <!-- Hidden File Input -->
     <input ref="fileInput" type="file" accept="image/*" @change="onFileChange" class="hidden" />
+
+    <!-- Image grid to choose already uploaded images -->
+    <ImageGrid v-model="isShowImageGrid" class="w-full mx-2 md:mx-0 md:w-8/12" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
+import ImageGrid from '@/components/products/ImageGrid.vue'
 
 const props = defineProps({
   rounded: {
@@ -78,6 +90,7 @@ const emit = defineEmits<{
   (e: 'file-cleared'): void
 }>()
 
+const isShowImageGrid = ref(false)
 const previewUrl = ref<string | null>(null)
 const fileInput = ref<HTMLInputElement | null>(null)
 
