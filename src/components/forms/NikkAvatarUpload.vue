@@ -55,14 +55,7 @@
     </div>
 
     <!-- Hidden File Input -->
-    <input
-      ref="fileInput"
-      type="file"
-      accept="image/*"
-      capture="environment"
-      @change="onFileChange"
-      class="hidden"
-    />
+    <input ref="fileInput" type="file" accept="image/*" @change="onFileChange" class="hidden" />
   </div>
 </template>
 
