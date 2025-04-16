@@ -88,6 +88,7 @@ onMounted(async () => {
     const filter = {
       itemsPerPage: -1,
       sortBy: ['products.created_at'],
+      sortDesc: ['true'],
     }
     await objStore.getAll(filter, businessId)
   } catch (error) {
