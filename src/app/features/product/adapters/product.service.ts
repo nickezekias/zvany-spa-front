@@ -10,7 +10,7 @@ const getAll = async function getAll(filter?: DBGetQueryFilter, businessId?: str
   if (!filter) {
     filter = {
       itemsPerPage: -1,
-      sortBy: ['products.name'],
+      sortBy: ['products.created_at'],
     }
   }
   let query = getQueryFromFilter(filter)
