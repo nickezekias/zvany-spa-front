@@ -58,9 +58,16 @@ const rowActionsItems = ref([
     label: t('labels.action', 2),
     items: [
       {
+        action: 'edit',
         label: t('labels.edit'),
         icon: 'pi pi-pencil',
         route: `/vendors/products/update`,
+      },
+      {
+        action: 'clone',
+        label: t('labels.clone'),
+        icon: 'pi pi-copy',
+        route: `/vendors/products/create`,
       },
       {
         label: t('labels.delete'),
@@ -338,7 +345,23 @@ const toggle = (event: Event, obj: Obj) => {
                   />
                   <PrimeMenu id="overlay_menu" ref="menu" :model="rowActionsItems" :popup="true">
                     <template #item="{ item }">
-                      <router-link v-if="item.route" :to="`${item.route}/${activeRowObj?.id}`">
+                      <router-link
+                        v-if="item.route && item.action == 'edit'"
+                        :to="`${item.route}/${activeRowObj?.id}`"
+                      >
+                        <PrimeButton
+                          class="w-full justify-start"
+                          small
+                          text
+                          plain
+                          :icon="item.icon"
+                          :label="`${item.label}`"
+                        />
+                      </router-link>
+                      <router-link
+                        v-if="item.route && item.action == 'clone'"
+                        :to="`${item.route}?cloneId=${activeRowObj?.id}`"
+                      >
                         <PrimeButton
                           class="w-full justify-start"
                           small

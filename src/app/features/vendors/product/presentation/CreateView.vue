@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Form as PrimeForm, type FormSubmitEvent } from '@primevue/forms'
 import { useAccountStore } from '@/stores/account.store'
 import { useI18n } from 'vue-i18n'
 import { useProductStore } from '@/stores/product.store'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'primevue'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
@@ -24,6 +24,7 @@ import NikkTextArea from '@/components/forms/NikkTextArea.vue'
 
 const accountStore = useAccountStore()
 const objStore = useProductStore()
+const route = useRoute()
 const router = useRouter()
 const toast = useToast()
 const { t } = useI18n()
@@ -31,6 +32,7 @@ const nikkToast = new NikkToast(toast, t)
 
 const loading = ref(false)
 const obj = ref(Obj.initEmpty())
+const pageLoading = ref(false)
 const resolver = zodResolver(
   z.object({
     // barcode: z.string().min(1, { message: 'errors.validation.requiredField' }),
@@ -54,6 +56,20 @@ const resolver = zodResolver(
     type: z.string().min(1, { message: 'errors.validation.requiredField' }),
   }),
 )
+
+onMounted(async () => {
+  const cloneId = route.query.cloneId
+  if (cloneId && cloneId.length == 36) {
+    pageLoading.value = true
+    try {
+      obj.value = await objStore.get(`${cloneId}`)
+    } catch (error) {
+      nikkToast.httpError(error as AxiosError)
+    } finally {
+      pageLoading.value = false
+    }
+  }
+})
 
 async function onFormSubmit(e: FormSubmitEvent) {
   const isFormCorrect = e.valid
