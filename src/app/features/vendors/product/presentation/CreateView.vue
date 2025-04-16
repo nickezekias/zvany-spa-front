@@ -63,6 +63,7 @@ onMounted(async () => {
     pageLoading.value = true
     try {
       obj.value = await objStore.get(`${cloneId}`)
+      obj.value.images = ''
     } catch (error) {
       nikkToast.httpError(error as AxiosError)
     } finally {

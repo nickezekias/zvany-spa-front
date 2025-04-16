@@ -359,7 +359,7 @@ const toggle = (event: Event, obj: Obj) => {
                         />
                       </router-link>
                       <router-link
-                        v-if="item.route && item.action == 'clone'"
+                        v-else-if="item.route && item.action == 'clone'"
                         :to="`${item.route}?cloneId=${activeRowObj?.id}`"
                       >
                         <PrimeButton
