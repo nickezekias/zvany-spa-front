@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { useProductStore } from '@/stores/product.store'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'primevue'
+import { useVendorStoreStore } from '@/stores/vendor/store.store'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
 
@@ -28,6 +29,7 @@ const route = useRoute()
 const router = useRouter()
 const toast = useToast()
 const { t } = useI18n()
+const vendorStoreStore = useVendorStoreStore()
 const nikkToast = new NikkToast(toast, t)
 
 const loading = ref(false)
@@ -84,6 +86,8 @@ async function onFormSubmit(e: FormSubmitEvent) {
       nikkToast.success('features.vendors.products.create.successMessage')
       router.push({ name: 'vendors.products.index' })
     } catch (e) {
+      vendorStoreStore.setErrors(e as AxiosError)
+      console.warn('VENDOR_STORE_STORE ERRORS', vendorStoreStore.errors)
       nikkToast.httpError(e as AxiosError)
     } finally {
       loading.value = false
