@@ -47,7 +47,8 @@
       "registerSuccessMessage": "Compte créé avec succès"
     },
     "errors": {
-      "404NotFound": "Oups ! Nous ne trouvons pas la page que vous recherchez."
+      "404NotFound": "Oups ! Nous ne trouvons pas la page que vous recherchez.",
+      "backToHome": "Retour à l'accueil"
     },
     "products": {
       "index": {

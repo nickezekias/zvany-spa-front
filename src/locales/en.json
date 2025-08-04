@@ -48,7 +48,8 @@
       "registerSuccessMessage": "Account created successfully"
     },
     "errors": {
-      "404NotFound": "Oops! We can't find the page you're looking for."
+      "404NotFound": "Oops! We can't find the page you're looking for.",
+      "backToHome": "Back to Home"
     },
     "products": {
       "index": {

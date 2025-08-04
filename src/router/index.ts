@@ -113,6 +113,16 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+
+  /**
+   * ERRORS
+   */
+  {
+    // This catch-all route must be at the end
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/app/features/errors/presentation/404NotFound.vue'),
+  },
 ]
 
 const router = createRouter({
