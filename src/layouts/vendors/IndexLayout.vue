@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import PrimeToast from 'primevue/toast'
+// import PrimeToast from 'primevue/toast'
+import NikkToast from '@/components/notifications/NikkToast.vue'
 
 import BottomBar from '@/layouts/vendors/mobile/BottomBar.vue'
 import FooterComponent from '@/layouts/app/FooterComponent.vue'
@@ -8,7 +9,8 @@ import TopBar from '@/layouts/vendors/TopBar.vue'
 
 <template>
   <div class="min-h-screen flex flex-col bg-surface-50 dark:bg-[#121212]">
-    <PrimeToast />
+    <NikkToast />
+
     <TopBar />
 
     <div class="flex flex-grow">
