@@ -2,7 +2,6 @@
 import { onMounted } from 'vue'
 import { useAppStore } from '@/stores/app.store'
 import { RouterView } from 'vue-router'
-import PrimeToast from 'primevue/toast'
 import PrimeProgressBar from 'primevue/progressbar'
 
 const appStore = useAppStore()
@@ -24,8 +23,6 @@ onMounted(() => {
       mode="indeterminate"
       class="app-progress-bar"
     ></PrimeProgressBar>
-
-    <PrimeToast />
     <PrimeSkeleton v-if="appStore.appLoading" height="100vh" width="100%" />
     <RouterView v-else />
   </div>
