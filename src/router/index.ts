@@ -40,6 +40,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'account.resetPassword',
         component: () => import('@/app/features/account/reset-password/presentation/IndexView.vue'),
       },
+      {
+        path: '/account/guest',
+        name: 'accounts.guest',
+        component: () => import('@/app/features/account/guest/presentation/IndexView.vue'),
+      },
     ],
   },
   /**
