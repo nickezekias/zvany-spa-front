@@ -14,7 +14,7 @@
             </router-link>
             <div class="font-light">{{ $t('labels.or') }}</div>
             <router-link to="/login">
-              <PrimeButton text rounded severity="contrast" :label="$t('labels.login')" />
+              <PrimeButton outlined rounded severity="contrast" :label="$t('labels.login')" />
             </router-link>
           </div>
         </div>
@@ -22,7 +22,7 @@
     </div>
 
     <!-- ORDERS -->
-    <div class="px-2">
+    <!-- <div class="px-2">
       <PrimeCard>
         <template #title>
           <h6>{{ $t('labels.myOrders') }}</h6>
@@ -56,17 +56,17 @@
               severity="secondary"
             />
 
-            <!-- <PrimeButton
+            <PrimeButton
               size="small"
               text
               icon="pi pi-arrow-left"
               iconPos="bottom"
               :label="$t('Returns')"
               severity="secondary"
-            /> -->
+            />
           </div>
         </template>
       </PrimeCard>
-    </div>
+    </div> -->
   </div>
 </template>

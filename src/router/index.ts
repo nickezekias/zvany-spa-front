@@ -63,6 +63,11 @@ const routes: Array<RouteRecordRaw> = [
             name: 'user.profile',
             component: () => import('@/app/features/profile/presentation/IndexView.vue'),
           },
+          {
+            path: 'account',
+            name: 'user.account',
+            component: () => import('@/app/features/account/presentation/IndexView.vue'),
+          },
         ],
       },
       {

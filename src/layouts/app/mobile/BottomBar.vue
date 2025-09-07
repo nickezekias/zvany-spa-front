@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import PrimeToolbar from 'primevue/toolbar'
+import { useAccountStore } from '@/stores/account.store'
 import { useRoute } from 'vue-router'
 
+const accountStore = useAccountStore()
 const route = useRoute()
 
 const items = [
@@ -27,14 +29,14 @@ const items = [
     `,
     label: 'labels.cart',
   },
-  {
+  /* {
     name: 'account',
     icon: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="6" r="4"/><path d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5Z" opacity="0.5"/></g></svg>
     `,
     label: 'labels.account',
     routeName: 'accounts.guest',
-  },
+  }, */
 ]
 </script>
 
@@ -63,6 +65,68 @@ const items = [
                 class="text-xs"
                 :class="route.name == item.routeName ? 'text-primary' : 'text-secondary'"
                 >{{ $t(`${item.label}`) }}</span
+              >
+            </div>
+          </PrimeButton>
+        </router-link>
+
+        <router-link
+          v-if="!accountStore.isAuthenticated"
+          :to="{ name: 'accounts.guest' }"
+          class="py-1"
+        >
+          <PrimeButton
+            size="small"
+            class="py-[0.05rem]"
+            :severity="route.name == 'accounts.guest' ? 'primary' : 'secondary'"
+            text
+            :aria-label="'guest account icon'"
+          >
+            <div class="flex flex-col justify-items-center items-center gap-[0.1rem]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="6" r="4" />
+                  <path
+                    d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5Z"
+                    opacity="0.5"
+                  />
+                </g>
+              </svg>
+              <span
+                class="text-xs"
+                :class="route.name == 'accounts.guest' ? 'text-primary' : 'text-secondary'"
+                >{{ $t(`labels.account`) }}</span
+              >
+            </div>
+          </PrimeButton>
+        </router-link>
+
+        <router-link
+          v-else-if="accountStore.isAuthenticated && accountStore.userModel?.isVendor()"
+          :to="{ name: 'user.account' }"
+          class="py-1"
+        >
+          <PrimeButton
+            size="small"
+            class="py-[0.05rem]"
+            :severity="route.name == 'user.account' ? 'primary' : 'secondary'"
+            text
+            :aria-label="'account icon'"
+          >
+            <div class="flex flex-col justify-items-center items-center gap-[0.1rem]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="6" r="4" />
+                  <path
+                    d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5Z"
+                    opacity="0.5"
+                  />
+                </g>
+              </svg>
+              <span
+                class="text-xs"
+                :class="route.name == 'user.account' ? 'text-primary' : 'text-secondary'"
+                >{{ $t(`labels.account`) }}</span
               >
             </div>
           </PrimeButton>
