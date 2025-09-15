@@ -72,9 +72,15 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
+import Compressor from 'compressorjs'
+
 import ImageGrid from '@/components/products/ImageGrid.vue'
 
 const props = defineProps({
+  isCompress: {
+    type: Boolean,
+    default: true,
+  },
   rounded: {
     type: Boolean,
     default: false,
@@ -84,6 +90,11 @@ const props = defineProps({
     default: '',
   },
 })
+
+// Define an interface for the compressed file
+interface CompressedFile extends Blob {
+  name: string
+}
 
 const emit = defineEmits<{
   (e: 'file-selected', file: File): void
@@ -107,10 +118,30 @@ onMounted(() => {
 const onFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
+  const compressedFiles: CompressedFile[] = []
 
   if (file) {
     previewUrl.value = URL.createObjectURL(file)
-    emit('file-selected', file)
+    // Compress if file larger than 2048 Bytes
+    if (file.size > 2048) {
+      new Compressor(file, {
+        quality: 0.6,
+        maxWidth: 1920,
+        maxHeight: 1080,
+        success(result: Blob) {
+          // Cast the result to the CompressedFile interface to add the 'name' property
+          const compressedFile = result as CompressedFile
+          compressedFile.name = file.name
+          compressedFiles.push(compressedFile)
+          emit('file-selected', compressedFiles[0] as File)
+          console.log('FILE', file, 'COMPRESSED FILE', compressedFiles[0])
+        },
+        error(err: Error) {
+          emit('file-selected', file)
+          console.error('Compression failed:', err.message)
+        },
+      })
+    }
   }
 }
 
