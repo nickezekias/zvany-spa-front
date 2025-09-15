@@ -21,6 +21,7 @@
     "@primevue/themes": "^4.2.5",
     "axios": "^1.7.9",
     "chart.js": "^4.4.8",
+    "compressorjs": "^1.2.1",
     "pinia": "^2.3.0",
     "primeicons": "^7.0.0",
     "primelocale": "^2.1.1",
