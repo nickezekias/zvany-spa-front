@@ -101,7 +101,7 @@ const appStore = useAppStore()
 
         <UserAvatarMenu />
 
-        <router-link :to="`/s/${accountStore.user?.business?.id}`">
+        <router-link class="hidden md:flex" :to="`/s/${accountStore.user?.business?.id}`">
           <span class="font-medium text-sm md:text-lg">{{
             accountStore.user?.business?.name
           }}</span>

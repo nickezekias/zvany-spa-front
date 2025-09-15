@@ -2,6 +2,10 @@
 import { useAccountStore } from '@/stores/account.store'
 
 const accountStore = useAccountStore()
+
+async function onLogout() {
+  await accountStore.logout()
+}
 </script>
 
 <template>
@@ -36,25 +40,30 @@ const accountStore = useAccountStore()
               severity="secondary"
             /> -->
 
-            <PrimeButton
-              size="small"
-              text
-              icon="pi pi-shop"
-              iconPos="bottom"
-              :label="$t('labels.visitFrontStore')"
-              severity="secondary"
-            />
+            <router-link :to="`/s/${accountStore.user?.business?.id}`">
+              <PrimeButton
+                size="small"
+                text
+                icon="pi pi-shop"
+                iconPos="bottom"
+                :label="$t('labels.visitFrontStore')"
+                severity="secondary"
+              />
+            </router-link>
+
+            <router-link :to="{ name: 'user.profile' }">
+              <PrimeButton
+                size="small"
+                text
+                icon="pi pi-cog"
+                iconPos="bottom"
+                :label="$t('labels.setting', 2)"
+                severity="secondary"
+              />
+            </router-link>
 
             <PrimeButton
-              size="small"
-              text
-              icon="pi pi-cog"
-              iconPos="bottom"
-              :label="$t('labels.setting', 2)"
-              severity="secondary"
-            />
-
-            <PrimeButton
+              @click="onLogout"
               size="small"
               text
               icon="pi pi-power-off"
