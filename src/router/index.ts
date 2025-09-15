@@ -57,11 +57,17 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/u',
+        component: () => import('@/app/features/settings/presentation/IndexView.vue'),
         children: [
           {
             path: 'profile',
             name: 'user.profile',
-            component: () => import('@/app/features/profile/presentation/IndexView.vue'),
+            component: () => import('@/app/features/settings/profile/presentation/IndexView.vue'),
+          },
+          {
+            path: 'business',
+            name: 'user.business',
+            component: () => import('@/app/features/settings/business/presentation/IndexView.vue'),
           },
           {
             path: 'account',

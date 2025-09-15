@@ -47,6 +47,10 @@
     "account": {
       "registerSuccessMessage": "Account created successfully"
     },
+    "businesses": {
+      "businessSettings": "Business Settings",
+      "businessSettingsDesc": "Customize your business here"
+    },
     "errors": {
       "404NotFound": "Oops! We can't find the page you're looking for.",
       "backToHome": "Back to Home"

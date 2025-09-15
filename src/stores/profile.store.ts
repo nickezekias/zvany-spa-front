@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import objService from '@/app/features/profile/adapter/profile.service'
+import objService from '@/app/features/settings/profile/adapter/profile.service'
 
 export const useProfileStore = defineStore('profileStore', () => {
   async function verifyIDDocument(payload: FormData) {
