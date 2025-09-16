@@ -4,6 +4,7 @@ export default class Business {
   public description: string
   public email: string
   public logo: string
+  public coverImage: string // Added coverImage attribute
   public name: string
   public phone: string
   public website: string
@@ -18,6 +19,7 @@ export default class Business {
     description: string,
     email: string,
     logo: string,
+    coverImage: string, // Added coverImage to constructor
     name: string,
     phone: string,
     website: string,
@@ -31,6 +33,7 @@ export default class Business {
     this.description = description
     this.email = email
     this.logo = logo
+    this.coverImage = coverImage // Assign coverImage
     this.name = name
     this.phone = phone
     this.website = website
@@ -46,6 +49,7 @@ export default class Business {
     description: string
     email: string
     logo: string
+    coverImage: string // Added coverImage to fromObject param
     name: string
     phone: string
     website: string
@@ -60,6 +64,7 @@ export default class Business {
       data.description,
       data.email,
       data.logo,
+      data.coverImage, // Pass coverImage to constructor
       data.name,
       data.phone,
       data.website,
@@ -72,6 +77,7 @@ export default class Business {
 
   static initEmpty(): Business {
     return new Business(
+      '',
       '',
       '',
       '',
