@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useAccountStore } from '@/stores/account.store'
 import { useI18n } from 'vue-i18n'
 import { useToast } from 'primevue'
-import { useVendorStoreStore } from '@/stores/vendor/store.store'
+import { useBusinessStore } from '@/stores/business.store'
 
 import NikkToast from '@/app/utils/NikkToast'
 import Obj from '@/app/models/business.model'
@@ -11,30 +11,57 @@ import Obj from '@/app/models/business.model'
 import type { AxiosError } from 'axios'
 
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
+import NikkAvatarUpload from '@/components/forms/NikkAvatarUpload.vue'
+import NikkInputText from '@/components/forms/NikkInputText.vue'
 
 const accountStore = useAccountStore()
-const objStore = useVendorStoreStore()
+const businessStore = useBusinessStore()
 const toast = useToast()
 const { t } = useI18n()
 const nikkToast = new NikkToast(toast, t)
 
+const coverImageLoading = ref(false)
+const logoLoading = ref(false)
 const pageLoading = ref(false)
-const obj = ref(Obj.initEmpty())
+const obj = ref(accountStore.user?.business || Obj.initEmpty())
 
-onMounted(async () => {
-  pageLoading.value = true
+async function updateCoverImage() {
+  coverImageLoading.value = true
   try {
-    if (objStore.obj) {
-      obj.value = objStore.obj
-    } else if (accountStore.user?.business) {
-      obj.value = accountStore.user?.business
+    if (!obj.value.coverImage) {
+      nikkToast.error(
+        'errors.validation.requiredField',
+        t('features.businesses.changeStoreCoverImage'),
+      )
+      return
     }
+    await businessStore.updateCoverImage(obj.value)
+    nikkToast.success('messages.updatedSuccessfully')
   } catch (e) {
     nikkToast.httpError(e as AxiosError)
   } finally {
-    pageLoading.value = false
+    coverImageLoading.value = false
   }
-})
+}
+
+async function updateLogo() {
+  logoLoading.value = true
+  try {
+    if (!obj.value.logo) {
+      nikkToast.error(
+        t('errors.validation.requiredField'),
+        t('features.businesses.changeStoreLogo'),
+      )
+      return
+    }
+    await businessStore.updateLogo(obj.value)
+    nikkToast.success('messages.updatedSuccessfully')
+  } catch (e) {
+    nikkToast.httpError(e as AxiosError)
+  } finally {
+    logoLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -47,30 +74,111 @@ onMounted(async () => {
       />
 
       <div class="content">
-        <div class="hero">
-          <div class="bg-gray-100 dark:bg-gray-800 h-96 relative">
-            <div
-              class="store-logo bg-gray-300 dark:bg-gray-950 border h-36 w-36 rounded-full absolute left-2/4 bottom-0"
-            ></div>
+        <div class="flex flex-col md:flex-row md:justify-between items-center gap-4 md:gap-6 mt-6">
+          <div class="flex-grow">
+            <h3 class="text-muted-color font-thin mb-2">
+              {{ $t('features.businesses.changeStoreCoverImage') }}
+            </h3>
+            <NikkAvatarUpload
+              class="h-48 border w-full"
+              :url="!!obj.coverImage ? `${obj.coverImage}` : ``"
+              @file-selected="
+                (event: File) => {
+                  obj.coverImage = event
+                }
+              "
+            />
+            <div class="h-full flex">
+              <PrimeButton
+                @click="updateCoverImage"
+                class="mt-2 ml-auto"
+                :loading="coverImageLoading"
+                outlined
+                type="submit"
+                :label="$t('features.businesses.updateCoverImage')"
+              />
+            </div>
           </div>
-          <div class="store-details mt-24 text-center">
-            <h2 class="text-xl md:text-2xl font-semibold">{{ obj.name }}</h2>
-            <div class="flex flex-col md:flex-row gap-2 md:gap-4 md:justify-around">
-              <span>
-                <i class="pi pi-map me-2"></i>
-                {{ obj.address }}
-              </span>
-              <span>
-                <i class="pi pi-envelope me-2"></i>
-                {{ obj.email }}
-              </span>
-              <span>
-                <i class="pi pi-phone me-2"></i>
-                {{ obj.phone }}
-              </span>
+          <div class="w-64">
+            <h3 class="text-muted-color font-thin mb-2 text-cente">
+              {{ $t('features.businesses.changeStoreLogo') }}
+            </h3>
+            <NikkAvatarUpload
+              class="border"
+              :url="!!obj.logo ? `${obj.logo}` : ``"
+              @file-selected="
+                (event: File) => {
+                  obj.logo = event
+                  console.log('THE LOGO', obj.logo, event)
+                }
+              "
+            />
+            <div class="h-full flex">
+              <PrimeButton
+                @click="updateLogo"
+                class="mt-2 ml-auto"
+                :loading="logoLoading"
+                outlined
+                type="submit"
+                :label="$t('features.businesses.updateLogo')"
+              />
             </div>
           </div>
         </div>
+
+        <PrimeCard class="store-details mt-16 border w-full md:w-5/12 lg:w-4/12 md:mx-auto">
+          <template #title>
+            <span>{{ $t('features.businesses.storeDetails') }}</span>
+          </template>
+
+          <template #content>
+            <PrimeForm :initialValues="obj" v-slot="$form" class="flex flex-col gap-5">
+              <NikkInputText
+                v-model="obj.name"
+                :errorHelpLabel="$form.name?.error?.message"
+                id="last-name"
+                :isError="$form.name?.invalid"
+                label="labels.lastName"
+                name="lastName"
+                type="text"
+              />
+
+              <NikkInputText
+                v-model="obj.email"
+                :errorHelpLabel="$form.email?.error?.message"
+                id="email"
+                :isError="$form.email?.invalid"
+                label="labels.email"
+                name="email"
+                type="email"
+              />
+
+              <NikkInputText
+                v-model="obj.phone"
+                :errorHelpLabel="$form.phone?.error?.message"
+                id="phone"
+                :isError="$form.phone?.invalid"
+                label="labels.phone"
+                name="phone"
+                type="text"
+              />
+
+              <NikkInputText
+                v-model="obj.address"
+                :errorHelpLabel="$form.address?.error?.message"
+                id="address"
+                :isError="$form.address?.invalid"
+                label="labels.address"
+                name="address"
+                type="text"
+              />
+            </PrimeForm>
+          </template>
+
+          <template #footer>
+            <PrimeButton class="mt-6" fluid type="submit" :label="$t('labels.edit')" />
+          </template>
+        </PrimeCard>
       </div>
     </div>
   </div>

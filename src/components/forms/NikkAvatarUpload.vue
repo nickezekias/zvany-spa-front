@@ -123,7 +123,7 @@ const onFileChange = (event: Event) => {
   if (file) {
     previewUrl.value = URL.createObjectURL(file)
     // Compress if file larger than 2048 Bytes
-    if (file.size > 2048) {
+    if (file.size > 2000048) {
       new Compressor(file, {
         quality: 0.6,
         maxWidth: 1920,
@@ -134,7 +134,6 @@ const onFileChange = (event: Event) => {
           compressedFile.name = file.name
           compressedFiles.push(compressedFile)
           emit('file-selected', compressedFiles[0] as File)
-          console.log('FILE', file, 'COMPRESSED FILE', compressedFiles[0])
         },
         error(err: Error) {
           emit('file-selected', file)

@@ -49,7 +49,12 @@
     },
     "businesses": {
       "businessSettings": "Business Settings",
-      "businessSettingsDesc": "Customize your business here"
+      "businessSettingsDesc": "Customize your business here",
+      "changeStoreCoverImage": "Change Store Cover Image",
+      "changeStoreLogo": "Change Store Logo",
+      "storeDetails": "Store Details",
+      "updateCoverImage": "Update Cover Image",
+      "updateLogo": "Update Logo"
     },
     "errors": {
       "404NotFound": "Oops! We can't find the page you're looking for.",
@@ -239,7 +244,8 @@
     "passwordResetLinkSent": "If an account with this email is found, you will receive a password reset link",
     "passwordResetSuccess": "Password reset successful, you will be redirected to login page",
     "productCreated": "Product added successfully | Products added successfully",
-    "productUpdated": "Product updated successfully"
+    "productUpdated": "Product updated successfully",
+    "updatedSuccessfully": "Updated successfully"
   },
   "placeholders": {
     "fileUploader": "Click to choose, or drag and drop a file"

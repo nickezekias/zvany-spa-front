@@ -3,8 +3,8 @@ export default class Business {
   public address: string
   public description: string
   public email: string
-  public logo: string
-  public coverImage: string // Added coverImage attribute
+  public logo: string | File
+  public coverImage: string | File // Added coverImage attribute
   public name: string
   public phone: string
   public website: string
@@ -18,15 +18,15 @@ export default class Business {
     address: string,
     description: string,
     email: string,
-    logo: string,
-    coverImage: string, // Added coverImage to constructor
+    logo: string | File,
+    coverImage: string | File, // Added coverImage to constructor
     name: string,
     phone: string,
     website: string,
     userId: string,
     createdAt: string,
     updatedAt: string,
-    deletedAt: string
+    deletedAt: string,
   ) {
     this.id = id
     this.address = address
@@ -48,8 +48,8 @@ export default class Business {
     address: string
     description: string
     email: string
-    logo: string
-    coverImage: string // Added coverImage to fromObject param
+    logo: string | File
+    coverImage: string | File // Added coverImage to fromObject param
     name: string
     phone: string
     website: string
@@ -71,25 +71,11 @@ export default class Business {
       data.userId,
       data.createdAt,
       data.updatedAt,
-      data.deletedAt
+      data.deletedAt,
     )
   }
 
   static initEmpty(): Business {
-    return new Business(
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      ''
-    )
+    return new Business('', '', '', '', '', '', '', '', '', '', '', '', '')
   }
 }

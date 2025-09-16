@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAccountStore } from '@/stores/account.store'
 import { useProductStore } from '@/stores/product.store'
 import { useVendorStoreStore } from '@/stores/vendor/store.store'
-import { useRoute } from 'vue-router'
 import { useToast } from 'primevue'
 
 import NikkToast from '@/app/utils/NikkToast'
@@ -17,17 +16,33 @@ import DefaultProductCard from '@/components/products/DefaultCard.vue'
 const accountStore = useAccountStore()
 const productStore = useProductStore()
 const objStore = useVendorStoreStore()
-const route = useRoute()
 const toast = useToast()
 const { t } = useI18n()
 const nikkToast = new NikkToast(toast, t)
 
 const pageLoading = ref(false)
-const obj = ref(Obj.initEmpty())
+const obj = ref(accountStore.user?.business || Obj.initEmpty())
+
+const coverImageStyle = computed(() => {
+  return {
+    backgroundImage: `url('${obj.value.coverImage}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }
+})
+
+const logoStyle = computed(() => {
+  return {
+    backgroundImage: `url('${obj.value.logo}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }
+})
 
 onMounted(async () => {
   pageLoading.value = true
-  console.log('ROUTE PARAMS', route.params)
   try {
     if (objStore.obj) {
       obj.value = objStore.obj
@@ -59,8 +74,9 @@ onMounted(async () => {
       <!-- STORE -->
       <div class="store-page col-span-12 md:col-span-8 lg:col-span-9">
         <div class="hero">
-          <div class="bg-gray-100 dark:bg-gray-800 h-96 relative">
+          <div class="bg-gray-100 dark:bg-gray-800 h-96 relative" :style="coverImageStyle">
             <div
+              :style="logoStyle"
               class="store-logo bg-gray-300 dark:bg-gray-950 border h-36 w-36 rounded-full absolute left-2/4 bottom-0"
             ></div>
           </div>

@@ -2,12 +2,12 @@
 
 <template>
   <div class="h-full">
-    <PrimeToolbar class="py-0 px-4 md:px-[3rem] border-0 border-b rounded-none">
+    <PrimeToolbar class="py-0 px-4 md:px-[3rem] lg:px-20 border-0 border-b rounded-none">
       <template #start>
         <router-link
           :to="{ name: 'user.profile' }"
           exactActiveClass="border-b border-primary !text-primary"
-          class="hidden md:flex py-1"
+          class="md:py-1"
         >
           <PrimeButton text plain>
             <div class="w-full flex items-center gap-2">
@@ -33,7 +33,7 @@
         <router-link
           :to="{ name: 'user.business' }"
           exactActiveClass="border-b border-primary !text-primary"
-          class="hidden md:flex py-1"
+          class="md:py-1"
         >
           <PrimeButton text plain>
             <div class="w-full flex items-center gap-2">
@@ -63,6 +63,6 @@
       </template>
     </PrimeToolbar>
 
-    <router-view />
+    <router-view class="mx-4 md:mx-6 lg:mx-10" />
   </div>
 </template>
