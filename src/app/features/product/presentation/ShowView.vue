@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useAccountStore } from '@/stores/account.store'
 import { useProductStore } from '@/stores/product.store'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue'
@@ -12,6 +13,7 @@ import type { AxiosError } from 'axios'
 
 import NikkInputNumber from '@/components/forms/NikkInputNumber.vue'
 
+const accountStore = useAccountStore()
 const objStore = useProductStore()
 const route = useRoute()
 const toast = useToast()
@@ -42,11 +44,11 @@ onMounted(async () => {
       <div class="w-full lg:w-4/12">
         <img
           v-if="obj.images && typeof obj.images === 'string' && obj.images.length > 0"
-          class="product-img h-96 object-cover border"
+          class="product-img w-full object-cover border"
           :src="`${obj.images}`"
           :alt="$t('labels.productImage')"
         />
-        <div v-else class="h-96 bg-gray-50" />
+        <div v-else class="h-96 w-full bg-gray-50" />
       </div>
       <div class="w-full lg:w-6/12 flex flex-col gap-4">
         <h1 class="product-name text-2xl text-primary font-medium">
@@ -132,7 +134,11 @@ onMounted(async () => {
 
         <span>
           <span class="text-gray-200 text-sm">{{ $t('labels.vendor') }}</span>
-          <span class="ms-5 font-medium text-primary">IgnisLab</span>
+          <!-- FIXME: Send business name from Product Resource -->
+          <span v-if="accountStore.user?.business?.name" class="ms-5 font-medium text-primary">{{
+            accountStore.user?.business?.name
+          }}</span>
+          <span v-else class="ms-5 font-medium text-primary">Zen Store</span>
         </span>
       </div>
 

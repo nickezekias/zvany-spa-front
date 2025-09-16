@@ -40,6 +40,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'account.resetPassword',
         component: () => import('@/app/features/account/reset-password/presentation/IndexView.vue'),
       },
+      {
+        path: '/account/guest',
+        name: 'accounts.guest',
+        component: () => import('@/app/features/account/guest/presentation/IndexView.vue'),
+      },
     ],
   },
   /**
@@ -52,11 +57,22 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/u',
+        component: () => import('@/app/features/settings/presentation/IndexView.vue'),
         children: [
           {
             path: 'profile',
             name: 'user.profile',
-            component: () => import('@/app/features/profile/presentation/IndexView.vue'),
+            component: () => import('@/app/features/settings/profile/presentation/IndexView.vue'),
+          },
+          {
+            path: 'business',
+            name: 'user.business',
+            component: () => import('@/app/features/settings/business/presentation/IndexView.vue'),
+          },
+          {
+            path: 'account',
+            name: 'user.account',
+            component: () => import('@/app/features/account/presentation/IndexView.vue'),
           },
         ],
       },
@@ -64,6 +80,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/p/:id',
         name: 'products.show',
         component: () => import('@/app/features/product/presentation/ShowView.vue'),
+      },
+      {
+        path: '/s/:id',
+        name: 'stores.show',
+        component: () => import('@/app/features/vendors/store/presentation/ShowView.vue'),
       },
     ],
   },
@@ -79,7 +100,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'vendors.index',
-        component: () => import('@/app/features/vendors/product/presentation/IndexView.vue'),
+        component: () => import('@/app/features/vendors/dashboard/presentation/IndexView.vue'),
       },
       {
         path: 'products/',
@@ -101,7 +122,22 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: 'sales',
+        name: 'vendors.sales.index',
+        component: () => import('@/app/features/vendors/sales/presentation/IndexView.vue'),
+      },
     ],
+  },
+
+  /**
+   * ERRORS
+   */
+  {
+    // This catch-all route must be at the end
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/app/features/errors/presentation/404NotFound.vue'),
   },
 ]
 

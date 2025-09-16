@@ -17,6 +17,7 @@ import Button from 'primevue/button'
 import Badge from 'primevue/badge'
 import Card from 'primevue/card'
 import Checkbox from 'primevue/checkbox'
+import Dialog from 'primevue/dialog'
 import Divider from 'primevue/divider'
 import { Form } from '@primevue/forms'
 import InputText from 'primevue/inputtext'
@@ -44,6 +45,7 @@ app.component('PrimeBadge', Badge)
 app.component('PrimeButton', Button)
 app.component('PrimeCard', Card)
 app.component('PrimeCheckbox', Checkbox)
+app.component('PrimeDialog', Dialog)
 app.component('PrimeDivider', Divider)
 app.component('PrimeForm', Form)
 app.component('PrimeInputText', InputText)

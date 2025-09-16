@@ -2,8 +2,6 @@
 const emit = defineEmits(['close', 'confirm'])
 const model = defineModel({ type: Boolean })
 const props = defineProps<{ loading: boolean }>()
-
-import PrimeDialog from 'primevue/dialog'
 </script>
 
 <template>

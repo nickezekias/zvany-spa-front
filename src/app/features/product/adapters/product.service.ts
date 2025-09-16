@@ -6,14 +6,17 @@ import type { DBGetQueryFilter } from '@/app/@types/account.interface'
 
 const url = 'api/v1/products'
 
-const getAll = async function getAll(filter?: DBGetQueryFilter) {
+const getAll = async function getAll(filter?: DBGetQueryFilter, businessId?: string) {
   if (!filter) {
     filter = {
       itemsPerPage: -1,
-      sortBy: ['products.name'],
+      sortBy: ['products.created_at'],
     }
   }
-  const query = getQueryFromFilter(filter)
+  let query = getQueryFromFilter(filter)
+  if (businessId) {
+    query += `&businessId=${businessId}`
+  }
   return axios.get(`${url}${query}`)
 }
 

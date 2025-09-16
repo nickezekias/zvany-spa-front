@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Form as PrimeForm, type FormSubmitEvent } from '@primevue/forms'
 import { useAccountStore } from '@/stores/account.store'
 import { useI18n } from 'vue-i18n'
 import { useProductStore } from '@/stores/product.store'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'primevue'
+import { useVendorStoreStore } from '@/stores/vendor/store.store'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
 
@@ -24,16 +25,19 @@ import NikkTextArea from '@/components/forms/NikkTextArea.vue'
 
 const accountStore = useAccountStore()
 const objStore = useProductStore()
+const route = useRoute()
 const router = useRouter()
 const toast = useToast()
 const { t } = useI18n()
+const vendorStoreStore = useVendorStoreStore()
 const nikkToast = new NikkToast(toast, t)
 
 const loading = ref(false)
 const obj = ref(Obj.initEmpty())
+const pageLoading = ref(false)
 const resolver = zodResolver(
   z.object({
-    barcode: z.string().min(1, { message: 'errors.validation.requiredField' }),
+    // barcode: z.string().min(1, { message: 'errors.validation.requiredField' }),
     brand: z.string().min(1, { message: 'errors.validation.requiredField' }),
     categories: z.string().min(1, { message: 'errors.validation.requiredField' }),
     cost: z.union([
@@ -55,17 +59,35 @@ const resolver = zodResolver(
   }),
 )
 
+onMounted(async () => {
+  const cloneId = route.query.cloneId
+  if (cloneId && cloneId.length == 36) {
+    pageLoading.value = true
+    try {
+      obj.value = await objStore.get(`${cloneId}`)
+      obj.value.images = ''
+    } catch (error) {
+      nikkToast.httpError(error as AxiosError)
+    } finally {
+      pageLoading.value = false
+    }
+  }
+})
+
 async function onFormSubmit(e: FormSubmitEvent) {
   const isFormCorrect = e.valid
   if (isFormCorrect) {
     loading.value = true
 
     try {
+      obj.value.barcode = obj.value.sku
       obj.value.businessId = `${accountStore.user?.business?.id}`
       await objStore.create(obj.value)
       nikkToast.success('features.vendors.products.create.successMessage')
       router.push({ name: 'vendors.products.index' })
     } catch (e) {
+      vendorStoreStore.setErrors(e as AxiosError)
+      console.warn('VENDOR_STORE_STORE ERRORS', vendorStoreStore.errors)
       nikkToast.httpError(e as AxiosError)
     } finally {
       loading.value = false
@@ -127,7 +149,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
                   type="text"
                 />
 
-                <NikkInputText
+                <!-- <NikkInputText
                   v-model="obj.barcode"
                   id="barcode"
                   :error-help-label="$form.barcode?.error?.message"
@@ -135,7 +157,7 @@ async function onFormSubmit(e: FormSubmitEvent) {
                   label="labels.barcode"
                   name="barcode"
                   type="text"
-                />
+                /> -->
 
                 <NikkSelect
                   v-model="obj.type"

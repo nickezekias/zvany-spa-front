@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import { FilterMatchMode } from '@primevue/core/api'
+
 import { useI18n } from 'vue-i18n'
+import { useAccountStore } from '@/stores/account.store'
 import { useProductStore } from '@/stores/product.store'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue'
@@ -10,11 +13,15 @@ import Obj from '@/app/models/product.model'
 import type { AxiosError } from 'axios'
 import type { MenuItem } from '@/app/@types/common.interface'
 
+import PrimeIconField from 'primevue/iconfield'
+import PrimeInputIcon from 'primevue/inputicon'
+import PrimeInputText from 'primevue/inputtext'
 import PrimeColumn from 'primevue/column'
 import PrimeDataTable from 'primevue/datatable'
 import AppPageTitle from '@/components/pages/AppPageTitle.vue'
 import NikkDeleteDialog from '@/components/crud/NikkDeleteDialog.vue'
 
+const accountStore = useAccountStore()
 const objStore = useProductStore()
 const router = useRouter()
 const { t } = useI18n()
@@ -32,6 +39,13 @@ const actionItems = ref<MenuItem[]>([
     },
   },
 ])
+const filters = ref({
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  sku: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+  categories: { value: null, matchMode: FilterMatchMode.IN },
+  description: { value: null, matchMode: FilterMatchMode.IN },
+})
 const isDeleteDialog = ref(false)
 const isDeleteDialogLoading = ref(false)
 const isMassCreateDialog = ref(false)
@@ -44,9 +58,16 @@ const rowActionsItems = ref([
     label: t('labels.action', 2),
     items: [
       {
+        action: 'edit',
         label: t('labels.edit'),
         icon: 'pi pi-pencil',
         route: `/vendors/products/update`,
+      },
+      {
+        action: 'clone',
+        label: t('labels.clone'),
+        icon: 'pi pi-copy',
+        route: `/vendors/products/create`,
       },
       {
         label: t('labels.delete'),
@@ -62,8 +83,14 @@ const selectedObjects = ref([])
 
 onMounted(async () => {
   loading.value = true
+  const businessId = accountStore.user?.business?.id
   try {
-    await objStore.getAll()
+    const filter = {
+      itemsPerPage: -1,
+      sortBy: ['products.created_at'],
+      sortDesc: ['true'],
+    }
+    await objStore.getAll(filter, businessId)
   } catch (error) {
     nikkToast.httpError(error as AxiosError)
   } finally {
@@ -148,6 +175,18 @@ const toggle = (event: Event, obj: Obj) => {
         title="features.vendors.products.index.title"
         subtitle="features.vendors.products.index.subtitle"
       >
+        <template #end>
+          <PrimeIconField iconPosition="left">
+            <PrimeInputIcon>
+              <i class="pi pi-search" />
+            </PrimeInputIcon>
+            <PrimeInputText
+              v-model="filters['global'].value"
+              :placeholder="$t('labels.search')"
+              class="py-3"
+            />
+          </PrimeIconField>
+        </template>
       </AppPageTitle>
 
       <PrimeCard class="rounded-none md:rounded-xl">
@@ -181,11 +220,18 @@ const toggle = (event: Event, obj: Obj) => {
           <PrimeSkeleton v-if="loading" width="100%" height="24rem" />
           <PrimeDataTable
             v-else
+            v-model:filters="filters"
             v-model:selection="selectedObjects"
             :value="objStore.objects"
             data-key="id"
             class="shadow-none rounded-lg text-sm border-none"
+            :globalFilterFields="['name', 'sku', 'categories', 'brand']"
+            paginator
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+            :rows="50"
+            :rowsPerPageOptions="[10, 25, 50]"
             scrollable
+            sortMode="multiple"
             table-style="min-width: 50rem"
             scroll-height="flex"
           >
@@ -216,7 +262,7 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- Name Column -->
-            <PrimeColumn field="name" :header="$t('labels.name')" class="max-w-[12rem]">
+            <PrimeColumn sortable field="name" :header="$t('labels.name')" class="max-w-[12rem]">
               <template #body="slotProps">
                 <span class="block truncate" :title="slotProps.data.name">
                   {{ slotProps.data.name }}
@@ -225,13 +271,13 @@ const toggle = (event: Event, obj: Obj) => {
             </PrimeColumn>
 
             <!-- SKU Column -->
-            <PrimeColumn field="sku" :header="$t('labels.sku')" class="min-w-[10rem]" />
+            <PrimeColumn sortable field="sku" :header="$t('labels.sku')" class="min-w-[10rem]" />
 
             <!-- Category Column -->
-            <PrimeColumn field="categories" :header="$t('labels.categories')" />
+            <PrimeColumn sortable field="categories" :header="$t('labels.categories')" />
 
             <!-- Brand Column -->
-            <PrimeColumn field="brand" :header="$t('labels.brand')" />
+            <PrimeColumn sortable field="brand" :header="$t('labels.brand')" />
 
             <!-- Type Column -->
             <PrimeColumn field="type" :header="$t('labels.type')" />
@@ -254,8 +300,8 @@ const toggle = (event: Event, obj: Obj) => {
             <PrimeColumn field="cost" :header="$t('labels.cost')">
               <template #body="slotProps">
                 <span class="text-sm font-semibold text-gray-600">
-                  ${{ slotProps.data.cost }}
-                  <!-- ${{ slotProps.data.cost.toFixed(2) }} -->
+                  <!-- {{ slotProps.data.cost }} XAF -->
+                  {{ Number(slotProps.data.cost).toFixed(2) }} XAF
                 </span>
               </template>
             </PrimeColumn>
@@ -264,8 +310,8 @@ const toggle = (event: Event, obj: Obj) => {
             <PrimeColumn field="price" :header="$t('labels.price')">
               <template #body="slotProps">
                 <span class="text-sm font-bold text-gray-800">
-                  <!-- ${{ slotProps.data.price.toFixed(2) }} -->
-                  ${{ slotProps.data.price }}
+                  {{ Number(slotProps.data.price).toFixed(2) }} XAF
+                  <!-- {{ slotProps.data.price }} XAF -->
                 </span>
               </template>
             </PrimeColumn>
@@ -300,7 +346,23 @@ const toggle = (event: Event, obj: Obj) => {
                   />
                   <PrimeMenu id="overlay_menu" ref="menu" :model="rowActionsItems" :popup="true">
                     <template #item="{ item }">
-                      <router-link v-if="item.route" :to="`${item.route}/${activeRowObj?.id}`">
+                      <router-link
+                        v-if="item.route && item.action == 'edit'"
+                        :to="`${item.route}/${activeRowObj?.id}`"
+                      >
+                        <PrimeButton
+                          class="w-full justify-start"
+                          small
+                          text
+                          plain
+                          :icon="item.icon"
+                          :label="`${item.label}`"
+                        />
+                      </router-link>
+                      <router-link
+                        v-else-if="item.route && item.action == 'clone'"
+                        :to="`${item.route}?cloneId=${activeRowObj?.id}`"
+                      >
                         <PrimeButton
                           class="w-full justify-start"
                           small

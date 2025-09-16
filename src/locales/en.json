@@ -9,6 +9,14 @@
       "http500": "An error occurred on our end. Reload the page, and if the problem persists, contact admin"
     }
   },
+  "components": {
+    "locale": {
+      "languageSwitcher": {
+        "english": "English",
+        "french": "French"
+      }
+    }
+  },
   "constants": {
     "statuses": {
       "available": "Available",
@@ -39,8 +47,18 @@
     "account": {
       "registerSuccessMessage": "Account created successfully"
     },
+    "businesses": {
+      "businessSettings": "Business Settings",
+      "businessSettingsDesc": "Customize your business here",
+      "changeStoreCoverImage": "Change Store Cover Image",
+      "changeStoreLogo": "Change Store Logo",
+      "storeDetails": "Store Details",
+      "updateCoverImage": "Update Cover Image",
+      "updateLogo": "Update Logo"
+    },
     "errors": {
-      "404NotFound": "Oops! We can't find the page you're looking for."
+      "404NotFound": "Oops! We can't find the page you're looking for.",
+      "backToHome": "Back to Home"
     },
     "products": {
       "index": {
@@ -56,6 +74,21 @@
       "userProfileDesc": "A centralized place for personal customization"
     },
     "vendors": {
+      "dashboard": {
+        "allTimeSales": "All-Time Sales:",
+        "customerDemographics": "Customer Demographics",
+        "earningsOverTime": "Earnings Over Time",
+        "newCustomersThisMonth": "New Customers This Month",
+        "recentOrders": "Recent Orders",
+        "salesByCategory": "Sales by Category",
+        "salesHighlight": "Sales Highlight",
+        "subtitle": "Central Hub to Manage Your Products",
+        "title": "Dashboard",
+        "totalEarningsThisMonth": "Total Earnings This Month",
+        "totalOrdersThisMonth": "Total Orders This Month",
+        "totalProducts": "Total Products",
+        "trafficSources": "Traffic Sources"
+      },
       "dashboardDesc": "Central Hub to Manage Your Products",
       "productInventoryDesc": "Manage your products inventory",
       "products": {
@@ -95,7 +128,7 @@
     "backToLogin": "Back to Login",
     "doNotHaveAccount": "Don't have an account?",
     "forgotPassword": "Forgot Password?",
-    "forgotPasswordDesc": "Enter your email address and we'll send you a link to reset your password"
+    "forgotPasswordDesc": "Enter your email address and if an account with this email is found, we'll send you a link to reset your password"
   },
 
   "labels": {
@@ -118,6 +151,7 @@
     "changeImage": "Change Image",
     "chooseImage": "Choose Image",
     "city": "City",
+    "clone": "Clone",
     "confirmPassword": "Confirm Password",
     "contact": "Contact",
     "cost": "Cost",
@@ -136,25 +170,31 @@
     "forgotPassword": "Forgot Password",
     "home": "Home",
     "image": "Image | Images",
+    "imageLibrary": "Image Library",
     "invalidForm": "Invalid Form",
     "inventory": "Inventory",
     "inventoryAdjustment": "Inventory Adjustment | Inventory Adjustments",
+    "language": "Language | Languages",
     "lastName": "Last Name",
     "learnMore": "Learn More",
     "license": "License",
     "list": "List",
     "login": "Login",
+    "loginFailed": "Login Failed",
     "logout": "Logout",
     "male": "Male",
     "massCreate": "Mass Create",
     "massCreateProducts": "Mass Create Products",
     "more": "More",
     "moreToLove": "More to Love",
+    "myOrders": "My Orders",
     "name": "Name",
     "newPassword": "New Password",
     "next": "Next",
     "operationFailure": "Operation Failure",
     "operationSuccess": "Operation Success",
+    "or": "Or",
+    "others": "Others",
     "password": "Password",
     "passwordConfirm": "Confirm Password",
     "payment": "Payment | Payments",
@@ -163,6 +203,7 @@
     "previous": "Previous",
     "price": "Price",
     "product": "Product | Products",
+    "productCategory": "Product Category | Product Categories",
     "productImage": "Product Image",
     "productType": "Product Type",
     "productCreate": "New Product",
@@ -173,30 +214,38 @@
     "resetPassword": "Reset Password",
     "sales": "Sales",
     "save": "Save",
+    "search": "Search",
     "selectGender": "Select Gender",
     "selectProductType": "Select Product Type",
     "setting": "Setting | Settings",
     "share": "Share",
+    "shipped": "Shipped",
     "shop": "Shop",
     "shopNow": "Shop Now",
     "sku": "SKU",
     "status": "Status",
     "tag": "Tag | Tags",
+    "toReview": "To Review",
+    "toShip": "To Ship",
     "type": "Type | Types",
     "update": "Update",
     "user": "User",
     "vendor": "Vendor",
     "vendorDashboard": "Vendor Dashboard",
-    "website": "Website"
+    "visitFrontStore": "Visit Front Store",
+    "website": "Website",
+    "welcome": "Welcome",
+    "writeUs": "Write Us"
   },
 
   "messages": {
     "credentialsNotFound": "These credentials do not match our records",
     "noDataFound": "No data found",
-    "passwordResetLinkSent": "Password reset link has been sent to your email",
+    "passwordResetLinkSent": "If an account with this email is found, you will receive a password reset link",
     "passwordResetSuccess": "Password reset successful, you will be redirected to login page",
     "productCreated": "Product added successfully | Products added successfully",
-    "productUpdated": "Product updated successfully"
+    "productUpdated": "Product updated successfully",
+    "updatedSuccessfully": "Updated successfully"
   },
   "placeholders": {
     "fileUploader": "Click to choose, or drag and drop a file"

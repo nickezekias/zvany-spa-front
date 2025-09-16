@@ -52,24 +52,35 @@
           <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-4.5l-1-1z" />
         </svg>
       </button>
+      <button
+        @click="isShowImageGrid = true"
+        class="action-btn"
+        title="Change photo with img library"
+        type="button"
+      >
+        <i class="pi pi-folder"></i>
+      </button>
     </div>
 
     <!-- Hidden File Input -->
-    <input
-      ref="fileInput"
-      type="file"
-      accept="image/*"
-      capture="environment"
-      @change="onFileChange"
-      class="hidden"
-    />
+    <input ref="fileInput" type="file" accept="image/*" @change="onFileChange" class="hidden" />
+
+    <!-- Image grid to choose already uploaded images -->
+    <ImageGrid v-model="isShowImageGrid" class="w-full mx-2 md:mx-0 md:w-8/12" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
+import Compressor from 'compressorjs'
+
+import ImageGrid from '@/components/products/ImageGrid.vue'
 
 const props = defineProps({
+  isCompress: {
+    type: Boolean,
+    default: true,
+  },
   rounded: {
     type: Boolean,
     default: false,
@@ -80,11 +91,17 @@ const props = defineProps({
   },
 })
 
+// Define an interface for the compressed file
+interface CompressedFile extends Blob {
+  name: string
+}
+
 const emit = defineEmits<{
   (e: 'file-selected', file: File): void
   (e: 'file-cleared'): void
 }>()
 
+const isShowImageGrid = ref(false)
 const previewUrl = ref<string | null>(null)
 const fileInput = ref<HTMLInputElement | null>(null)
 
@@ -101,10 +118,29 @@ onMounted(() => {
 const onFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
+  const compressedFiles: CompressedFile[] = []
 
   if (file) {
     previewUrl.value = URL.createObjectURL(file)
-    emit('file-selected', file)
+    // Compress if file larger than 2048 Bytes
+    if (file.size > 2000048) {
+      new Compressor(file, {
+        quality: 0.6,
+        maxWidth: 1920,
+        maxHeight: 1080,
+        success(result: Blob) {
+          // Cast the result to the CompressedFile interface to add the 'name' property
+          const compressedFile = result as CompressedFile
+          compressedFile.name = file.name
+          compressedFiles.push(compressedFile)
+          emit('file-selected', compressedFiles[0] as File)
+        },
+        error(err: Error) {
+          emit('file-selected', file)
+          console.error('Compression failed:', err.message)
+        },
+      })
+    }
   }
 }
 

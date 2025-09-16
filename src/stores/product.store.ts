@@ -12,8 +12,8 @@ export const useProductStore = defineStore('productStore', () => {
 
   const objects = ref<Obj[]>([])
 
-  async function getAll(filter?: DBGetQueryFilter) {
-    const response = await objService.getAll(filter)
+  async function getAll(filter?: DBGetQueryFilter, businessId?: string) {
+    const response = await objService.getAll(filter, businessId)
     objects.value = response.data.data
   }
 

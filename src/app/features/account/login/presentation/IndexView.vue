@@ -35,7 +35,7 @@ const state: Ref<LoginRequest> = ref({
 const resolver = zodResolver(
   z.object({
     email: z.string().email({ message: 'errors.validation.email' }),
-    password: z.string().min(8, { message: 'errors.validation.passwords.minCount' }),
+    password: z.string().min(1, { message: 'errors.validation.requiredField' }),
   }),
 )
 

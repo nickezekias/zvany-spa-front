@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useAppStore } from '@/stores/app.store'
 import { RouterView } from 'vue-router'
-import PrimeToast from 'primevue/toast'
 import PrimeProgressBar from 'primevue/progressbar'
 
 const appStore = useAppStore()
+
+onMounted(() => {
+  const persistedLocale = appStore.getPersistedLocale()
+  if (persistedLocale) {
+    appStore.changeLocale(persistedLocale)
+  } else {
+    appStore.setLocaleFromBrowser()
+  }
+})
 </script>
 
 <template>
@@ -14,10 +23,8 @@ const appStore = useAppStore()
       mode="indeterminate"
       class="app-progress-bar"
     ></PrimeProgressBar>
-
-    <PrimeToast />
-
-    <RouterView />
+    <PrimeSkeleton v-if="appStore.appLoading" height="100vh" width="100%" />
+    <RouterView v-else />
   </div>
 </template>
 
