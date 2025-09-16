@@ -11,7 +11,6 @@ const updateCoverImage = async function (payload: Obj) {
 
 const updateLogo = async function (payload: Obj) {
   const formData = new FormData()
-  console.log('THE LOGO', payload.logo)
   formData.append('logo', payload.logo)
   return axios.post(`${url}/${payload.id}/logo?_method=PUT`, formData)
 }

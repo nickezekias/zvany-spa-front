@@ -109,7 +109,6 @@ async function updateLogo() {
               @file-selected="
                 (event: File) => {
                   obj.logo = event
-                  console.log('THE LOGO', obj.logo, event)
                 }
               "
             />
