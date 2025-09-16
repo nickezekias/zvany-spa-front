@@ -29,7 +29,6 @@ const errorKeys = (errors: string | object) => {
     if (typeof errors === 'string') {
       return null
     } else if (typeof errors === 'object') {
-      console.log('object keys', Object.keys(errors))
       return Object.keys(errors)
     } else {
       return null
@@ -49,8 +48,6 @@ function getErrors(key: string) {
 
 function getType(obj: object) {
   const typeRes = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
-  console.log('OBJECT', obj, 'TYPE RES', typeRes)
-  console.log('TYPE_OF TYPE OF ERRORS: ', typeof computedErrors.value == 'object')
   return typeRes
 }
 </script>
