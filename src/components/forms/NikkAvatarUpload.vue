@@ -1,75 +1,3 @@
-<template>
-  <div :class="['avatar-upload', roundedClass]">
-    <!-- Image Preview -->
-    <div :class="['image-preview', roundedClass]">
-      <img v-if="previewUrl" :src="previewUrl" alt="Avatar" />
-      <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-64 mx-auto" viewBox="0 0 24 24">
-        <g fill="none" stroke="#d0d7d5" stroke-width="1.5">
-          <path
-            d="M2.384 13.793c-.447-3.164-.67-4.745.278-5.77C3.61 7 5.298 7 8.672 7h6.656c3.374 0 5.062 0 6.01 1.024c.947 1.024.724 2.605.278 5.769l-.422 3c-.35 2.48-.525 3.721-1.422 4.464c-.897.743-2.22.743-4.867.743h-5.81c-2.646 0-3.97 0-4.867-.743c-.897-.743-1.072-1.983-1.422-4.464z"
-          />
-          <path
-            d="M19.562 7a2.132 2.132 0 0 0-2.1-2.5H6.538a2.132 2.132 0 0 0-2.1 2.5M17.5 4.5c.028-.26.043-.389.043-.496a2 2 0 0 0-1.787-1.993C15.65 2 15.52 2 15.26 2H8.74c-.26 0-.391 0-.497.011a2 2 0 0 0-1.787 1.993c0 .107.014.237.043.496"
-            opacity="0.5"
-          />
-          <circle cx="16.5" cy="11.5" r="1.5" opacity="0.5" />
-          <path
-            stroke-linecap="round"
-            d="m20 20l-2.884-2.149c-.93-.692-2.316-.761-3.34-.166l-.266.155c-.712.414-1.68.345-2.294-.164l-3.839-3.177c-.766-.634-1.995-.668-2.81-.078l-1.324.96"
-            opacity="0.5"
-          />
-        </g>
-      </svg>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-      <button @click="triggerFileInput" class="action-btn" title="Change photo" type="button">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path
-            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92.92L14.06 9.06l1.77 1.77L7.69 20.44H5.92v-1.77zM20.71 7.04a1.004 1.004 0 0 0 0-1.42l-2.34-2.34a1.004 1.004 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"
-          />
-        </svg>
-      </button>
-      <button
-        @click="clearImage"
-        class="action-btn delete-btn"
-        v-if="previewUrl"
-        title="Delete photo"
-        type="button"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-4.5l-1-1z" />
-        </svg>
-      </button>
-      <button
-        @click="isShowImageGrid = true"
-        class="action-btn"
-        title="Change photo with img library"
-        type="button"
-      >
-        <i class="pi pi-folder"></i>
-      </button>
-    </div>
-
-    <!-- Hidden File Input -->
-    <input ref="fileInput" type="file" accept="image/*" @change="onFileChange" class="hidden" />
-
-    <!-- Image grid to choose already uploaded images -->
-    <ImageGrid v-model="isShowImageGrid" class="w-full mx-2 md:mx-0 md:w-8/12" />
-  </div>
-</template>
-
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
 import Compressor from 'compressorjs'
@@ -155,6 +83,78 @@ const clearImage = () => {
   emit('file-cleared')
 }
 </script>
+
+<template>
+  <div :class="['avatar-upload', roundedClass]">
+    <!-- Image Preview -->
+    <div :class="['image-preview', roundedClass]">
+      <img v-if="previewUrl" :src="previewUrl" alt="Avatar" />
+      <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-64 mx-auto" viewBox="0 0 24 24">
+        <g fill="none" stroke="#d0d7d5" stroke-width="1.5">
+          <path
+            d="M2.384 13.793c-.447-3.164-.67-4.745.278-5.77C3.61 7 5.298 7 8.672 7h6.656c3.374 0 5.062 0 6.01 1.024c.947 1.024.724 2.605.278 5.769l-.422 3c-.35 2.48-.525 3.721-1.422 4.464c-.897.743-2.22.743-4.867.743h-5.81c-2.646 0-3.97 0-4.867-.743c-.897-.743-1.072-1.983-1.422-4.464z"
+          />
+          <path
+            d="M19.562 7a2.132 2.132 0 0 0-2.1-2.5H6.538a2.132 2.132 0 0 0-2.1 2.5M17.5 4.5c.028-.26.043-.389.043-.496a2 2 0 0 0-1.787-1.993C15.65 2 15.52 2 15.26 2H8.74c-.26 0-.391 0-.497.011a2 2 0 0 0-1.787 1.993c0 .107.014.237.043.496"
+            opacity="0.5"
+          />
+          <circle cx="16.5" cy="11.5" r="1.5" opacity="0.5" />
+          <path
+            stroke-linecap="round"
+            d="m20 20l-2.884-2.149c-.93-.692-2.316-.761-3.34-.166l-.266.155c-.712.414-1.68.345-2.294-.164l-3.839-3.177c-.766-.634-1.995-.668-2.81-.078l-1.324.96"
+            opacity="0.5"
+          />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button @click="triggerFileInput" class="action-btn" title="Change photo" type="button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92.92L14.06 9.06l1.77 1.77L7.69 20.44H5.92v-1.77zM20.71 7.04a1.004 1.004 0 0 0 0-1.42l-2.34-2.34a1.004 1.004 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"
+          />
+        </svg>
+      </button>
+      <button
+        @click="clearImage"
+        class="action-btn delete-btn"
+        v-if="previewUrl"
+        title="Delete photo"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-4.5l-1-1z" />
+        </svg>
+      </button>
+      <button
+        @click="isShowImageGrid = true"
+        class="action-btn"
+        title="Change photo with img library"
+        type="button"
+      >
+        <i class="pi pi-folder"></i>
+      </button>
+    </div>
+
+    <!-- Hidden File Input -->
+    <input ref="fileInput" type="file" accept="image/*" @change="onFileChange" class="hidden" />
+
+    <!-- Image grid to choose already uploaded images -->
+    <ImageGrid v-model="isShowImageGrid" class="w-full mx-2 md:mx-0 md:w-8/12" />
+  </div>
+</template>
 
 <style scoped>
 .avatar-upload {
