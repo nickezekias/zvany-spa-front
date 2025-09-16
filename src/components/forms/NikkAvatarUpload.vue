@@ -140,6 +140,8 @@ const onFileChange = (event: Event) => {
           console.error('Compression failed:', err.message)
         },
       })
+    } else {
+      emit('file-selected', file)
     }
   }
 }
